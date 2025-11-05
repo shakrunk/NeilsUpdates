@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Engineering Impact Report | Krishna A. Kumar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #f4f7f9;
+            --text-color: #333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: var(--text-color);
+            display: flex;
+        }
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        /* Layout */
+        #toc-container {
+            width: 250px;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            border-right: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        #main-content {
+            flex-grow: 1;
+            padding: 40px;
+            max-width: 900px;
+        }
+        /* TOC Styles */
+        .toc-link {
+            display: block;
+            padding: 10px 0;
+            text-decoration: none;
+            color: var(--text-color);
+            border-bottom: 1px solid #eee;
+            transition: color 0.2s;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        .toc-link:hover {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        /* Content Card Styles */
+        .content-card {
+            background-color: #fff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary-color);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .card-header i {
+            font-size: 2em;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.6em;
+        }
+        .effort-summary {
+            background-color: #e0f0ff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--primary-color);
+            font-style: italic;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toc-container">
+        <h2>Report Navigation</h2>
+        <a class="toc-link" href="#exec-summary"><i class="fas fa-bullseye"></i> Executive Summary</a>
+        <a class="toc-link" href="#theme-api"><i class="fas fa-database"></i> Core Data Foundation</a>
+        <a class="toc-link" href="#theme-refactor"><i class="fas fa-cogs"></i> System Future-Proofing</a>
+        <a class="toc-link" href="#theme-ui"><i class="fas fa-boxes"></i> Component Library Velocity</a>
+        <a class="toc-link" href="#theme-landing"><i class="fas fa-globe"></i> User Access & Flow</a>
+        <a class="toc-link" href="#theme-quality"><i class="fas fa-shield-alt"></i> Quality & Stability</a>
+        <a class="toc-link" href="#effort-impact"><i class="fas fa-bolt"></i> Effort & Impact</a>
+    </div>
+
+    <div id="main-content">
+        <h1>Weekly Engineering Impact & Progress Report</h1>
+        <p><strong>Contributor:</strong> Krishna A. Kumar | **Date:** Week of November 3, 2025</p>
+
+        <section id="exec-summary" class="content-card">
+            <div class="card-header">
+                <i class="fas fa-bullseye"></i>
+                <h2>Executive Summary</h2>
+            </div>
+            <p>This week delivered substantial progress on the foundational architecture for the new **CPR Analytics Platform**, achieving full parity on the backend and frontend setup. The team completed the complex **initial build of the core donor API** and significantly enhanced the reusability of our **UI Component Library**. This work directly accelerates the path to **initial data visualization capability** and future project efficiency by creating reusable, high-quality components.</p>
+        </section>
+
+        <section id="theme-api" class="content-card">
+            <div class="card-header">
+                <i class="fas fa-database"></i>
+                <h2>Theme 1: Launching the Core Data Foundation (CPR Donor API)</h2>
+            </div>
+            <p>A robust, scalable backend **API (Application Programming Interface)** was fully scaffolded, including essential services like logging, configuration, and a flexible database manager with mock data support. This high-effort initiative, comprising **925 lines of new code**, is the single-largest dependency for the dashboard and enables the **CPR Donor dashboard tab** to request and display key performance indicators (KPIs) and chart data for the first time.</p>
+        </section>
+
+        <section id="theme-refactor" class="content-card">
+            <div class="card-header">
+                <i class="fas fa-cogs"></i>
+                <h2>Theme 2: System Future-Proofing through Core Architecture Refinement</h2>
+            </div>
+            <p>Significant time was invested in **refactoring and organizing the backend codebase** and establishing a new, clear folder structure for the API. This crucial work enhances **developer velocity** by simplifying code management, minimizing future onboarding costs, and ensuring the platform can scale reliably to support additional features like DRC, Distribution, and Transplant tracking.</p>
+        </section>
+
+        <section id="theme-ui" class="content-card">
+            <div class="card-header">
+                <i class="fas fa-boxes"></i>
+                <h2>Theme 3: Accelerating Dashboard Feature Development (Component Library)</h2>
+            </div>
+            <p>The shared **UI Component Library** was expanded with several high-value, reusable elements, including a dedicated **KPI Card** and **enhanced Bar/Composed Charts** with stacking support. This investment means that all future dashboards built across the platform (CPR, DRC, etc.) can rapidly assemble complex layouts and data visualizations using pre-tested, standardized components, saving significant development time per dashboard.</p>
+        </section>
+
+        <section id="theme-landing" class="content-card">
+            <div class="card-header">
+                <i class="fas fa-globe"></i>
+                <h2>Theme 4: Improving Accessibility and User Flow with Landing Page</h2>
+            </div>
+            <p>The initial **Project Landing Page** was established and integrated with the new, engaging **Card Component** that includes linking and visual tilt effects. This page serves as the user's central access point, improving **project discoverability** and ensuring a professional first impression across the entire analytics suite.</p>
+        </section>
+
+        <section id="theme-quality" class="content-card">
+            <div class="card-header">
+                <i class="fas fa-shield-alt"></i>
+                <h2>Theme 5: Enhancing Product Quality & System Stability</h2>
+            </div>
+            <p>Continuous improvement was applied across the API and UI packages through **exhaustive test creation** and **ESLint refactoring**. By adding/updating over **1,300 lines of automated safety checks** and enforcing rigorous code standards, this effort proactively prevents critical bugs, minimizes technical debt, and provides confidence in system stability for stakeholders and end-users.</p>
+        </section>
+
+        <section id="effort-impact" class="effort-summary">
+            <div class="card-header" style="border: none;">
+                <i class="fas fa-bolt"></i>
+                <h2 style="color: #0056b3;">Effort & Impact Summary</h2>
+            </div>
+            <p>This week's work involved over **3,400 substantial lines of code additions** across the core API, shared UI components, and the new CPR dashboard application. This heavy investment reflects a foundational effort dedicated to **building an enterprise-ready analytics platform from the ground up**. The completion of the core API and the expansion of the component library have significantly de-risked the project schedule, directly accelerating our time-to-market for data visualization capabilities and ensuring a **high degree of component reusability** that will pay dividends across every future project in the portfolio.</p>
+        </section>
+    </div>
+
+</body>
+</html>

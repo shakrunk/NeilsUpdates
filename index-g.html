@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMLEB Project Status Report</title>
+    <style>
+        :root {
+            --primary: #1e3a8a; /* Dark Blue */
+            --secondary: #64748b; /* Slate */
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --accent: #3b82f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- Layout & Typography --- */
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.5rem; margin-bottom: 1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-main); }
+
+        p { margin-bottom: 1rem; }
+
+        /* --- Header --- */
+        header {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--primary);
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* --- Statistics Grid --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover { transform: translateY(-2px); }
+
+        .stat-value {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        /* --- Navigation (Sticky) --- */
+        .toc-nav {
+            position: sticky;
+            top: 20px;
+            background: var(--primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .toc-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .toc-nav a:hover { opacity: 0.8; }
+
+        /* --- Content Sections --- */
+        .section-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .update-item {
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--border);
+        }
+
+        .update-item:hover { border-left-color: var(--accent); }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .tag.feat { background: #dbeafe; color: #1e40af; }
+        .tag.fix { background: #fee2e2; color: #991b1b; }
+        .tag.infra { background: #f3f4f6; color: #374151; }
+        .tag.style { background: #fef3c7; color: #92400e; }
+
+        /* --- Code/Technical details --- */
+        .tech-details {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .nav-btn {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--secondary);
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .toc-nav { flex-direction: column; border-radius: 12px; gap: 0.5rem; text-align: center; position: relative; top: 0; }
+            header { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <header>
+        <h1>Weekly Engineering Report</h1>
+        <p>RMLEB IIP & Infrastructure Status</p>
+        <div class="meta-info">
+            <span><strong>Author:</strong> Krishna A. Kumar</span>
+            <span><strong>Date:</strong> November 19, 2025</span>
+            <span><strong>Period:</strong> Past 7 Days</span>
+        </div>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-value">53</span>
+            <span class="stat-label">Total Commits</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">83</span>
+            <span class="stat-label">Files Modified</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">1</span>
+            <span class="stat-label">Contributor</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">High</span>
+            <span class="stat-label">Impact Level</span>
+        </div>
+    </div>
+
+    <nav class="toc-nav">
+        <a href="#executive-summary">Executive Summary</a>
+        <a href="#cpr-dashboard">CPR Dashboard</a>
+        <a href="#backend-infra">Backend & Infra</a>
+        <a href="#design-system">Design System</a>
+    </nav>
+
+    <section id="executive-summary" class="section-card">
+        <h2>Executive Summary</h2>
+        <p>This week marked significant progress in both frontend visualization and backend stability. We successfully deployed initial layouts for four major analytical tabs within the <strong>CPR Dashboard</strong> and launched the foundational structure for the new <strong>DRC Dashboard</strong> application.</p>
+        <p>Simultaneously, a comprehensive <strong>backend test suite</strong> was established (+2,700 lines) to ensure data integrity and API reliability going forward.</p>
+    </section>
+
+    <section id="cpr-dashboard" class="section-card">
+        <h2>CPR Dashboard Enhancements</h2>
+        
+        <div class="update-item">
+            <span class="tag feat">Feature</span>
+            <h3>New Visualization Layouts</h3>
+            <p>Replaced placeholder content with functional UI components across four key tabs. This includes the implementation of KPI cards, comparative horizontal bar charts, and transplant placement trend lines.</p>
+            <div class="tech-details">
+                Files: DistributionTab.tsx, EyeDetailsTab.tsx, InstitutionsTab.tsx, TransplantPlacementTab.tsx
+            </div>
+        </div>
+
+        <div class="update-item">
+            <span class="tag style">Refactor</span>
+            <h3>Eye Donors Tab Overhaul</h3>
+            <p>Refactored the donor data visualization for clarity. Split charts for granular monthly vs. yearly analysis and added percentage labels to reduce cognitive load.</p>
+        </div>
+
+        <div class="update-item">
+            <span class="tag style">Branding</span>
+            <h3>Professional Branding</h3>
+            <p>Updated the application header to include the official RMLEB logo and expanded the application title to "Community and Professional Relations Dashboard".</p>
+        </div>
+    </section>
+
+    <section id="backend-infra" class="section-card">
+        <h2>Backend & Infrastructure</h2>
+
+        <div class="update-item">
+            <span class="tag infra">Testing</span>
+            <h3>Comprehensive Test Suite</h3>
+            <p>Established a complete testing structure to enable CI/CD validation. This includes fixtures, configuration, and coverage for health checks and donor API endpoints.</p>
+            <div class="tech-details">
+                +2,735 lines added | Coverage: test_donors.py, test_donor_service.py
+            </div>
+        </div>
+
+        <div class="update-item">
+            <span class="tag fix">Bug Fix</span>
+            <h3>Database Decorator Fix</h3>
+            <p>Resolved a critical bug in the <code>@with_db_mode</code> decorator to correctly handle database connections passed as keyword arguments.</p>
+        </div>
+
+        <div class="update-item">
+            <span class="tag feat">New App</span>
+            <h3>DRC Dashboard Initialization</h3>
+            <p>Initialized the <code>drc-dashboard</code> application using Vite, React, and TypeScript, ensuring architecture consistency with the existing dashboard.</p>
+        </div>
+    </section>
+
+    <section id="design-system" class="section-card">
+        <h2>UI Components & Design System</h2>
+        
+        <div class="update-item">
+            <span class="tag feat">Animation</span>
+            <h3>DynamicCard Overhaul</h3>
+            <p>Refactored the card component using <strong>Framer Motion</strong>. This enables smoother shared-layout animations and adds full keyboard accessibility (Escape to close, Enter to expand).</p>
+        </div>
+
+        <div class="update-item">
+            <span class="tag feat">Charts</span>
+            <h3>Chart Labels & KPIs</h3>
+            <p>Updated the <code>BarChart</code> component to support direct data labels and custom formatting (e.g., percentages). Added a `contentOnly` prop to KPI cards for flexible reuse.</p>
+        </div>
+    </section>
+
+    <footer>
+        <button class="nav-btn" onclick="alert('Previous report not available in this view.')">← Previous Report</button>
+        <button class="nav-btn" onclick="alert('This is the current report.')">Next Report →</button>
+    </footer>
+
+</div>
+
+<script>
+    // Simple smooth scrolling script for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMLEB IIP - Weekly Development Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-dark: #1e40af;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --accent-blue: #60a5fa;
+            --dark-gray: #1f2937;
+            --medium-gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --border-gray: #e5e7eb;
+            --white: #ffffff;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--light-gray);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 0;
+            min-height: 100vh;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background-color: var(--white);
+            padding: 2rem 1.5rem;
+            border-right: 1px solid var(--border-gray);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .toc-header {
+            margin-bottom: 2rem;
+        }
+
+        .toc-header h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-header p {
+            font-size: 0.875rem;
+            color: var(--medium-gray);
+        }
+
+        .toc-nav {
+            list-style: none;
+        }
+
+        .toc-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-nav a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--medium-gray);
+            text-decoration: none;
+            border-radius: 0.375rem;
+            font-size: 0.9375rem;
+            transition: all 0.2s;
+        }
+
+        .toc-nav a:hover {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+        }
+
+        .toc-nav a.active {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            background-color: var(--white);
+            padding: 3rem;
+        }
+
+        /* Header */
+        .report-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border-gray);
+        }
+
+        .report-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .report-meta {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9375rem;
+            color: var(--medium-gray);
+        }
+
+        .meta-item strong {
+            color: var(--dark-gray);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            color: var(--white);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 0.875rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card .label {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-blue);
+        }
+
+        .section-header h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .section-description {
+            font-size: 1.0625rem;
+            color: var(--medium-gray);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .feature-details {
+            margin-top: 1rem;
+        }
+
+        .detail-list {
+            list-style: none;
+            margin-top: 0.75rem;
+        }
+
+        .detail-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--medium-gray);
+            font-size: 0.9375rem;
+        }
+
+        .detail-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .impact-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            margin-top: 0.75rem;
+        }
+
+        .impact-high {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .impact-medium {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .impact-low {
+            background-color: #e0e7ff;
+            color: #3730a3;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border-gray);
+        }
+
+        .nav-button {
+            flex: 1;
+            padding: 1rem 2rem;
+            background-color: var(--white);
+            border: 2px solid var(--border-gray);
+            border-radius: 0.5rem;
+            color: var(--medium-gray);
+            text-decoration: none;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-button:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+            background-color: var(--light-blue);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-button.disabled:hover {
+            border-color: var(--border-gray);
+            color: var(--medium-gray);
+            background-color: var(--white);
+        }
+
+        /* Expandable Details */
+        .expandable {
+            margin-top: 1rem;
+        }
+
+        .expand-toggle {
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .expand-toggle:hover {
+            color: var(--primary-blue-dark);
+        }
+
+        .expand-toggle::before {
+            content: "▶";
+            display: inline-block;
+            transition: transform 0.2s;
+            font-size: 0.75rem;
+        }
+
+        .expand-toggle.expanded::before {
+            transform: rotate(90deg);
+        }
+
+        .expand-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .expand-content.expanded {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                position: static;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-gray);
+            }
+
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .report-header h1 {
+                font-size: 1.875rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Print Styles */
+        @media print {
+            .toc, .nav-buttons {
+                display: none;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Table of Contents -->
+        <aside class="toc">
+            <div class="toc-header">
+                <h2>Contents</h2>
+                <p>Week of Nov 12-19, 2025</p>
+            </div>
+            <ul class="toc-nav">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#testing">Testing Infrastructure</a></li>
+                <li><a href="#dashboard">Dashboard Enhancements</a></li>
+                <li><a href="#components">UI Components</a></li>
+                <li><a href="#new-app">New DRC Dashboard</a></li>
+                <li><a href="#infrastructure">Infrastructure & CI/CD</a></li>
+                <li><a href="#summary">Summary</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="report-header">
+                <h1>Weekly Development Report</h1>
+                <div class="report-meta">
+                    <div class="meta-item">
+                        <strong>Period:</strong> November 12-19, 2025
+                    </div>
+                    <div class="meta-item">
+                        <strong>Project:</strong> RMLEB Internal Information Portal
+                    </div>
+                    <div class="meta-item">
+                        <strong>Team:</strong> Krishna A. Kumar
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Commits</h3>
+                    <div class="value">53</div>
+                    <div class="label">Version Control</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Files Modified</h3>
+                    <div class="value">83</div>
+                    <div class="label">Code Changes</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Lines Added</h3>
+                    <div class="value">5,200+</div>
+                    <div class="label">New Functionality</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Major Features</h3>
+                    <div class="value">5</div>
+                    <div class="label">Delivered</div>
+                </div>
+            </div>
+
+            <!-- Executive Overview -->
+            <section id="overview" class="section">
+                <div class="section-header">
+                    <h2>Executive Overview</h2>
+                </div>
+                <div class="section-description">
+                    This week delivered significant progress across multiple fronts of the RMLEB Internal Information Portal project. The primary achievement was establishing a comprehensive automated testing infrastructure for the backend API, ensuring reliability and enabling continuous integration. Simultaneously, major user interface improvements were completed for the Community and Professional Relations (CPR) Dashboard, with enhanced data visualizations and a new dashboard application initialized for Donor Referral Coordination (DRC).
+                </div>
+            </section>
+
+            <!-- Testing Infrastructure -->
+            <section id="testing" class="section">
+                <div class="section-header">
+                    <h2>Testing Infrastructure</h2>
+                    <span class="section-badge">80+ Tests Added</span>
+                </div>
+                <div class="section-description">
+                    Implemented a comprehensive automated testing suite for the backend API to ensure code quality, reliability, and enable continuous integration/deployment pipelines.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Comprehensive Test Coverage</h3>
+                        <p>Established complete testing infrastructure with over 80 automated tests covering all critical API endpoints and business logic.</p>
+                        <span class="impact-tag impact-high">High Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Full test suite for health check and donor-related API endpoints</li>
+                                    <li>Service layer testing with mock data validation</li>
+                                    <li>Schema validation and database connection tests</li>
+                                    <li>Test configuration with pytest.ini and comprehensive fixtures</li>
+                                    <li>Automated test runner script (run_tests.sh) for CI/CD integration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Documentation & Developer Experience</h3>
+                        <p>Created extensive documentation to streamline testing workflow and onboard new developers.</p>
+                        <span class="impact-tag impact-medium">Medium Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Quick Start Guide for running tests locally</li>
+                                    <li>Comprehensive README with testing strategy</li>
+                                    <li>Test Suite Summary documenting all test categories</li>
+                                    <li>Placeholder tests for future endpoints to establish structure</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Bug Fixes Discovered During Testing</h3>
+                        <p>Testing implementation revealed and fixed several critical issues in the backend codebase.</p>
+                        <span class="impact-tag impact-high">High Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Fixed @with_db_mode decorator to properly handle keyword arguments</li>
+                                    <li>Corrected get_age_distribution service to work with database row tuples</li>
+                                    <li>Enhanced health check endpoint with timestamp and status fields</li>
+                                    <li>Improved error handling across service functions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Enhancements -->
+            <section id="dashboard" class="section">
+                <div class="section-header">
+                    <h2>CPR Dashboard Enhancements</h2>
+                    <span class="section-badge">4 Tabs Upgraded</span>
+                </div>
+                <div class="section-description">
+                    Transformed the Community and Professional Relations Dashboard from placeholder content to fully functional data visualization interfaces across multiple operational areas.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Eye Donors Tab - Complete Redesign</h3>
+                        <p>Comprehensive refactor of the Eye Donors visualization with improved data clarity and multiple chart enhancements.</p>
+                        <span class="impact-tag impact-high">High Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Split monthly vs. yearly donor data into separate focused charts</li>
+                                    <li>Added age distribution visualization with histogram</li>
+                                    <li>Implemented transplant suitability tracking by month</li>
+                                    <li>Enhanced charts with data labels formatted as percentages</li>
+                                    <li>Improved layout with responsive KPI sidebar and multi-chart columns</li>
+                                    <li>Added descriptive titles and total counts for all visualizations</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Four Dashboard Tabs Activated</h3>
+                        <p>Replaced placeholder content with functional UI components across Distribution, Eye Details, Institutions, and Transplant Placement tabs.</p>
+                        <span class="impact-tag impact-high">High Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Distribution Tab: KPI cards for shipping and reach metrics</li>
+                                    <li>Eye Details Tab: DataTable view with mock data and summary KPIs</li>
+                                    <li>Institutions Tab: Comparative horizontal bar charts for donor analytics</li>
+                                    <li>Transplant Placement Tab: Line and bar charts for monthly trends and state distribution</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Visual Design Refinements</h3>
+                        <p>Enhanced overall dashboard aesthetics and branding with professional touches.</p>
+                        <span class="impact-tag impact-medium">Medium Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Added RMLEB logo to header with gradient separator</li>
+                                    <li>Expanded dashboard title to full "Community and Professional Relations Dashboard"</li>
+                                    <li>Increased header title prominence (text-5xl)</li>
+                                    <li>Added fullWidth layout option for better screen utilization</li>
+                                    <li>Improved tooltip styling with updated color tokens</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- UI Components -->
+            <section id="components" class="section">
+                <div class="section-header">
+                    <h2>UI Components Library</h2>
+                    <span class="section-badge">Shared Components</span>
+                </div>
+                <div class="section-description">
+                    Enhanced the shared component library with new features and capabilities to support more sophisticated user interactions across all dashboard applications.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>DynamicCard Component with Framer Motion</h3>
+                        <p>Complete overhaul of the DynamicCard component with smooth animations and enhanced accessibility.</p>
+                        <span class="impact-tag impact-high">High Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Migrated from HeadlessUI to Framer Motion for smoother animations</li>
+                                    <li>Implemented shared-layout "magic motion" effects</li>
+                                    <li>Added three animation types: fade, slideUp, and flip with 3D transforms</li>
+                                    <li>Enhanced keyboard accessibility (Escape, Enter, Space key support)</li>
+                                    <li>Proper ARIA attributes for screen readers</li>
+                                    <li>Click-to-close backdrop functionality</li>
+                                    <li>Comprehensive test suite with 100% coverage</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Chart Components Enhancement</h3>
+                        <p>Expanded chart capabilities with data labeling and flexible formatting options.</p>
+                        <span class="impact-tag impact-medium">Medium Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Added showLabels and labelFormat props to BarChart component</li>
+                                    <li>Created BarChartLabel component for custom value formatting</li>
+                                    <li>Enabled percentage-based height values for responsive charts</li>
+                                    <li>Enhanced ComposedChart with flexible height options</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>KPICard Flexibility</h3>
+                        <p>Introduced contentOnly mode for using KPI logic in custom layouts.</p>
+                        <span class="impact-tag impact-low">Low Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>New contentOnly prop to render without card wrapper</li>
+                                    <li>Enables embedding KPI content in other components</li>
+                                    <li>Maintains all loading, linking, and click functionality</li>
+                                    <li>Comprehensive test coverage for new mode</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- New Application -->
+            <section id="new-app" class="section">
+                <div class="section-header">
+                    <h2>DRC Dashboard Initialization</h2>
+                    <span class="section-badge">New Application</span>
+                </div>
+                <div class="section-description">
+                    Started development on a second dashboard application for Donor Referral Coordination, establishing the foundational structure and configuration.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Application Foundation</h3>
+                        <p>Set up complete project structure with modern tooling and consistent styling.</p>
+                        <span class="impact-tag impact-medium">Medium Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Vite bundler configuration for fast development</li>
+                                    <li>React 18 with TypeScript for type safety</li>
+                                    <li>React Router for navigation structure</li>
+                                    <li>Tailwind CSS with RMLEB color definitions</li>
+                                    <li>Integration with shared @rmleb-iip/ui-components library</li>
+                                    <li>Initial Dashboard page with tab navigation</li>
+                                    <li>Application assets (logos and icons)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Infrastructure -->
+            <section id="infrastructure" class="section">
+                <div class="section-header">
+                    <h2>Infrastructure & CI/CD</h2>
+                    <span class="section-badge">DevOps</span>
+                </div>
+                <div class="section-description">
+                    Improved continuous integration pipeline and development tooling to ensure code quality and smooth deployments.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>GitHub Actions Improvements</h3>
+                        <p>Fixed and enhanced CI/CD workflows to handle test execution correctly.</p>
+                        <span class="impact-tag impact-medium">Medium Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Stubbed passing test scripts for apps without tests</li>
+                                    <li>Updated pnpm version specifications</li>
+                                    <li>Fixed linting workflow configuration</li>
+                                    <li>Enabled automated backend test execution</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Code Quality & Type Safety</h3>
+                        <p>Enhanced development tools and type definitions across the codebase.</p>
+                        <span class="impact-tag impact-low">Low Impact</span>
+                        
+                        <div class="expandable">
+                            <button class="expand-toggle" onclick="toggleExpand(this)">View Details</button>
+                            <div class="expand-content">
+                                <ul class="detail-list">
+                                    <li>Added unused variables rule to ESLint configuration</li>
+                                    <li>Improved type definitions in test setup files</li>
+                                    <li>Fixed DateFilter and DateRange type exports</li>
+                                    <li>Enhanced decorator typing for better IDE support</li>
+                                    <li>Multiple formatting fixes for consistency</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section id="summary" class="section">
+                <div class="section-header">
+                    <h2>Summary & Business Impact</h2>
+                </div>
+                <div class="section-description">
+                    This week's development efforts focused on three strategic priorities:
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>1. Quality Assurance</h3>
+                        <p>The comprehensive testing infrastructure ensures reliability and maintainability as the platform grows. With 80+ automated tests, we can now confidently deploy changes knowing that regressions will be caught early. This investment will pay dividends in reduced debugging time and increased system stability.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>2. User Experience</h3>
+                        <p>The CPR Dashboard transformation from placeholder to functional interface represents a major milestone. Staff can now view and analyze donor data, institutional performance, and transplant placement metrics through intuitive visualizations. The enhanced Eye Donors tab alone provides unprecedented insight into donation patterns and age demographics.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>3. Scalability</h3>
+                        <p>The shared UI components library improvements and the DRC Dashboard initialization demonstrate our commitment to building a scalable platform. By creating reusable, well-tested components, future dashboard development will be significantly faster and more consistent.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--light-blue); border-left: 4px solid var(--primary-blue); border-radius: 0.5rem;">
+                    <p style="margin: 0; color: var(--dark-gray);"><strong>Looking Ahead:</strong> Next week's priorities include connecting the CPR Dashboard to live data sources, completing the DRC Dashboard implementation, and expanding test coverage to frontend components. The foundation established this week positions us well for rapid progress on user-facing features.</p>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="#" class="nav-button disabled">← Previous Report</a>
+                <a href="#" class="nav-button disabled">Next Report →</a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.toc-nav a');
+
+        function updateActiveNav() {
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        window.addEventListener('load', updateActiveNav);
+
+        // Expandable sections
+        function toggleExpand(button) {
+            button.classList.toggle('expanded');
+            const content = button.nextElementSibling;
+            content.classList.toggle('expanded');
+        }
+
+        // Initialize first section as active
+        if (navLinks.length > 0) {
+            navLinks[0].classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina | Tissue Bank Analytics</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0f766e', // Teal 700
+                        secondary: '#0ea5e9', // Sky 500
+                        surface: '#f8fafc', // Slate 50
+                        card: '#ffffff',
+                        dark: '#0f172a' // Slate 900
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+        .nav-item.active { background-color: rgba(255,255,255,0.1); border-left: 4px solid #2dd4bf; }
+        .nav-item { border-left: 4px solid transparent; transition: all 0.2s; }
+        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <aside class="w-64 bg-dark text-white flex flex-col flex-shrink-0 z-20 shadow-xl">
+        <div class="p-6 flex items-center gap-3 border-b border-slate-800">
+            <span class="material-symbols-outlined text-teal-400 text-3xl">visibility</span>
+            <div>
+                <h1 class="font-bold text-lg tracking-wide">LUMINA</h1>
+                <p class="text-xs text-slate-400 uppercase tracking-wider">Tissue Analytics</p>
+            </div>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1">
+                <li>
+                    <button onclick="router('dashboard')" id="nav-dashboard" class="nav-item active w-full flex items-center gap-3 px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        <span class="text-sm font-medium">Overview</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="router('technicians')" id="nav-technicians" class="nav-item w-full flex items-center gap-3 px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800">
+                        <span class="material-symbols-outlined">clinical_notes</span>
+                        <span class="text-sm font-medium">Technician Stats</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="router('recoveries')" id="nav-recoveries" class="nav-item w-full flex items-center gap-3 px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800">
+                        <span class="material-symbols-outlined">medical_services</span>
+                        <span class="text-sm font-medium">Recovery Log</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="router('inventory')" id="nav-inventory" class="nav-item w-full flex items-center gap-3 px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800">
+                        <span class="material-symbols-outlined">inventory_2</span>
+                        <span class="text-sm font-medium">Tissue Inventory</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="p-4 border-t border-slate-800">
+            <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full border-2 border-slate-600 object-cover" alt="Profile">
+                <div>
+                    <p class="text-sm font-medium text-white">Dr. A. Vance</p>
+                    <p class="text-xs text-slate-400">Medical Director</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50 relative">
+        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 flex-shrink-0 z-10">
+            <h2 id="page-title" class="text-xl font-bold text-slate-800">Executive Dashboard</h2>
+            <div class="flex items-center gap-4">
+                <div class="flex bg-slate-100 rounded-lg p-1">
+                    <button class="px-3 py-1 text-xs font-medium text-slate-600 rounded-md bg-white shadow-sm">Monthly</button>
+                    <button class="px-3 py-1 text-xs font-medium text-slate-500 hover:text-slate-800">Quarterly</button>
+                    <button class="px-3 py-1 text-xs font-medium text-slate-500 hover:text-slate-800">YTD</button>
+                </div>
+                <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="content-area" class="flex-1 overflow-y-auto p-8">
+            </div>
+    </main>
+
+    <script>
+        // --- DATA MOCKING ---
+        const mockData = {
+            kpi: {
+                recoveries: 142,
+                transplantRate: 78, // percent
+                avgDTP: 5.4, // hours (Death to Preservation)
+                avgCellCount: 2850 // Endothelial Cell Density
+            },
+            technicians: [
+                { id: 1, name: "Sarah Jenkins", role: "Senior Recovery Tech", recoveries: 45, avgTime: 42, efficiency: 94, avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" },
+                { id: 2, name: "David Chen", role: "Recovery Tech II", recoveries: 38, avgTime: 55, efficiency: 88, avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80" },
+                { id: 3, name: "Elena Rodriguez", role: "Recovery Tech I", recoveries: 22, avgTime: 65, efficiency: 81, avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80" },
+                { id: 4, name: "Marcus Johnson", role: "Lab Supervisor", recoveries: 15, avgTime: 38, efficiency: 98, avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" }
+            ],
+            recoveries: [
+                { id: "R-24-0891", type: "Whole Globe", donorAge: 54, dtp: "4.2h", status: "Cleared", tech: "Sarah Jenkins", date: "Nov 18, 2025" },
+                { id: "R-24-0890", type: "Cornea In-Situ", donorAge: 67, dtp: "6.1h", status: "Serology Pending", tech: "David Chen", date: "Nov 18, 2025" },
+                { id: "R-24-0889", type: "Cornea In-Situ", donorAge: 32, dtp: "3.5h", status: "Cleared", tech: "Marcus Johnson", date: "Nov 17, 2025" },
+                { id: "R-24-0888", type: "Sclera Only", donorAge: 71, dtp: "8.0h", status: "Discard (Bio)", tech: "Elena Rodriguez", date: "Nov 17, 2025" },
+                { id: "R-24-0887", type: "Whole Globe", donorAge: 44, dtp: "5.1h", status: "Cleared", tech: "Sarah Jenkins", date: "Nov 16, 2025" },
+                { id: "R-24-0886", type: "Cornea In-Situ", donorAge: 21, dtp: "2.9h", status: "QA Review", tech: "David Chen", date: "Nov 16, 2025" },
+            ],
+            charts: {
+                monthly: {
+                    labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+                    recovered: [110, 125, 118, 134, 128, 142],
+                    transplanted: [85, 98, 92, 105, 101, 115]
+                }
+            }
+        };
+
+        // --- STATE & ROUTING ---
+        let currentChart = null;
+        let currentDoughnut = null;
+
+        function router(route) {
+            // Update Nav UI
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`nav-${route}`).classList.add('active');
+
+            const content = document.getElementById('content-area');
+            const title = document.getElementById('page-title');
+
+            if (route === 'dashboard') {
+                title.innerText = "Executive Dashboard";
+                renderDashboard(content);
+            } else if (route === 'technicians') {
+                title.innerText = "Technician Performance";
+                renderTechnicians(content);
+            } else if (route === 'recoveries') {
+                title.innerText = "Recovery Log";
+                renderRecoveries(content);
+            } else {
+                title.innerText = "Inventory Management";
+                content.innerHTML = `<div class="flex flex-col items-center justify-center h-96 text-slate-400">
+                    <span class="material-symbols-outlined text-6xl mb-4">inventory_2</span>
+                    <p>Inventory Module requires database connection.</p>
+                </div>`;
+            }
+        }
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderDashboard(container) {
+            container.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    ${kpiCard('Total Recoveries', mockData.kpi.recoveries, 'trending_up', 'text-emerald-600', '+12% vs last mo')}
+                    ${kpiCard('Transplant Rate', mockData.kpi.transplantRate + '%', 'check_circle', 'text-blue-600', 'Target: 75%')}
+                    ${kpiCard('Avg Ischemic Time', mockData.kpi.avgDTP + ' hrs', 'timer', 'text-amber-600', '-0.3h improvement')}
+                    ${kpiCard('Avg ECD', mockData.kpi.avgCellCount, 'grid_on', 'text-purple-600', 'Cells / mm²')}
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-96">
+                    <div class="glass-card rounded-xl p-6 col-span-2 flex flex-col">
+                        <h3 class="text-sm font-bold text-slate-500 uppercase mb-4">Recovery vs Utilization</h3>
+                        <div class="flex-1 relative">
+                            <canvas id="mainChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl p-6 flex flex-col">
+                        <h3 class="text-sm font-bold text-slate-500 uppercase mb-4">Tissue Disposition</h3>
+                        <div class="flex-1 relative flex justify-center">
+                            <canvas id="doughnutChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-center text-xs text-slate-400">
+                            Based on current month pathology reports
+                        </div>
+                    </div>
+                </div>
+            `;
+            initDashboardCharts();
+        }
+
+        function renderTechnicians(container) {
+            const techHTML = mockData.technicians.map(tech => `
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow">
+                    <img src="${tech.avatar}" class="w-24 h-24 rounded-full object-cover mb-4 border-4 border-slate-50 shadow-sm">
+                    <h3 class="font-bold text-slate-800 text-lg">${tech.name}</h3>
+                    <p class="text-sm text-primary font-medium mb-4">${tech.role}</p>
+                    
+                    <div class="w-full grid grid-cols-3 gap-2 border-t border-slate-100 pt-4">
+                        <div>
+                            <p class="text-xs text-slate-400">Volume</p>
+                            <p class="font-bold text-slate-700">${tech.recoveries}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400">Avg Time</p>
+                            <p class="font-bold text-slate-700">${tech.avgTime}m</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400">Efficiency</p>
+                            <p class="font-bold text-emerald-600">${tech.efficiency}%</p>
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full py-2 text-sm text-slate-500 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors">View Detailed Profile</button>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    ${techHTML}
+                </div>
+            `;
+        }
+
+        function renderRecoveries(container) {
+            const rows = mockData.recoveries.map(r => {
+                let statusColor = 'bg-slate-100 text-slate-600';
+                if (r.status === 'Cleared') statusColor = 'bg-emerald-100 text-emerald-700';
+                if (r.status.includes('Pending')) statusColor = 'bg-amber-100 text-amber-700';
+                if (r.status.includes('Discard')) statusColor = 'bg-rose-100 text-rose-700';
+
+                return `
+                <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 font-medium text-primary">${r.id}</td>
+                    <td class="px-6 py-4 text-slate-600">${r.date}</td>
+                    <td class="px-6 py-4 text-slate-800 font-medium">${r.type}</td>
+                    <td class="px-6 py-4 text-slate-600">${r.dtp}</td>
+                    <td class="px-6 py-4 text-slate-600">${r.donorAge}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold ${statusColor}">${r.status}</span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-slate-500">${r.tech}</td>
+                </tr>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <div class="p-4 border-b border-slate-200 flex justify-between items-center bg-white">
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-lg">search</span>
+                            <input type="text" placeholder="Search Case ID..." class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-primary w-64">
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                                <span class="material-symbols-outlined text-lg">filter_list</span> Filter
+                            </button>
+                            <button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm hover:bg-teal-700 shadow-sm shadow-teal-200">
+                                <span class="material-symbols-outlined text-lg">add</span> New Case
+                            </button>
+                        </div>
+                    </div>
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 text-xs uppercase text-slate-500 font-semibold tracking-wider">
+                                <th class="px-6 py-4">Case ID</th>
+                                <th class="px-6 py-4">Date</th>
+                                <th class="px-6 py-4">Tissue Type</th>
+                                <th class="px-6 py-4">Ischemic Time</th>
+                                <th class="px-6 py-4">Age</th>
+                                <th class="px-6 py-4">Status</th>
+                                <th class="px-6 py-4">Technician</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            ${rows}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // --- COMPONENT HELPERS ---
+        function kpiCard(title, value, icon, iconColor, subtext) {
+            return `
+                <div class="glass-card rounded-xl p-6 flex items-start justify-between relative overflow-hidden">
+                    <div class="z-10">
+                        <p class="text-slate-500 text-sm font-medium mb-1">${title}</p>
+                        <h3 class="text-3xl font-bold text-slate-800">${value}</h3>
+                        <p class="text-xs text-slate-400 mt-2 flex items-center gap-1">
+                            ${subtext.includes('+') || subtext.includes('improvement') ? '<span class="material-symbols-outlined text-sm text-emerald-500">trending_up</span>' : ''}
+                            ${subtext}
+                        </p>
+                    </div>
+                    <div class="p-3 rounded-lg bg-slate-50 ${iconColor} bg-opacity-10 z-10">
+                        <span class="material-symbols-outlined text-2xl ${iconColor}">${icon}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- CHARTS LOGIC ---
+        function initDashboardCharts() {
+            const ctxMain = document.getElementById('mainChart');
+            const ctxDoughnut = document.getElementById('doughnutChart');
+
+            // Cleanup old charts if re-rendering
+            if (currentChart) currentChart.destroy();
+            if (currentDoughnut) currentDoughnut.destroy();
+
+            // Main Bar/Line Combo
+            currentChart = new Chart(ctxMain, {
+                type: 'bar',
+                data: {
+                    labels: mockData.charts.monthly.labels,
+                    datasets: [
+                        {
+                            label: 'Recovered',
+                            data: mockData.charts.monthly.recovered,
+                            backgroundColor: '#2dd4bf',
+                            borderRadius: 4,
+                            barPercentage: 0.6
+                        },
+                        {
+                            label: 'Transplanted',
+                            data: mockData.charts.monthly.transplanted,
+                            backgroundColor: '#0f766e',
+                            borderRadius: 4,
+                            barPercentage: 0.6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            // Doughnut Chart
+            currentDoughnut = new Chart(ctxDoughnut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Transplant', 'Research', 'Training', 'Discard'],
+                    datasets: [{
+                        data: [78, 12, 5, 5],
+                        backgroundColor: ['#0f766e', '#2dd4bf', '#94a3b8', '#f43f5e'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } }
+                    }
+                }
+            });
+        }
+
+        // --- INITIALIZATION ---
+        window.addEventListener('DOMContentLoaded', () => {
+            router('dashboard');
+        });
+
+    </script>
+</body>
+</html>

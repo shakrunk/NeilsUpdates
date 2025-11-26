@@ -1971,28 +1971,26 @@
                 </div>
               </div>
               <div class="commit-toolbar-row">
-                <span class="module-filter-label">Filter by module:</span>
+                <span class="module-filter-label">Filter by scope:</span>
                 <div class="module-filters">
-                  <button class="module-btn active" data-module="all">
+                  <button class="module-btn active" data-scope="all">
                     All
                   </button>
-                  <button class="module-btn" data-module="backend">
+                  <button class="module-btn" data-scope="frontend">
+                    Frontend
+                  </button>
+                  <button class="module-btn" data-scope="backend">
                     Backend
                   </button>
-                  <button class="module-btn" data-module="cpr-dashboard">
-                    CPR Dashboard
-                  </button>
-                  <button class="module-btn" data-module="drc-dashboard">
-                    DRC Dashboard
-                  </button>
-                  <button class="module-btn" data-module="ui-components">
+                  <button class="module-btn" data-scope="ui">
                     UI Components
                   </button>
-                  <button class="module-btn" data-module="api-client">
+                  <button class="module-btn" data-scope="api">
                     API Client
                   </button>
-                  <button class="module-btn" data-module="ci">CI/CD</button>
-                  <button class="module-btn" data-module="test">Tests</button>
+                  <button class="module-btn" data-scope="test">Test</button>
+                  <button class="module-btn" data-scope="ci">CI/CD</button>
+                  <button class="module-btn" data-scope="chore">Chore</button>
                 </div>
               </div>
             </div>
@@ -2001,7 +1999,7 @@
             <details
               class="commit-item"
               data-search="test backend remove unused any import conftest b6c5a94"
-              data-module="test"
+              data-scope="test"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2037,7 +2035,7 @@
             <details
               class="commit-item"
               data-search="chore backend update environment config type hints b452ab2"
-              data-module="backend"
+              data-scope="backend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2080,7 +2078,7 @@
             <details
               class="commit-item"
               data-search="test ui-components resolve ambiguous label selectors daterangefilter 86f3781"
-              data-module="ui-components"
+              data-scope="test"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2117,7 +2115,7 @@
             <details
               class="commit-item"
               data-search="fix backend test remove unused sample_year_month_filters fixture 0f974ff"
-              data-module="backend"
+              data-scope="backend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2153,7 +2151,7 @@
             <details
               class="commit-item"
               data-search="fix ci exclude backend frontend turbo tasks 0a8a86d"
-              data-module="backend"
+              data-scope="ci"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2198,7 +2196,7 @@
             <details
               class="commit-item"
               data-search="fix ci update poetry install command group syntax 288276e"
-              data-module="ci"
+              data-scope="ci"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2233,7 +2231,7 @@
             <details
               class="commit-item"
               data-search="refactor backend standardize assert syntax donor_service 731b626"
-              data-module="backend"
+              data-scope="backend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2270,7 +2268,7 @@
             <details
               class="commit-item"
               data-search="fix ci remove explicit pnpm version pinning 71cb7ac"
-              data-module="ci"
+              data-scope="ci"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2314,7 +2312,7 @@
             <details
               class="commit-item"
               data-search="feat ui-components make chart line interpolation configurable 2bb4eb2"
-              data-module="ui-components"
+              data-scope="ui"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2359,7 +2357,7 @@
             <details
               class="commit-item"
               data-search="feat cpr-dashboard update category filter options real data 1204711"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2398,7 +2396,7 @@
             <details
               class="commit-item"
               data-search="feat cpr-dashboard add mocked data support eye donor tab ebd71f5"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2452,7 +2450,7 @@
             <details
               class="commit-item"
               data-search="fix ui-components add relative positioning context kpicard 716f242"
-              data-module="ui-components"
+              data-scope="ui"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2489,7 +2487,7 @@
             <details
               class="commit-item"
               data-search="fix ui-components add relative positioning context card kpicard afe72c1"
-              data-module="ui-components"
+              data-scope="ui"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2533,7 +2531,7 @@
             <details
               class="commit-item"
               data-search="feat ui-components add visual indicator mocked data 0b30aab"
-              data-module="ui-components"
+              data-scope="ui"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2591,7 +2589,7 @@
             <details
               class="commit-item"
               data-search="style ui-components replace deprecated flex-shrink classes dc1f5d7"
-              data-module="ui-components"
+              data-scope="ui"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2649,7 +2647,7 @@
             <details
               class="commit-item"
               data-search="test backend update donor age distribution split counts 0d8e067"
-              data-module="backend"
+              data-scope="test"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2692,7 +2690,7 @@
             <details
               class="commit-item"
               data-search="chore backend bump fastapi 0.122.0 pin starlette 6da2735"
-              data-module="backend"
+              data-scope="backend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2728,7 +2726,7 @@
             <details
               class="commit-item"
               data-search="chore deployment add editorconfig optimize turbo test pipeline 13e1af7"
-              data-module="ci"
+              data-scope="chore"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2772,7 +2770,7 @@
             <details
               class="commit-item"
               data-search="style ui-components update filters dropdown hover states colors a801f9c"
-              data-module="ui-components"
+              data-scope="ui"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2816,7 +2814,7 @@
             <details
               class="commit-item"
               data-search="feat ui-components enable date picker icon click 15fa2e9"
-              data-module="ui-components"
+              data-scope="ui"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2852,7 +2850,7 @@
             <details
               class="commit-item"
               data-search="fix backend calculate donor recovery eyetissuerecovered join f778163"
-              data-module="backend"
+              data-scope="backend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2889,7 +2887,7 @@
             <details
               class="commit-item"
               data-search="style cpr-dashboard show all axis keys eye donors charts 922efa6"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2927,7 +2925,7 @@
             <details
               class="commit-item"
               data-search="feat ui-components add showallxkeys prop barchart 63cb604"
-              data-module="ui-components"
+              data-scope="ui"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -2963,7 +2961,7 @@
             <details
               class="commit-item"
               data-search="refactor cpr-dashboard update eye donor age data mapping display order 4703602"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3016,7 +3014,7 @@
             <details
               class="commit-item"
               data-search="feat backend split donor age distribution recovery status f52bf69"
-              data-module="backend"
+              data-scope="backend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3067,7 +3065,7 @@
             <details
               class="commit-item"
               data-search="feat cpr-dashboard normalize age distribution chart data 131bdc4"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3106,7 +3104,7 @@
             <details
               class="commit-item"
               data-search="fix cpr-dashboard use undefined missing date range filters c3e3334"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3144,7 +3142,7 @@
             <details
               class="commit-item"
               data-search="chore cpr-dashboard remove unused donor service hooks dd46d9b"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3188,7 +3186,7 @@
             <details
               class="commit-item"
               data-search="refactor api-client migrate environment variables vite standards 3f7c77b"
-              data-module="api-client"
+              data-scope="api"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3238,7 +3236,7 @@
             <details
               class="commit-item"
               data-search="refactor cpr-dashboard migrate donor data fetching cprclient 387947b"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3284,7 +3282,7 @@
             <details
               class="commit-item"
               data-search="test api-client update cprclient tests assert post requests 22ff568"
-              data-module="api-client"
+              data-scope="test"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3320,7 +3318,7 @@
             <details
               class="commit-item"
               data-search="refactor api-client migrate cpr endpoints post update filter schema 3bee4c6"
-              data-module="api-client"
+              data-scope="api"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3358,7 +3356,7 @@
             <details
               class="commit-item"
               data-search="refactor api-client pivot cpr client dashboard-specific architecture a2412a8"
-              data-module="api-client"
+              data-scope="api"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3437,7 +3435,7 @@
             <details
               class="commit-item"
               data-search="feat cpr refine donor age distribution 10-year intervals 19c2b64"
-              data-module="backend"
+              data-scope="backend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3474,7 +3472,7 @@
             <details
               class="commit-item"
               data-search="refactor cpr-dashboard optimize filter dependency harden types 558f242"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3526,7 +3524,7 @@
             <details
               class="commit-item"
               data-search="feat cpr-dashboard integrate eye donor api refactor date filtering 93d10bd"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3595,7 +3593,7 @@
             <details
               class="commit-item"
               data-search="feat backend implement advanced dashboard filtering cpr donors f291574"
-              data-module="backend"
+              data-scope="backend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3660,7 +3658,7 @@
             <details
               class="commit-item"
               data-search="feat backend improve local development auto-browser-open 88e898a"
-              data-module="backend"
+              data-scope="backend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3703,7 +3701,7 @@
             <details
               class="commit-item"
               data-search="feat cpr-dashboard refactor layout implement filter context e7a795d"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3763,7 +3761,7 @@
             <details
               class="commit-item"
               data-search="feat ui-components refresh styling layout props update logo 4a82cf4"
-              data-module="ui-components"
+              data-scope="ui"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3821,7 +3819,7 @@
             <details
               class="commit-item"
               data-search="feat cpr-dashboard add global filter ui application header bc8208c"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3881,7 +3879,7 @@
             <details
               class="commit-item"
               data-search="chore workspace integrate backend pnpm workspace b01008a"
-              data-module="backend"
+              data-scope="chore"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3924,7 +3922,7 @@
             <details
               class="commit-item"
               data-search="feat drc-dashboard restructure organization individual tabs 8869f4b"
-              data-module="drc-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -3977,7 +3975,7 @@
             <details
               class="commit-item"
               data-search="style landing overhaul layout card visual design 6bfa6ae"
-              data-module="cpr-dashboard"
+              data-scope="frontend"
             >
               <summary class="commit-summary">
                 <span class="commit-toggle">▶</span>
@@ -4014,7 +4012,10 @@
 
         <!-- Navigation -->
         <nav class="report-navigation" aria-label="Report navigation">
-          <a href="002" class="nav-button">
+          <button
+            onclick="window.location.href='002.html'"
+            class="nav-button"
+          >
             <svg
               width="16"
               height="16"
@@ -4028,8 +4029,8 @@
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
             Previous Report
-          </a>
-          <a href="#" class="nav-button disabled">
+          </button>
+          <button onclick="alert('This is the current report.')" class="nav-button disabled" disabled>
             Next Report
             <svg
               width="16"
@@ -4043,7 +4044,7 @@
             >
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
-          </a>
+          </buttona>
         </nav>
       </main>
     </div>
@@ -4250,14 +4251,14 @@
         });
       });
 
-      // Module filtering
-      const moduleButtons = document.querySelectorAll(".module-btn");
-      let activeModule = "all";
+      // Scope filtering
+      const scopeButtons = document.querySelectorAll(".module-btn");
+      let activeScope = "all";
 
-      function filterByModule(module) {
-        activeModule = module;
-        moduleButtons.forEach((btn) => {
-          btn.classList.toggle("active", btn.dataset.module === module);
+      function filterByScope(scope) {
+        activeScope = scope;
+        scopeButtons.forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.scope === scope);
         });
         applyFilters();
       }
@@ -4268,20 +4269,20 @@
 
         commitItems.forEach((item) => {
           const searchData = item.getAttribute("data-search").toLowerCase();
-          const itemModule = item.getAttribute("data-module") || "";
+          const itemScope = item.getAttribute("data-scope") || "";
 
           const matchesSearch = query === "" || searchData.includes(query);
-          const matchesModule =
-            activeModule === "all" || itemModule === activeModule;
+          const matchesScope =
+            activeScope === "all" || itemScope === activeScope;
 
-          const isVisible = matchesSearch && matchesModule;
+          const isVisible = matchesSearch && matchesScope;
           item.classList.toggle("hidden", !isVisible);
           if (isVisible) visibleCount++;
         });
 
         searchClear.classList.toggle("visible", query.length > 0);
 
-        if (query.length > 0 || activeModule !== "all") {
+        if (query.length > 0 || activeScope !== "all") {
           searchCount.textContent = `${visibleCount} of ${commitItems.length} commits`;
         } else {
           searchCount.textContent = "";
@@ -4299,8 +4300,8 @@
         searchInput.focus();
       });
 
-      moduleButtons.forEach((btn) => {
-        btn.addEventListener("click", () => filterByModule(btn.dataset.module));
+      scopeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => filterByScope(btn.dataset.scope));
       });
     </script>
   </body>

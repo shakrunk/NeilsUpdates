@@ -1,0 +1,2690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMLEB IIP Status Report | Week of Nov 19-26, 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #1e3a5f;
+            --color-primary-light: #2d5a8b;
+            --color-primary-dark: #0f1f33;
+            --color-accent: #3b82f6;
+            --color-accent-light: #60a5fa;
+            --color-success: #059669;
+            --color-warning: #d97706;
+            --color-neutral-50: #f8fafc;
+            --color-neutral-100: #f1f5f9;
+            --color-neutral-200: #e2e8f0;
+            --color-neutral-300: #cbd5e1;
+            --color-neutral-400: #94a3b8;
+            --color-neutral-500: #64748b;
+            --color-neutral-600: #475569;
+            --color-neutral-700: #334155;
+            --color-neutral-800: #1e293b;
+            --color-neutral-900: #0f172a;
+            --font-display: 'Source Serif 4', Georgia, serif;
+            --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --toc-width: 280px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--color-neutral-800);
+            background: var(--color-neutral-50);
+        }
+
+        /* Header */
+        .site-header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .org-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .report-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.01em;
+        }
+
+        .report-subtitle {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .report-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.7;
+        }
+
+        .meta-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .print-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+            padding: 0.625rem 1rem;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: var(--radius);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .print-button:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        /* Commit Log Toolbar */
+        .commit-toolbar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-neutral-200);
+        }
+
+        .commit-toolbar-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .commit-search-wrapper {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--color-neutral-50);
+            border: 1px solid var(--color-neutral-200);
+            border-radius: var(--radius);
+            padding: 0.625rem 1rem;
+            transition: all 0.15s ease;
+        }
+
+        .commit-search-wrapper:focus-within {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-icon {
+            color: var(--color-neutral-400);
+            flex-shrink: 0;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            font-size: 0.9375rem;
+            font-family: var(--font-body);
+            color: var(--color-neutral-800);
+            background: transparent;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--color-neutral-400);
+        }
+
+        .search-clear {
+            background: none;
+            border: none;
+            color: var(--color-neutral-400);
+            cursor: pointer;
+            padding: 0.25rem;
+            display: none;
+        }
+
+        .search-clear.visible {
+            display: block;
+        }
+
+        .search-results-count {
+            font-size: 0.8125rem;
+            color: var(--color-neutral-500);
+            white-space: nowrap;
+        }
+
+        .toolbar-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .toolbar-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.5rem 0.875rem;
+            border: 1px solid var(--color-neutral-300);
+            border-radius: var(--radius);
+            background: white;
+            color: var(--color-neutral-700);
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .toolbar-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-neutral-50);
+        }
+
+        .toolbar-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .module-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .module-filter-label {
+            font-size: 0.8125rem;
+            color: var(--color-neutral-500);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            margin-right: 0.25rem;
+        }
+
+        .module-btn {
+            padding: 0.375rem 0.75rem;
+            border: 1px solid var(--color-neutral-200);
+            border-radius: 9999px;
+            background: white;
+            color: var(--color-neutral-600);
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .module-btn:hover {
+            border-color: var(--color-neutral-400);
+            background: var(--color-neutral-50);
+        }
+
+        .module-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+        }
+
+        .module-btn.active:hover {
+            background: var(--color-primary-light);
+            border-color: var(--color-primary-light);
+        }
+
+        /* Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: var(--toc-width) 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Table of Contents */
+        .toc-wrapper {
+            position: relative;
+        }
+
+        .toc {
+            position: sticky;
+            top: 1rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            max-height: calc(100vh - 2rem);
+            overflow-y: auto;
+        }
+
+        .toc-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin: 0 0 1rem 0;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--color-neutral-200);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-item {
+            margin-bottom: 0.25rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--color-neutral-600);
+            text-decoration: none;
+            font-size: 0.875rem;
+            border-radius: 4px;
+            transition: all 0.15s ease;
+        }
+
+        .toc-link:hover {
+            background: var(--color-neutral-100);
+            color: var(--color-primary);
+        }
+
+        .toc-link.active {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .toc-section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-neutral-400);
+            margin: 1rem 0 0.5rem 0.75rem;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-wrapper {
+                display: none;
+            }
+        }
+
+        /* Mobile TOC */
+        .mobile-toc-toggle {
+            display: none;
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 1.25rem;
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-toc-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .mobile-toc-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-toc-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .mobile-toc-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radius) var(--radius) 0 0;
+            padding: 1.5rem;
+            z-index: 1002;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .mobile-toc-panel.active {
+            transform: translateY(0);
+        }
+
+        /* Main Content */
+        .main-content {
+            min-width: 0;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 1.25rem 1.5rem;
+            background: var(--color-neutral-50);
+            border-bottom: 1px solid var(--color-neutral-200);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        .section-body {
+            padding: 1.5rem;
+        }
+
+        /* Executive Summary */
+        .executive-summary {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--color-neutral-700);
+        }
+
+        .executive-summary p:first-child {
+            margin-top: 0;
+        }
+
+        .executive-summary p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Highlight Cards */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .highlight-card {
+            background: var(--color-neutral-50);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .highlight-card.feature {
+            border-left-color: var(--color-success);
+        }
+
+        .highlight-card.improvement {
+            border-left-color: var(--color-accent);
+        }
+
+        .highlight-card.fix {
+            border-left-color: var(--color-warning);
+        }
+
+        .highlight-title {
+            font-weight: 600;
+            color: var(--color-neutral-800);
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .highlight-description {
+            color: var(--color-neutral-600);
+            margin: 0;
+            font-size: 0.9375rem;
+        }
+
+        .highlight-tag {
+            display: inline-block;
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.125rem 0.5rem;
+            border-radius: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-card.feature .highlight-tag {
+            background: rgba(5, 150, 105, 0.1);
+            color: var(--color-success);
+        }
+
+        .highlight-card.improvement .highlight-tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--color-accent);
+        }
+
+        .highlight-card.fix .highlight-tag {
+            background: rgba(217, 119, 6, 0.1);
+            color: var(--color-warning);
+        }
+
+        /* Technical Deep Dive */
+        .feature-group {
+            margin-bottom: 2rem;
+        }
+
+        .feature-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-group-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-neutral-800);
+            margin: 0 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-neutral-200);
+        }
+
+        .feature-group-content {
+            color: var(--color-neutral-700);
+        }
+
+        .feature-group-content p {
+            margin: 0 0 1rem 0;
+        }
+
+        .feature-group-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-list {
+            margin: 0.75rem 0;
+            padding-left: 1.25rem;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            color: var(--color-neutral-600);
+        }
+
+        .feature-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Commit Details */
+        .commit-item {
+            border: 1px solid var(--color-neutral-200);
+            border-radius: var(--radius);
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+
+        .commit-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .commit-item.hidden {
+            display: none;
+        }
+
+        .commit-summary {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+            background: white;
+            transition: background 0.15s ease;
+        }
+
+        .commit-summary:hover {
+            background: var(--color-neutral-50);
+        }
+
+        .commit-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .commit-toggle {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            background: var(--color-neutral-100);
+            color: var(--color-neutral-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.75rem;
+            transition: all 0.15s ease;
+        }
+
+        details[open] .commit-toggle {
+            background: var(--color-primary);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .commit-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .commit-subject {
+            font-weight: 600;
+            color: var(--color-neutral-800);
+            margin: 0 0 0.25rem 0;
+            font-size: 0.9375rem;
+        }
+
+        .commit-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.8125rem;
+            color: var(--color-neutral-500);
+        }
+
+        .commit-hash {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            background: var(--color-neutral-100);
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .commit-scope {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .scope-backend { background: #fef3c7; color: #92400e; }
+        .scope-frontend { background: #dbeafe; color: #1e40af; }
+        .scope-ui { background: #f3e8ff; color: #6b21a8; }
+        .scope-ci { background: #d1fae5; color: #065f46; }
+        .scope-api { background: #fee2e2; color: #991b1b; }
+        .scope-test { background: #e0e7ff; color: #3730a3; }
+        .scope-chore { background: var(--color-neutral-200); color: var(--color-neutral-600); }
+
+        .commit-details {
+            padding: 1rem 1.25rem;
+            padding-left: 3.5rem;
+            background: var(--color-neutral-50);
+            border-top: 1px solid var(--color-neutral-200);
+        }
+
+        .commit-description {
+            color: var(--color-neutral-700);
+            font-size: 0.9375rem;
+            margin: 0 0 1rem 0;
+            white-space: pre-wrap;
+        }
+
+        .commit-files {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .commit-files li {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.8125rem;
+            color: var(--color-neutral-600);
+            padding: 0.25rem 0;
+        }
+
+        .file-stat {
+            display: inline-block;
+            width: 80px;
+            font-size: 0.75rem;
+        }
+
+        .file-stat-add { color: var(--color-success); }
+        .file-stat-del { color: #dc2626; }
+
+        /* Impact Analysis */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .impact-card {
+            background: var(--color-neutral-50);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+        }
+
+        .impact-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .impact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .impact-icon.cpr {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+
+        .impact-icon.drc {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .impact-title {
+            font-weight: 600;
+            color: var(--color-neutral-800);
+            margin: 0;
+        }
+
+        .impact-subtitle {
+            font-size: 0.875rem;
+            color: var(--color-neutral-500);
+            margin: 0;
+        }
+
+        .impact-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .impact-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--color-neutral-200);
+            font-size: 0.9375rem;
+            color: var(--color-neutral-700);
+        }
+
+        .impact-list li:last-child {
+            border-bottom: none;
+        }
+
+        .impact-list li::before {
+            content: '→';
+            margin-right: 0.5rem;
+            color: var(--color-neutral-400);
+        }
+
+        /* Navigation Footer */
+        .report-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border: 1px solid var(--color-neutral-300);
+            border-radius: var(--radius);
+            background: white;
+            color: var(--color-neutral-700);
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none;
+        }
+
+        .nav-button:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-neutral-50);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-button.disabled:hover {
+            border-color: var(--color-neutral-300);
+            color: var(--color-neutral-700);
+            background: white;
+        }
+
+        /* Site Footer */
+        .site-footer {
+            background: var(--color-neutral-800);
+            color: var(--color-neutral-300);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        .site-footer a {
+            color: var(--color-accent-light);
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Utility Classes */
+        .code {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.875em;
+            background: var(--color-neutral-100);
+            padding: 0.125rem 0.375rem;
+            border-radius: 3px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Print Styles */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body {
+                background: white;
+                font-size: 11pt;
+                line-height: 1.5;
+                color: black;
+            }
+
+            .site-header {
+                background: var(--color-primary) !important;
+                padding: 1rem;
+            }
+
+            .site-header::before {
+                display: none;
+            }
+
+            .report-title {
+                font-size: 18pt;
+            }
+
+            .report-subtitle {
+                font-size: 12pt;
+            }
+
+            .main-layout {
+                display: block;
+                padding: 1rem;
+                max-width: 100%;
+            }
+
+            /* Hide interactive elements */
+            .toc-wrapper,
+            .mobile-toc-toggle,
+            .mobile-toc-overlay,
+            .mobile-toc-panel,
+            .commit-toolbar,
+            .report-navigation,
+            .commit-toggle,
+            .nav-button,
+            .print-button {
+                display: none !important;
+            }
+
+            .section {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 1rem;
+            }
+
+            .section-header {
+                background: #f5f5f5 !important;
+            }
+
+            /* Auto-expand all details */
+            details {
+                display: block !important;
+            }
+
+            details[open] summary ~ * {
+                display: block !important;
+            }
+
+            details summary {
+                display: block !important;
+                cursor: default;
+            }
+
+            .commit-item {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .commit-summary {
+                padding-left: 1rem;
+            }
+
+            .commit-details {
+                display: block !important;
+                padding-left: 1rem;
+            }
+
+            .highlight-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .impact-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .site-footer {
+                background: white !important;
+                color: black !important;
+                border-top: 1px solid #ccc;
+                padding: 1rem;
+            }
+
+            a {
+                color: black !important;
+                text-decoration: none !important;
+            }
+
+            h2, h3 {
+                page-break-after: avoid;
+            }
+        }
+
+        @page {
+            margin: 0.75in;
+            size: letter;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="header-top">
+                <span class="org-badge">Rocky Mountain Lions Eye Bank</span>
+            </div>
+            <h1 class="report-title">Internal Information Portal — Status Report</h1>
+            <p class="report-subtitle">Weekly Development Summary & Progress Update</p>
+            <div class="report-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Reporting Period</span>
+                    <span class="meta-value">Nov 19 – 26, 2025</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Total Commits</span>
+                    <span class="meta-value">56</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Files Modified</span>
+                    <span class="meta-value">111</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Contributors</span>
+                    <span class="meta-value">1</span>
+                </div>
+                <button class="print-button" onclick="window.print()" aria-label="Print report">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>
+                    Print
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="toc-wrapper">
+            <nav class="toc" aria-label="Table of Contents">
+                <h2 class="toc-title">Contents</h2>
+                <ul class="toc-list">
+                    <li class="toc-item"><a href="#executive-summary" class="toc-link">Executive Summary</a></li>
+                    <li class="toc-item"><a href="#key-highlights" class="toc-link">Key Highlights</a></li>
+                    <p class="toc-section-label">Technical Details</p>
+                    <li class="toc-item"><a href="#cpr-dashboard" class="toc-link">CPR Dashboard</a></li>
+                    <li class="toc-item"><a href="#backend-api" class="toc-link">Backend API</a></li>
+                    <li class="toc-item"><a href="#ui-components" class="toc-link">UI Components</a></li>
+                    <li class="toc-item"><a href="#api-client" class="toc-link">API Client Package</a></li>
+                    <li class="toc-item"><a href="#drc-dashboard" class="toc-link">DRC Dashboard</a></li>
+                    <li class="toc-item"><a href="#devops" class="toc-link">DevOps & CI/CD</a></li>
+                    <p class="toc-section-label">Analysis</p>
+                    <li class="toc-item"><a href="#impact-analysis" class="toc-link">Impact Analysis</a></li>
+                    <li class="toc-item"><a href="#commit-log" class="toc-link">Full Commit Log</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- Executive Summary -->
+            <section id="executive-summary" class="section">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">📋</span>
+                        Executive Summary
+                    </h2>
+                </header>
+                <div class="section-body">
+                    <div class="executive-summary">
+                        <p>This week marked a significant milestone for the RMLEB Internal Information Portal with the successful integration of live backend data into the CPR Dashboard. The Eye Donor analytics tab now pulls real-time metrics directly from our internal database, eliminating the dependency on static placeholder data and paving the way for evidence-based decision-making by the Community & Professional Relations team.</p>
+                        <p>Key architectural improvements include a complete refactoring of the API client package to support dashboard-specific data fetching, enhanced filtering capabilities that allow users to query by date ranges, categories (Coroner, Hospital, Hospice), and institutions, and the introduction of visual indicators for mocked versus live data—ensuring transparency during the transition period.</p>
+                        <p>The DRC Dashboard received foundational restructuring with new Organization and Individual Statistics tabs, setting the stage for upcoming technician performance feedback features. Infrastructure improvements across CI/CD pipelines and dependency management ensure the platform remains maintainable and aligned with modern development practices.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Highlights -->
+            <section id="key-highlights" class="section">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">⭐</span>
+                        Key Highlights
+                    </h2>
+                </header>
+                <div class="section-body">
+                    <div class="highlights-grid">
+                        <div class="highlight-card feature">
+                            <span class="highlight-tag">Feature</span>
+                            <h3 class="highlight-title">Live Data Integration for Eye Donor Tab</h3>
+                            <p class="highlight-description">CPR Dashboard now fetches real-time KPI metrics and chart data from backend APIs, replacing static mock data with actual organizational insights.</p>
+                        </div>
+                        <div class="highlight-card feature">
+                            <span class="highlight-tag">Feature</span>
+                            <h3 class="highlight-title">Advanced Dashboard Filtering</h3>
+                            <p class="highlight-description">New filtering architecture supports date ranges, category selections (Coroner, Hospital, Hospice), and institution-based queries for granular data analysis.</p>
+                        </div>
+                        <div class="highlight-card feature">
+                            <span class="highlight-tag">Feature</span>
+                            <h3 class="highlight-title">Mocked Data Indicator</h3>
+                            <p class="highlight-description">Visual warning overlay alerts users when displayed data is for demonstration purposes, ensuring transparency during development phases.</p>
+                        </div>
+                        <div class="highlight-card improvement">
+                            <span class="highlight-tag">Improvement</span>
+                            <h3 class="highlight-title">Donor Age Distribution Refinement</h3>
+                            <p class="highlight-description">Analytics now provide 10-year age intervals with separate recovered/unrecovered counts, offering more actionable demographic insights.</p>
+                        </div>
+                        <div class="highlight-card improvement">
+                            <span class="highlight-tag">Improvement</span>
+                            <h3 class="highlight-title">API Client Architecture Overhaul</h3>
+                            <p class="highlight-description">Migrated to POST-based endpoints with dashboard-specific methods, improving payload flexibility and aligning with backend capabilities.</p>
+                        </div>
+                        <div class="highlight-card fix">
+                            <span class="highlight-tag">Fix</span>
+                            <h3 class="highlight-title">CI/CD Pipeline Stabilization</h3>
+                            <p class="highlight-description">Resolved Poetry command deprecations, pnpm version conflicts, and TurboRepo workspace exclusions for reliable automated builds.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CPR Dashboard -->
+            <section id="cpr-dashboard" class="section">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">📊</span>
+                        CPR Dashboard Enhancements
+                    </h2>
+                </header>
+                <div class="section-body">
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Eye Donor Tab — Live Data Integration</h3>
+                        <div class="feature-group-content">
+                            <p>The Eye Donors tab has been fully connected to the backend API, transitioning from placeholder visuals to actionable real-time analytics. This integration enables the CPR team to make informed decisions based on current organizational performance.</p>
+                            <ul class="feature-list">
+                                <li>Created <span class="code">useEyeDonorData</span> hook to manage fetching, state, and data transformation for KPIs and charts</li>
+                                <li>Implemented <span class="code">donorService</span> interface to communicate with <span class="code">/api/v1/cpr</span> endpoints</li>
+                                <li>Added mocked data status propagation through the data pipeline with <span class="code">isMocked</span> prop support</li>
+                                <li>Normalized age distribution charts to display percentage-based recovery rates instead of absolute counts</li>
+                                <li>Reversed display order of age groups for improved visualization flow</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Global Filter Implementation</h3>
+                        <div class="feature-group-content">
+                            <p>A comprehensive filtering system now spans the entire dashboard, allowing users to slice data by multiple dimensions simultaneously.</p>
+                            <ul class="feature-list">
+                                <li>Replaced <span class="code">YearMonthFilter</span> with <span class="code">DateRangeFilter</span> for flexible date selection</li>
+                                <li>Created <span class="code">CategoryFilter</span> with real business domain values: Coroner, Hospital, Hospice, etc.</li>
+                                <li>Implemented <span class="code">FilterProvider</span> and <span class="code">FilterContext</span> for global state management</li>
+                                <li>Memoized <span class="code">apiFilters</span> to ensure referential stability and prevent unnecessary re-fetching</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Architecture Improvements</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li>Migrated from local <span class="code">donorService</span> to shared <span class="code">CPRClient</span> instance from <span class="code">@rmleb-iip/api-client</span></li>
+                                <li>Reorganized pages directory to tabs for improved semantic clarity</li>
+                                <li>Defined explicit TypeScript interfaces (<span class="code">AgeChartData</span>, <span class="code">MonthlyChartData</span>) to eliminate <span class="code">any</span> usage</li>
+                                <li>Removed deprecated <span class="code">useCPRData</span> hook and unused service files</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Backend API -->
+            <section id="backend-api" class="section">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">⚙️</span>
+                        Backend API Development
+                    </h2>
+                </header>
+                <div class="section-body">
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Advanced Filtering Infrastructure</h3>
+                        <div class="feature-group-content">
+                            <p>The backend now supports comprehensive filtering capabilities through a redesigned schema architecture.</p>
+                            <ul class="feature-list">
+                                <li>Replaced <span class="code">YearMonthFilter</span> with <span class="code">DashboardFilters</span> schema supporting date ranges, categories, and institutions</li>
+                                <li>Updated donor service SQL queries to include <span class="code">BASE_JOINS</span> for Organization and Relationship tables</li>
+                                <li>Refactored <span class="code">build_date_filter_clause</span> to <span class="code">build_query_filter_clause</span> for BETWEEN and IN clause support</li>
+                                <li>Added type hints to query filter parameters for improved type safety</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Donor Analytics Enhancements</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li>Refined age distribution from 20-year to 10-year intervals (0-9, 10-19, ... 90+) for granular demographic analysis</li>
+                                <li>Split <span class="code">AgeDistribution</span> schema from single <span class="code">count</span> to <span class="code">recovered_count</span> and <span class="code">unrecovered_count</span></li>
+                                <li>Changed recovery determination logic from Referral Status string to <span class="code">EyeTissueRecovered</span> table join verification</li>
+                                <li>Added <span class="code">RECOVERY_JOIN</span> with T-SQL logic to handle ID format discrepancies</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Developer Experience</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li>Created <span class="code">run.py</span> script to auto-open browser to API documentation on server start</li>
+                                <li>Upgraded FastAPI from 0.119.0 to 0.122.0 with pinned Starlette compatibility</li>
+                                <li>Added 'test' environment to allowed ENVIRONMENT literal in settings</li>
+                                <li>Standardized assertion syntax across donor_service for improved readability</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- UI Components -->
+            <section id="ui-components" class="section">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">🎨</span>
+                        UI Components Library
+                    </h2>
+                </header>
+                <div class="section-body">
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">New Components</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li><strong>MockDataIndicator:</strong> Popover-based warning component that overlays cards when data is for demonstration purposes</li>
+                                <li><strong>MockStatus:</strong> Layout component placeholder for database and API status indicators</li>
+                                <li>Added <span class="code">isMocked</span> prop to Card and KPICard components with integrated warning overlay</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Chart Improvements</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li>Added configurable curve interpolation (<span class="code">type</span> prop) to LineChart and ComposedChart components</li>
+                                <li>Introduced <span class="code">showAllxKeys</span> prop to BarChart for forcing all axis label visibility</li>
+                                <li>Changed default interpolation from 'monotone' to 'linear' for clearer data representation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Filter & Interaction Polish</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li>Implemented date picker trigger on calendar icon click with <span class="code">showPicker()</span> API</li>
+                                <li>Added <span class="code">align</span> prop to FilterDropdown for left/right Popover positioning</li>
+                                <li>Updated hover shadows, colors, and active states across filter components</li>
+                                <li>Replaced <span class="code">focus</span> with <span class="code">focus-visible</span> classes for improved keyboard navigation UX</li>
+                                <li>Added <span class="code">cursor-pointer</span> to interactive labels and buttons</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Styling & Maintenance</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li>Added relative positioning context to Card and KPICard for proper absolute child positioning</li>
+                                <li>Replaced deprecated <span class="code">flex-shrink-0</span> with <span class="code">shrink-0</span> Tailwind utility</li>
+                                <li>Updated RMLEB logo asset with higher resolution version</li>
+                                <li>Migrated color system to opacity-based <span class="code">rmleb-grey</span> values</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Client -->
+            <section id="api-client" class="section">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">🔌</span>
+                        API Client Package
+                    </h2>
+                </header>
+                <div class="section-body">
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Architecture Overhaul</h3>
+                        <div class="feature-group-content">
+                            <p>The API client package underwent a fundamental restructuring to better serve dashboard-specific requirements.</p>
+                            <ul class="feature-list">
+                                <li>Replaced generic CRUD operations with specialized read-only metric fetching methods</li>
+                                <li>Implemented domain-specific <span class="code">CPRClient</span> methods: Donors, Transplants, Distribution, Eye Details, Institutions</li>
+                                <li>Converted all CPR endpoints from GET to POST requests for JSON body payload support</li>
+                                <li>Updated <span class="code">DashboardFilters</span> interface: replaced <span class="code">year</span>/<span class="code">month</span> with <span class="code">date_range</span> object</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Technical Improvements</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li>Migrated environment variables from <span class="code">process.env</span> to <span class="code">import.meta.env</span> for Vite compatibility</li>
+                                <li>Fixed entry points to resolve to compiled <span class="code">.js</span> files in <span class="code">dist/</span> directory</li>
+                                <li>Improved interceptor test reliability with proper async assertion handling</li>
+                                <li>Added package entry point at <span class="code">index.ts</span> for cleaner imports</li>
+                                <li>Reset <span class="code">DRCClient</span> to placeholder state pending finalized backend specifications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DRC Dashboard -->
+            <section id="drc-dashboard" class="section">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">🏥</span>
+                        DRC Dashboard Foundation
+                    </h2>
+                </header>
+                <div class="section-body">
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Dashboard Restructuring</h3>
+                        <div class="feature-group-content">
+                            <p>The Donor Recovery Center Dashboard received foundational restructuring to support upcoming technician performance features.</p>
+                            <ul class="feature-list">
+                                <li>Replaced generic Dashboard view with distinct Organization Stats and Individual Stats tabs</li>
+                                <li>Created <span class="code">OrganizationTab</span> with KPI cards for Recovery Rating, Referrals, Tissues using <span class="code">DynamicCard</span></li>
+                                <li>Added <span class="code">IndividualStatsTab</span> placeholder structure for technician-specific metrics</li>
+                                <li>Enabled <span class="code">fullWidth</span> mode on PageLayout component for better data density</li>
+                                <li>Corrected header title typo ("Recover" → "Recovery")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DevOps -->
+            <section id="devops" class="section">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">🔧</span>
+                        DevOps & CI/CD
+                    </h2>
+                </header>
+                <div class="section-body">
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Pipeline Fixes</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li>Updated Poetry install command from deprecated <span class="code">--no-dev</span> to <span class="code">--without dev</span> for Poetry 1.2+ compatibility</li>
+                                <li>Excluded Python backend from TurboRepo frontend tasks to prevent execution errors</li>
+                                <li>Removed explicit pnpm version pinning in favor of <span class="code">packageManager</span> field resolution</li>
+                                <li>Optimized turbo.json to remove build dependency for tests and define explicit inputs for better caching</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Workspace Integration</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li>Added backend to pnpm workspace configuration for unified task management</li>
+                                <li>Created <span class="code">backend/package.json</span> to bridge npm commands to Poetry tasks</li>
+                                <li>Added <span class="code">.editorconfig</span> to enforce consistent coding style across the monorepo</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-group">
+                        <h3 class="feature-group-title">Test Infrastructure</h3>
+                        <div class="feature-group-content">
+                            <ul class="feature-list">
+                                <li>Updated DateRangeFilter tests to resolve ambiguous label selectors by targeting input elements</li>
+                                <li>Rewrote CPRClient test suites to spy on Axios instances and verify endpoint resolution</li>
+                                <li>Fixed unawaited async assertions in error handling tests</li>
+                                <li>Mocked console output to suppress noise during test runs</li>
+                                <li>Removed unused test fixtures (<span class="code">sample_year_month_filters</span>)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Impact Analysis -->
+            <section id="impact-analysis" class="section">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">📈</span>
+                        Impact Analysis
+                    </h2>
+                </header>
+                <div class="section-body">
+                    <div class="impact-grid">
+                        <div class="impact-card">
+                            <div class="impact-header">
+                                <div class="impact-icon cpr">📊</div>
+                                <div>
+                                    <h3 class="impact-title">CPR Team</h3>
+                                    <p class="impact-subtitle">Community & Professional Relations</p>
+                                </div>
+                            </div>
+                            <ul class="impact-list">
+                                <li>Access to real-time eye donor analytics for hospital presentation preparation</li>
+                                <li>Filter data by date ranges, referral categories, and partner institutions</li>
+                                <li>View demographic breakdowns with 10-year age intervals</li>
+                                <li>Distinguish between recovered and unrecovered donor counts</li>
+                                <li>Clear visual indicators when viewing demonstration data</li>
+                                <li>Improved chart readability with all axis labels visible</li>
+                            </ul>
+                        </div>
+                        <div class="impact-card">
+                            <div class="impact-header">
+                                <div class="impact-icon drc">🏥</div>
+                                <div>
+                                    <h3 class="impact-title">DRC Team</h3>
+                                    <p class="impact-subtitle">Donor Recovery Center</p>
+                                </div>
+                            </div>
+                            <ul class="impact-list">
+                                <li>New dashboard structure separates organizational and individual metrics</li>
+                                <li>Organization Stats tab ready for recovery rating and referral KPIs</li>
+                                <li>Individual Stats tab prepared for technician performance tracking</li>
+                                <li>Full-width layout optimized for data-dense displays</li>
+                                <li>Foundation laid for upcoming real-time feedback features</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Full Commit Log -->
+            <section id="commit-log" class="section">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">📝</span>
+                        Full Commit Log
+                    </h2>
+                </header>
+                <div class="section-body" id="commitList">
+                    <!-- Commit Toolbar -->
+                    <div class="commit-toolbar">
+                        <div class="commit-toolbar-row">
+                            <div class="commit-search-wrapper">
+                                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                <input type="text" class="search-input" id="commitSearch" placeholder="Search commits...">
+                                <button class="search-clear" id="searchClear" aria-label="Clear search">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                                <span class="search-results-count" id="searchCount"></span>
+                            </div>
+                            <div class="toolbar-actions">
+                                <button class="toolbar-btn" id="expandAll" aria-label="Expand all commits">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="7 13 12 18 17 13"></polyline>
+                                        <polyline points="7 6 12 11 17 6"></polyline>
+                                    </svg>
+                                    Expand All
+                                </button>
+                                <button class="toolbar-btn" id="collapseAll" aria-label="Collapse all commits">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="17 11 12 6 7 11"></polyline>
+                                        <polyline points="17 18 12 13 7 18"></polyline>
+                                    </svg>
+                                    Collapse All
+                                </button>
+                            </div>
+                        </div>
+                        <div class="commit-toolbar-row">
+                            <span class="module-filter-label">Filter by module:</span>
+                            <div class="module-filters">
+                                <button class="module-btn active" data-module="all">All</button>
+                                <button class="module-btn" data-module="backend">Backend</button>
+                                <button class="module-btn" data-module="cpr-dashboard">CPR Dashboard</button>
+                                <button class="module-btn" data-module="drc-dashboard">DRC Dashboard</button>
+                                <button class="module-btn" data-module="ui-components">UI Components</button>
+                                <button class="module-btn" data-module="api-client">API Client</button>
+                                <button class="module-btn" data-module="ci">CI/CD</button>
+                                <button class="module-btn" data-module="test">Tests</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Commits -->
+                    <details class="commit-item" data-search="test backend remove unused any import conftest b6c5a94" data-module="test">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Remove unused Any import from conftest</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">b6c5a94</span>
+                                    <span class="commit-scope scope-test">test</span>
+                                    <span>14 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Removes the unused `Any` type hint from the imports in backend/tests/conftest.py to clean up the code and satisfy linting rules.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> backend/tests/conftest.py</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="chore backend update environment config type hints b452ab2" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Update environment config and type hints</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">b452ab2</span>
+                                    <span class="commit-scope scope-backend">backend</span>
+                                    <span>14 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">- Add 'test' to the allowed ENVIRONMENT literal in settings to support testing contexts.
+- Add type hints to query filter params in helpers.py for better type safety.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> backend/app/core/config.py</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+3</span> <span class="file-stat-del">-1</span></span> backend/app/utils/helpers.py</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="test ui-components resolve ambiguous label selectors daterangefilter 86f3781" data-module="ui-components">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Resolve ambiguous label selectors in DateRangeFilter</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">86f3781</span>
+                                    <span class="commit-scope scope-test">test</span>
+                                    <span>14 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Update test queries to specifically target input elements when selecting by label text. This resolves potential ambiguity errors and ensures interactions are directed at the correct input fields.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+34</span> <span class="file-stat-del">-26</span></span> packages/ui-components/src/components/FilterDropdown/DateRangeFilter.test.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="fix backend test remove unused sample_year_month_filters fixture 0f974ff" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Remove unused sample_year_month_filters fixture</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">0f974ff</span>
+                                    <span class="commit-scope scope-backend">backend</span>
+                                    <span>15 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Removes the `sample_year_month_filters` fixture from conftest.py to clean up test configuration and remove unused helper code.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+0</span> <span class="file-stat-del">-11</span></span> backend/tests/conftest.py</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="fix ci exclude backend frontend turbo tasks 0a8a86d" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Exclude backend from frontend turbo tasks</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">0a8a86d</span>
+                                    <span class="commit-scope scope-ci">CI</span>
+                                    <span>15 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates TurboRepo command to explicitly filter out the "backend" workspace. The backend is Python-based and is handled by dedicated jobs (lint-backend, test-backend). Excluding it from the general Turbo pipeline prevents execution errors and redundant processing.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+4</span> <span class="file-stat-del">-4</span></span> .github/workflows/ci.yml</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> .github/workflows/test.yml</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="fix ci update poetry install command group syntax 288276e" data-module="ci">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Update poetry install command to use group syntax</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">288276e</span>
+                                    <span class="commit-scope scope-ci">CI</span>
+                                    <span>15 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Replaces the deprecated `--no-dev` flag with `--without dev` to align with Poetry 1.2+ standards.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> .github/workflows/build.yml</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="refactor backend standardize assert syntax donor_service 731b626" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Standardize assert syntax in donor_service</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">731b626</span>
+                                    <span class="commit-scope scope-backend">backend</span>
+                                    <span>15 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates assertion statements to wrap the condition in parentheses rather than the error message. This improves readability and prevents potential ambiguity regarding the Python tuple-assertion behavior.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+18</span> <span class="file-stat-del">-18</span></span> backend/app/services/cpr/donor_service.py</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="fix ci remove explicit pnpm version pinning 71cb7ac" data-module="ci">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Remove explicit pnpm version pinning</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">71cb7ac</span>
+                                    <span class="commit-scope scope-ci">CI</span>
+                                    <span>15 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Removes the hardcoded version configuration from the `pnpm/action-setup` step in both build and test workflows. This allows the pnpm version to be resolved dynamically via the `packageManager` field in `package.json`.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+0</span> <span class="file-stat-del">-2</span></span> .github/workflows/build.yml</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+0</span> <span class="file-stat-del">-2</span></span> .github/workflows/test.yml</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat ui-components make chart line interpolation configurable 2bb4eb2" data-module="ui-components">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Make chart line interpolation configurable</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">2bb4eb2</span>
+                                    <span class="commit-scope scope-ui">ui-components</span>
+                                    <span>15 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates LineChart and ComposedChart to allow consumers to specify the curve interpolation type (e.g., linear, monotone, step, etc.). Adds `type` prop to LineChart and per-line configuration in ComposedChart. Updates default interpolation from 'monotone' to 'linear'.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+3</span> <span class="file-stat-del">-2</span></span> packages/ui-components/src/components/Chart/ComposedChart.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+4</span> <span class="file-stat-del">-1</span></span> packages/ui-components/src/components/Chart/LineChart.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat cpr-dashboard update category filter options real data 1204711" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Update category filter options with real data</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">1204711</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>16 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Replaces placeholder values (Category 1, etc.) with actual business domain values (Coroner, Hospital, Hospice, etc.) in the CategoryFilter component to align with project requirements.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+7</span> <span class="file-stat-del">-3</span></span> apps/cpr-dashboard/src/components/filters/CategoryFilter.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat cpr-dashboard add mocked data support eye donor tab ebd71f5" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Add mocked data support to Eye Donor tab</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">ebd71f5</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>18 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates the Eye Donor dashboard data flow to handle and display mocked data indicators. Updates `EyeDonorData` types to wrap metrics in an `ApiResponse` object containing the data and a mocked boolean. Refactors `useEyeDonorData` hook to preserve the mocked status during data transformation.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+33</span> <span class="file-stat-del">-17</span></span> apps/cpr-dashboard/src/hooks/useEyeDonorData.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+23</span> <span class="file-stat-del">-18</span></span> apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+4</span> <span class="file-stat-del">-4</span></span> apps/cpr-dashboard/src/types/cpr.types.ts</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="fix ui-components add relative positioning context kpicard 716f242" data-module="ui-components">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Add relative positioning context to KPICard regardless of content</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">716f242</span>
+                                    <span class="commit-scope scope-ui">ui-components</span>
+                                    <span>18 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Added the relative classname to the base classes of the KPICard component. Previously it was only added if the "contentOnly" setting was set to true.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> packages/ui-components/src/components/Chart/KPICard.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="fix ui-components add relative positioning context card kpicard afe72c1" data-module="ui-components">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Add relative positioning context to Card and KPICard</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">afe72c1</span>
+                                    <span class="commit-scope scope-ui">ui-components</span>
+                                    <span>18 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates the base class configuration for both Card and KPICard components to include the 'relative' utility class. This establishes a local positioning context for absolutely positioned child elements.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> packages/ui-components/src/components/Card/Card.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> packages/ui-components/src/components/Chart/KPICard.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat ui-components add visual indicator mocked data 0b30aab" data-module="ui-components">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Add visual indicator for mocked data</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">0b30aab</span>
+                                    <span class="commit-scope scope-ui">ui-components</span>
+                                    <span>19 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Introduces a new MockDataIndicator component utilizing a Popover to warn users when displayed data is for demonstration purposes. Adds optional 'isMocked' prop to Card and KPICard components with integrated warning icon overlay.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+6</span> <span class="file-stat-del">-0</span></span> packages/types/src/ui/component.types.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+13</span> <span class="file-stat-del">-2</span></span> packages/ui-components/src/components/Card/Card.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+5</span> <span class="file-stat-del">-0</span></span> packages/ui-components/src/components/Chart/KPICard.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+52</span> <span class="file-stat-del">-0</span></span> packages/ui-components/src/components/MockDataIndicator/MockDataIndicator.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="style ui-components replace deprecated flex-shrink classes dc1f5d7" data-module="ui-components">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Replace deprecated flex-shrink classes</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">dc1f5d7</span>
+                                    <span class="commit-scope scope-ui">ui-components</span>
+                                    <span>20 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates instances of 'flex-shrink-0' to the more modern 'shrink-0' Tailwind utility class across Alert, Button, ChartLegend, and SingleSelectFilter components for consistency.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-2</span></span> packages/ui-components/src/components/Alert/Alert.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-2</span></span> packages/ui-components/src/components/Button/Button.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> packages/ui-components/src/components/Chart/ChartLegend.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> packages/ui-components/src/components/FilterDropdown/SingleSelectFilter.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="test backend update donor age distribution split counts 0d8e067" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Update donor age distribution to use split counts</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">0d8e067</span>
+                                    <span class="commit-scope scope-test">test</span>
+                                    <span>21 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Update AgeDistribution test fixtures and assertions to replace the single 'count' field with 'recovered_count' and 'unrecovered_count'.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+10</span> <span class="file-stat-del">-9</span></span> backend/tests/api/v1/cpr/test_donors.py</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+5</span> <span class="file-stat-del">-4</span></span> backend/tests/test_schemas.py</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="chore backend bump fastapi 0.122.0 pin starlette 6da2735" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Bump fastapi to 0.122.0 and pin starlette</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">6da2735</span>
+                                    <span class="commit-scope scope-backend">backend</span>
+                                    <span>21 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">- Upgrade fastapi from `^0.119.0` to `^0.122.0`.
+- Pin starlette to `0.47.3` to ensure compatibility with the fastapi version</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-1</span></span> backend/pyproject.toml</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="chore deployment add editorconfig optimize turbo test pipeline 13e1af7" data-module="ci">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Add editorconfig and optimize turbo test pipeline</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">13e1af7</span>
+                                    <span class="commit-scope scope-chore">deployment</span>
+                                    <span>21 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">- Add `.editorconfig` to enforce consistent coding style (indentation, newlines).
+- Update turbo.json to remove build dependency for tests and define explicit inputs for better caching</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+14</span> <span class="file-stat-del">-0</span></span> .editorconfig</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-1</span></span> turbo.json</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="style ui-components update filters dropdown hover states colors a801f9c" data-module="ui-components">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Update filters dropdown hover states and colors</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">a801f9c</span>
+                                    <span class="commit-scope scope-ui">ui-components</span>
+                                    <span>22 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">- Adds cursor-pointer to labels and buttons in DateRangeFilter
+- Updates hover shadows and colors for Clear/Apply buttons
+- Refines active state styling and badge colors in FilterDropdown</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+18</span> <span class="file-stat-del">-14</span></span> packages/ui-components/src/components/FilterDropdown/DateRangeFilter.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+8</span> <span class="file-stat-del">-4</span></span> packages/ui-components/src/components/FilterDropdown/FilterDropdown.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat ui-components enable date picker icon click 15fa2e9" data-module="ui-components">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Enable date picker on icon click</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">15fa2e9</span>
+                                    <span class="commit-scope scope-ui">ui-components</span>
+                                    <span>22 hours ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">- Wraps CalendarDatsIcon in a button
+- Uses refs to programmatically trigger showPicker() on input click
+- Hides default webkit calendar indicator to avoid UI redundancy
+
+Known Issue: Firefox does not support the webkit-specific pseudo-element.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+20</span> <span class="file-stat-del">-1</span></span> packages/ui-components/src/components/FilterDropdown/DateRangeFilter.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="fix backend calculate donor recovery eyetissuerecovered join f778163" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Calculate donor recovery via EyeTissueRecovered join</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">f778163</span>
+                                    <span class="commit-scope scope-backend">backend</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Changes the logic for determining recovered vs. unrecovered donor counts in the age distribution report. Previously relied on Referral Status string; now verifies existence of a record in the EyeTissueRecovered table.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+17</span> <span class="file-stat-del">-4</span></span> backend/app/services/cpr/donor_service.py</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="style cpr-dashboard show all axis keys eye donors charts 922efa6" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Show all axis keys on Eye Donors charts</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">922efa6</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates the BarChart instances in the EyeDonorsTab to utilize the new `showAllxKeys` prop, ensuring that all labels on the independent axis are visible.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat ui-components add showallxkeys prop barchart 63cb604" data-module="ui-components">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Add showAllxKeys prop to BarChart</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">63cb604</span>
+                                    <span class="commit-scope scope-ui">ui-components</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Introduces a new optional boolean prop `showAllxKeys` to the BarChart component. When enabled, this sets the axis interval to 0, forcing the chart to render ticks for every data point.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+5</span> <span class="file-stat-del">-2</span></span> packages/ui-components/src/components/Chart/BarChart.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="refactor cpr-dashboard update eye donor age data mapping display order 4703602" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Update eye donor age data mapping and display order</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">4703602</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">- Update `AgeChartData` interface to use `recovered_count` and `unrecovered_count` instead of generic names.
+- Refactor `useEyeDonorData` to map specific API fields.
+- Reverse the display order of age groups for improved visualization.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-2</span></span> apps/cpr-dashboard/src/hooks/useEyeDonorData.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+14</span> <span class="file-stat-del">-12</span></span> apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-2</span></span> apps/cpr-dashboard/src/types/cpr.types.ts</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat backend split donor age distribution recovery status f52bf69" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Split donor age distribution by recovery status</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">f52bf69</span>
+                                    <span class="commit-scope scope-backend">backend</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates the donor age distribution analytics to provide granular metrics based on referral status rather than a total aggregate count. Updates `AgeDistribution` schema to replace `count` with `recovered_count` and `unrecovered_count`.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+5</span> <span class="file-stat-del">-5</span></span> backend/app/db/mock_data/cpr.py</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-1</span></span> backend/app/schemas/cpr/donors.py</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+4</span> <span class="file-stat-del">-2</span></span> backend/app/services/cpr/donor_service.py</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat cpr-dashboard normalize age distribution chart data 131bdc4" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Normalize age distribution chart data</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">131bdc4</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Refactors the EyeDonorsTab to display relative percentages rather than absolute values for the Age Distribution chart. Adds `processedAgeData` memoization to calculate recovery rates per age group.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+20</span> <span class="file-stat-del">-4</span></span> apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="fix cpr-dashboard use undefined missing date range filters c3e3334" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Use undefined for missing date range filters</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">c3e3334</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates the EyeDonorsTab filter construction to assign `undefined` instead of `null` when the date range is not present, ensuring compatibility with the filter interface.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="chore cpr-dashboard remove unused donor service hooks dd46d9b" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Remove unused donor service and hooks</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">dd46d9b</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Deletes donorService.ts and useCPRData.ts as they have been deprecated and are no longer referenced in the codebase.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+0</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/hooks/useCPRData.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+0</span> <span class="file-stat-del">-43</span></span> apps/cpr-dashboard/src/services/donorService.ts</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="refactor api-client migrate environment variables vite standards 3f7c77b" data-module="api-client">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Migrate environment variables to Vite standards</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">3f7c77b</span>
+                                    <span class="commit-scope scope-api">api-client</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Replaces Node.js-style `process.env` accessors with `import.meta.env` to ensure compatibility with the Vite build system and browser environments.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-0</span></span> packages/api-client/package.json</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-3</span></span> packages/api-client/src/config/apiConfig.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-1</span></span> packages/api-client/tsconfig.json</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="refactor cpr-dashboard migrate donor data fetching cprclient 387947b" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Migrate donor data fetching to CPRClient</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">387947b</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">- Replace local donorService with shared CPRClient instance
+- Update useEyeDonorData to unpack API response envelopes
+- Add explicit type casting for chart data mapping
+- Update DashboardFilters types to use optional properties</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+16</span> <span class="file-stat-del">-14</span></span> apps/cpr-dashboard/src/hooks/useEyeDonorData.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+3</span> <span class="file-stat-del">-3</span></span> apps/cpr-dashboard/src/types/filters.types.ts</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="test api-client update cprclient tests assert post requests 22ff568" data-module="api-client">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Update CPRClient tests to assert POST requests</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">22ff568</span>
+                                    <span class="commit-scope scope-test">test</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Refactors the CPRClient test suite to align with the API client's switch from GET to POST methods. Replaces `axios.get` spies with `axios.post` and updates expectation signatures.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+26</span> <span class="file-stat-del">-31</span></span> packages/api-client/src/clients/cprClient.test.ts</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="refactor api-client migrate cpr endpoints post update filter schema 3bee4c6" data-module="api-client">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Migrate CPR endpoints to POST and update filter schema</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">3bee4c6</span>
+                                    <span class="commit-scope scope-api">api-client</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">- Converts all CPR dashboard data fetch methods from GET to POST requests
+- Updates `DashboardFilters` interface: removes `year` and `month` in favor of `date_range` object
+- Adds `ApiDateRange` interface type definition
+- Replaces internal `getParams` helper with `getBody`</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+43</span> <span class="file-stat-del">-36</span></span> packages/api-client/src/clients/cprClient.ts</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="refactor api-client pivot cpr client dashboard-specific architecture a2412a8" data-module="api-client">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Pivot CPR client to dashboard-specific architecture</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">a2412a8</span>
+                                    <span class="commit-scope scope-api">api-client</span>
+                                    <span>2 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Replaces generic CRUD functionality with specialized read-only metric fetching to support the CPR Dashboard requirements. Implements domain-specific CPRClient methods and refactors endpoint configuration.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+67</span> <span class="file-stat-del">-249</span></span> packages/api-client/src/clients/cprClient.test.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+212</span> <span class="file-stat-del">-132</span></span> packages/api-client/src/clients/cprClient.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+17</span> <span class="file-stat-del">-256</span></span> packages/api-client/src/clients/drcClient.test.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+3</span> <span class="file-stat-del">-186</span></span> packages/api-client/src/clients/drcClient.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+21</span> <span class="file-stat-del">-77</span></span> packages/api-client/src/config/endpoints.test.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+50</span> <span class="file-stat-del">-70</span></span> packages/api-client/src/config/endpoints.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+5</span> <span class="file-stat-del">-0</span></span> packages/api-client/src/index.ts</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat cpr refine donor age distribution 10-year intervals 19c2b64" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Refine donor age distribution to 10-year intervals</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">19c2b64</span>
+                                    <span class="commit-scope scope-backend">backend</span>
+                                    <span>6 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates the donor service `get_age_distribution` query to provide more granular reporting data. Replaced 20-year age buckets with 10-year buckets (0-9, 10-19, ... 90+). Refactored sorting logic to sort dynamically by minimum age.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+22</span> <span class="file-stat-del">-18</span></span> backend/app/services/cpr/donor_service.py</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="refactor cpr-dashboard optimize filter dependency harden types 558f242" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Optimize filter dependency and harden types</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">558f242</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>6 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">- Memoize `apiFilters` in `EyeDonorsTab` to ensure referential stability
+- Define explicit `AgeChartData` and `MonthlyChartData` interfaces to remove `any` usage</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+2</span> <span class="file-stat-del">-10</span></span> apps/cpr-dashboard/src/hooks/useEyeDonorData.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+15</span> <span class="file-stat-del">-12</span></span> apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+18</span> <span class="file-stat-del">-2</span></span> apps/cpr-dashboard/src/types/cpr.types.ts</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat cpr-dashboard integrate eye donor api refactor date filtering 93d10bd" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Integrate Eye Donor API and refactor date filtering</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">93d10bd</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>6 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">- Replaced `YearMonthFilter` with `DateRangeFilter` to standardize date selection
+- Implemented `donorService` to interface with backend `/api/v1/cpr` endpoints
+- Created `useEyeDonorData` hook for fetching, state, and data transformation
+- Updated `EyeDonorsTab` to consume live data via the new hook</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+17</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/components/filters/DateRangeFilter.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+81</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/hooks/useEyeDonorData.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+43</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/services/donorService.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+36</span> <span class="file-stat-del">-22</span></span> apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+33</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/types/cpr.types.ts</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat backend implement advanced dashboard filtering cpr donors f291574" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Implement advanced dashboard filtering for CPR donors</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">f291574</span>
+                                    <span class="commit-scope scope-backend">backend</span>
+                                    <span>6 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Replaces the limited YearMonthFilter with a comprehensive DashboardFilters schema to support specific Date Ranges, Categories, and Institutions. Updates service SQL queries and helper utilities.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+8</span> <span class="file-stat-del">-7</span></span> backend/app/api/v1/endpoints/cpr/donors.py</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+23</span> <span class="file-stat-del">-17</span></span> backend/app/db/mock_data/cpr.py</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+17</span> <span class="file-stat-del">-5</span></span> backend/app/schemas/cpr/donors.py</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+95</span> <span class="file-stat-del">-55</span></span> backend/app/services/cpr/donor_service.py</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+31</span> <span class="file-stat-del">-14</span></span> backend/app/utils/helpers.py</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat backend improve local development auto-browser-open 88e898a" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Improve local development experience with auto-browser-open</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">88e898a</span>
+                                    <span class="commit-scope scope-backend">backend</span>
+                                    <span>6 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Added `run.py` script to start the Uvicorn server with reload enabled and automatically open a web browser to `http://localhost:8000/docs` after a brief delay.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-1</span></span> backend/package.json</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+19</span> <span class="file-stat-del">-0</span></span> backend/run.py</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat cpr-dashboard refactor layout implement filter context e7a795d" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Refactor layout and implement filter context</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">e7a795d</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>6 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Implements `FilterProvider` and `FilterContext` for global filter state management. Simplifies `App.tsx` by abstracting layout into Header and Footer components. Reorganizes pages directory to tabs for semantic clarity.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+20</span> <span class="file-stat-del">-88</span></span> apps/cpr-dashboard/src/App.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+24</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/contexts/FilterContext.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+12</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/hooks/useFilters.ts</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+41</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/constants/tabs.ts</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat ui-components refresh styling layout props update logo 4a82cf4" data-module="ui-components">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Refresh styling, add layout props, and update logo</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">4a82cf4</span>
+                                    <span class="commit-scope scope-ui">ui-components</span>
+                                    <span>7 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Updates UI components with revised color palettes and accessibility improvements. Adds `align` prop to FilterDropdown and `dbStatus`/`apiStatus` props to Footer. Replaces focus with focus-visible classes. Updates RMLEB logo.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+26</span> <span class="file-stat-del">-26</span></span> packages/ui-components/src/components/FilterDropdown/DateRangeFilter.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+15</span> <span class="file-stat-del">-11</span></span> packages/ui-components/src/components/FilterDropdown/FilterDropdown.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+4</span> <span class="file-stat-del">-0</span></span> packages/ui-components/src/components/Layout/Footer.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+9</span> <span class="file-stat-del">-9</span></span> packages/ui-components/src/components/Layout/TabNavigation.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat cpr-dashboard add global filter ui application header bc8208c" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Add global filter UI to application header</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">bc8208c</span>
+                                    <span class="commit-scope scope-frontend">cpr-dashboard</span>
+                                    <span>7 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Creates `YearMonthFilter`, `CategoryFilter`, and `InstitutionFilter` components. Exports new components via barrel file. Updates `App.tsx` layout to render filters alongside main tab navigation.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+9</span> <span class="file-stat-del">-1</span></span> apps/cpr-dashboard/src/App.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+22</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/components/filters/CategoryFilter.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+22</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/components/filters/InstitutionFilter.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+15</span> <span class="file-stat-del">-0</span></span> apps/cpr-dashboard/src/components/filters/YearMonthFilter.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="chore workspace integrate backend pnpm workspace b01008a" data-module="backend">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Integrate backend into pnpm workspace</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">b01008a</span>
+                                    <span class="commit-scope scope-chore">workspace</span>
+                                    <span>7 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Adds the backend directory to the pnpm workspace configuration. Creates `backend/package.json` to define script aliases that bridge npm commands to Poetry tasks.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+8</span> <span class="file-stat-del">-0</span></span> backend/package.json</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+1</span> <span class="file-stat-del">-0</span></span> pnpm-workspace.yaml</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="feat drc-dashboard restructure organization individual tabs 8869f4b" data-module="drc-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Restructure dashboard into organization and individual tabs</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">8869f4b</span>
+                                    <span class="commit-scope scope-frontend">drc-dashboard</span>
+                                    <span>7 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Replaces the generic Dashboard view with distinct 'Organization Stats' and 'Individual Stats' tabs. Adds `OrganizationTab` with KPI cards and `IndividualStatsTab` placeholder. Enables `fullWidth` mode on PageLayout.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+13</span> <span class="file-stat-del">-6</span></span> apps/drc-dashboard/src/App.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+25</span> <span class="file-stat-del">-0</span></span> apps/drc-dashboard/src/pages/IndividualStatsTab.tsx</li>
+                                <li><span class="file-stat"><span class="file-stat-add">+64</span> <span class="file-stat-del">-0</span></span> apps/drc-dashboard/src/pages/OrganizationTab.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="commit-item" data-search="style landing overhaul layout card visual design 6bfa6ae" data-module="cpr-dashboard">
+                        <summary class="commit-summary">
+                            <span class="commit-toggle">▶</span>
+                            <div class="commit-info">
+                                <p class="commit-subject">Overhaul layout and card visual design</p>
+                                <div class="commit-meta">
+                                    <span class="commit-hash">6bfa6ae</span>
+                                    <span class="commit-scope scope-frontend">landing</span>
+                                    <span>7 days ago</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="commit-details">
+                            <p class="commit-description">Centers page content vertically, increases gap spacing, replaces generic placeholder images with specific dashboard cover images, and updates typography styles.</p>
+                            <ul class="commit-files">
+                                <li><span class="file-stat"><span class="file-stat-add">+29</span> <span class="file-stat-del">-17</span></span> apps/landing/src/App.tsx</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <nav class="report-navigation" aria-label="Report navigation">
+                <a href="#" class="nav-button disabled">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    Previous Report
+                </a>
+                <a href="#" class="nav-button disabled">
+                    Next Report
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <button class="mobile-toc-toggle" id="mobileTocToggle" aria-label="Open table of contents">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
+    <div class="mobile-toc-overlay" id="mobileTocOverlay"></div>
+    <div class="mobile-toc-panel" id="mobileTocPanel">
+        <h2 class="toc-title">Contents</h2>
+        <ul class="toc-list">
+            <li class="toc-item"><a href="#executive-summary" class="toc-link mobile-toc-link">Executive Summary</a></li>
+            <li class="toc-item"><a href="#key-highlights" class="toc-link mobile-toc-link">Key Highlights</a></li>
+            <li class="toc-item"><a href="#cpr-dashboard" class="toc-link mobile-toc-link">CPR Dashboard</a></li>
+            <li class="toc-item"><a href="#backend-api" class="toc-link mobile-toc-link">Backend API</a></li>
+            <li class="toc-item"><a href="#ui-components" class="toc-link mobile-toc-link">UI Components</a></li>
+            <li class="toc-item"><a href="#api-client" class="toc-link mobile-toc-link">API Client Package</a></li>
+            <li class="toc-item"><a href="#drc-dashboard" class="toc-link mobile-toc-link">DRC Dashboard</a></li>
+            <li class="toc-item"><a href="#devops" class="toc-link mobile-toc-link">DevOps & CI/CD</a></li>
+            <li class="toc-item"><a href="#impact-analysis" class="toc-link mobile-toc-link">Impact Analysis</a></li>
+            <li class="toc-item"><a href="#commit-log" class="toc-link mobile-toc-link">Full Commit Log</a></li>
+        </ul>
+    </div>
+
+    <footer class="site-footer">
+        <p>RMLEB Internal Information Portal — Generated Nov 26, 2025</p>
+        <p>For questions or feedback, contact <a href="/cdn-cgi/l/email-protection#701b1b051d110230131f021e1511035e1f0217"><span class="__cf_email__" data-cfemail="b9d2d2ccd4d8cbf9dad6cbd7dcd8ca97d6cbde">[email&#160;protected]</span></a></p>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Search functionality
+        const searchInput = document.getElementById('commitSearch');
+        const searchClear = document.getElementById('searchClear');
+        const searchCount = document.getElementById('searchCount');
+        const commitItems = document.querySelectorAll('.commit-item');
+
+        function performSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            searchClear.classList.toggle('visible', query.length > 0);
+
+            commitItems.forEach(item => {
+                const searchData = item.getAttribute('data-search').toLowerCase();
+                const isMatch = query === '' || searchData.includes(query);
+                
+                item.classList.toggle('hidden', !isMatch);
+                if (isMatch) visibleCount++;
+            });
+
+            if (query.length > 0) {
+                searchCount.textContent = `${visibleCount} of ${commitItems.length} commits`;
+            } else {
+                searchCount.textContent = '';
+            }
+        }
+
+        searchInput.addEventListener('input', performSearch);
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            performSearch();
+            searchInput.focus();
+        });
+
+        // Mobile TOC
+        const mobileTocToggle = document.getElementById('mobileTocToggle');
+        const mobileTocOverlay = document.getElementById('mobileTocOverlay');
+        const mobileTocPanel = document.getElementById('mobileTocPanel');
+        const mobileTocLinks = document.querySelectorAll('.mobile-toc-link');
+
+        function openMobileToc() {
+            mobileTocOverlay.classList.add('active');
+            mobileTocPanel.classList.add('active');
+        }
+
+        function closeMobileToc() {
+            mobileTocOverlay.classList.remove('active');
+            mobileTocPanel.classList.remove('active');
+        }
+
+        mobileTocToggle.addEventListener('click', openMobileToc);
+        mobileTocOverlay.addEventListener('click', closeMobileToc);
+        mobileTocLinks.forEach(link => {
+            link.addEventListener('click', closeMobileToc);
+        });
+
+        // Active TOC tracking
+        const tocLinks = document.querySelectorAll('.toc-link:not(.mobile-toc-link)');
+        const sections = document.querySelectorAll('section[id]');
+
+        function updateActiveToc() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveToc);
+        updateActiveToc();
+
+        // Auto-expand all details for print
+        window.addEventListener('beforeprint', () => {
+            document.querySelectorAll('details').forEach(d => d.setAttribute('open', ''));
+        });
+
+        // Expand/Collapse All
+        const expandAllBtn = document.getElementById('expandAll');
+        const collapseAllBtn = document.getElementById('collapseAll');
+
+        expandAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.commit-item').forEach(item => {
+                item.setAttribute('open', '');
+            });
+        });
+
+        collapseAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.commit-item').forEach(item => {
+                item.removeAttribute('open');
+            });
+        });
+
+        // Module filtering
+        const moduleButtons = document.querySelectorAll('.module-btn');
+        let activeModule = 'all';
+
+        function filterByModule(module) {
+            activeModule = module;
+            moduleButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.module === module);
+            });
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            commitItems.forEach(item => {
+                const searchData = item.getAttribute('data-search').toLowerCase();
+                const itemModule = item.getAttribute('data-module') || '';
+                
+                const matchesSearch = query === '' || searchData.includes(query);
+                const matchesModule = activeModule === 'all' || itemModule === activeModule;
+                
+                const isVisible = matchesSearch && matchesModule;
+                item.classList.toggle('hidden', !isVisible);
+                if (isVisible) visibleCount++;
+            });
+
+            searchClear.classList.toggle('visible', query.length > 0);
+            
+            if (query.length > 0 || activeModule !== 'all') {
+                searchCount.textContent = `${visibleCount} of ${commitItems.length} commits`;
+            } else {
+                searchCount.textContent = '';
+            }
+        }
+
+        // Override performSearch to use applyFilters
+        searchInput.removeEventListener('input', performSearch);
+        searchInput.addEventListener('input', applyFilters);
+        
+        searchClear.removeEventListener('click', () => {});
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            applyFilters();
+            searchInput.focus();
+        });
+
+        moduleButtons.forEach(btn => {
+            btn.addEventListener('click', () => filterByModule(btn.dataset.module));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RMLEB IIP | Weekly Status Report</title>
+    <style>
+      :root {
+        --primary: #2563eb;
+        --secondary: #475569;
+        --bg-body: #f8fafc;
+        --bg-card: #ffffff;
+        --text-main: #1e293b;
+        --text-muted: #64748b;
+        --border: #e2e8f0;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-main);
+        line-height: 1.6;
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Sidebar Navigation */
+      .sidebar {
+        width: 260px;
+        background: var(--bg-card);
+        border-right: 1px solid var(--border);
+        position: fixed;
+        height: 100vh;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        z-index: 10;
+      }
+
+      .logo {
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--primary);
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .nav-links {
+        list-style: none;
+        flex-grow: 1;
+      }
+
+      .nav-links li {
+        margin-bottom: 0.5rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        display: block;
+        transition: all 0.2s;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        background-color: #eff6ff;
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .sidebar-footer {
+        margin-top: auto;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      /* Main Content */
+      .main-content {
+        margin-left: 260px;
+        flex: 1;
+        padding: 3rem 4rem;
+        max-width: 1200px;
+      }
+
+      /* Header */
+      header {
+        margin-bottom: 3rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-main);
+      }
+
+      .meta-info {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      /* Summary Stats */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .stat-card {
+        background: var(--bg-card);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-label {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      /* Section Styling */
+      section {
+        margin-bottom: 4rem;
+        scroll-margin-top: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--border);
+        color: var(--text-main);
+      }
+
+      h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+        color: var(--secondary);
+      }
+
+      /* Highlights */
+      .highlight-card {
+        background: var(--bg-card);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border-left: 4px solid var(--primary);
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      }
+
+      .highlight-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-main);
+      }
+
+      /* Changelog / Commits */
+      .changelog-group {
+        margin-bottom: 2rem;
+      }
+
+      .commit-item {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .commit-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .commit-hash {
+        font-family: monospace;
+        background: #f1f5f9;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        color: var(--secondary);
+      }
+
+      .commit-subject {
+        font-weight: 500;
+        color: var(--text-main);
+      }
+
+      .commit-meta {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      .tag {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 99px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .tag-feat {
+        background: #dcfce7;
+        color: #166534;
+      }
+      .tag-fix {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .tag-chore {
+        background: #f1f5f9;
+        color: #475569;
+      }
+      .tag-refactor {
+        background: #e0e7ff;
+        color: #3730a3;
+      }
+      .tag-test {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      /* Navigation Buttons */
+      .report-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.2s;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-secondary {
+        background: #e2e8f0;
+        color: var(--text-secondary);
+      }
+
+      .btn:hover {
+        opacity: 0.9;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        body {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: relative;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+          padding: 1rem;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 1rem;
+          overflow-x: auto;
+          padding-bottom: 0.5rem;
+        }
+
+        .nav-links li {
+          margin-bottom: 0;
+          white-space: nowrap;
+        }
+
+        .main-content {
+          margin-left: 0;
+          padding: 2rem 1.5rem;
+        }
+
+        .sidebar-footer {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="logo">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+        RMLEB IIP
+      </div>
+      <ul class="nav-links">
+        <li><a href="#summary" class="active">Summary</a></li>
+        <li><a href="#highlights">Key Highlights</a></li>
+        <li><a href="#backend">Backend & API</a></li>
+        <li><a href="#frontend">Frontend & UI</a></li>
+        <li><a href="#devops">Infra & Tools</a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <p><strong>Krishna A. Kumar</strong><br />Principal Architect</p>
+        <p style="margin-top: 0.5rem; font-size: 0.75rem">
+          Generated: Nov 26, 2025
+        </p>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <header id="summary">
+        <h1>Weekly Engineering Status</h1>
+        <div class="meta-info">
+          <span>Week of November 19-26, 2025</span>
+          <span>•</span>
+          <span>Version 1.4.2</span>
+        </div>
+      </header>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">56</div>
+          <div class="stat-label">Commits</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">111</div>
+          <div class="stat-label">Files Modified</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">CPR</div>
+          <div class="stat-label">Primary Focus</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">API Migration</div>
+        </div>
+      </div>
+
+      <section id="highlights">
+        <h2>Key Highlights</h2>
+
+        <div class="highlight-card">
+          <div class="highlight-title">
+            🚀 Live Data Integration (CPR Dashboard)
+          </div>
+          <p>
+            Migrated Eye Donor KPIs and charts from mock data to live API
+            endpoints. This includes the implementation of granular filtering by
+            Date Range, Institution, and Category.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-title">🔍 Advanced Query Architecture</div>
+          <p>
+            Refactored the backend SQL service and API Client to switch from GET
+            to POST requests, enabling complex filter payloads and ensuring
+            accurate donor recovery metrics.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-title">📐 DRC Dashboard Structure</div>
+          <p>
+            Split the Donor Recovery dashboard into distinct "Organization" and
+            "Individual" tabs to better align with business reporting
+            requirements.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-title">📚 Documentation & Architecture</div>
+          <p>
+            Added comprehensive system documentation (Architecture Overview,
+            Data Flow, Security) and integrated dark mode theming context.
+          </p>
+        </div>
+      </section>
+
+      <section id="backend">
+        <h2>Backend & API Development</h2>
+
+        <div class="changelog-group">
+          <h3>Data Services & SQL</h3>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Refine donor age distribution to 10-year intervals</span
+              >
+              <span class="tag tag-feat">Feat</span>
+            </div>
+            <div class="commit-meta">
+              Replaced 20-year buckets with granular 10-year tracking.
+            </div>
+          </div>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Calculate donor recovery via EyeTissueRecovered join</span
+              >
+              <span class="tag tag-fix">Fix</span>
+            </div>
+            <div class="commit-meta">
+              Corrected logic for determining recovered vs unrecovered donor
+              counts.
+            </div>
+          </div>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Implement advanced dashboard filtering</span
+              >
+              <span class="tag tag-feat">Feat</span>
+            </div>
+            <div class="commit-meta">
+              Added support for Date Range, Category, and Institution filtering
+              in API.
+            </div>
+          </div>
+        </div>
+
+        <div class="changelog-group">
+          <h3>API Client</h3>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject">Migrate CPR endpoints to POST</span>
+              <span class="tag tag-refactor">Refactor</span>
+            </div>
+            <div class="commit-meta">
+              Updated API client to use POST for complex filter payloads.
+            </div>
+          </div>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Pivot client to dashboard-specific architecture</span
+              >
+              <span class="tag tag-refactor">Refactor</span>
+            </div>
+            <div class="commit-meta">
+              Replaced generic CRUD with specialized analytic fetch methods.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="frontend">
+        <h2>Frontend & UI Components</h2>
+
+        <div class="changelog-group">
+          <h3>CPR Dashboard</h3>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Integrate Eye Donor API and refactor filtering</span
+              >
+              <span class="tag tag-feat">Feat</span>
+            </div>
+            <div class="commit-meta">
+              Connected UI to live backend services; replaced YearMonth filter
+              with DateRange.
+            </div>
+          </div>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Refactor layout and implement filter context</span
+              >
+              <span class="tag tag-refactor">Refactor</span>
+            </div>
+            <div class="commit-meta">
+              Added centralized FilterProvider for global state management.
+            </div>
+          </div>
+        </div>
+
+        <div class="changelog-group">
+          <h3>DRC Dashboard</h3>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Restructure dashboard into Org/Individual tabs</span
+              >
+              <span class="tag tag-feat">Feat</span>
+            </div>
+            <div class="commit-meta">
+              Created distinct views for organizational vs individual stats.
+            </div>
+          </div>
+        </div>
+
+        <div class="changelog-group">
+          <h3>UI Library</h3>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Add visual indicator for mocked data</span
+              >
+              <span class="tag tag-feat">Feat</span>
+            </div>
+            <div class="commit-meta">
+              Added UI warning when displaying non-production data.
+            </div>
+          </div>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Enable date picker on icon click</span
+              >
+              <span class="tag tag-feat">Feat</span>
+            </div>
+            <div class="commit-meta">
+              Improved UX for date range selection inputs.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="devops">
+        <h2>Infrastructure & Tooling</h2>
+        <div class="changelog-group">
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Integrate backend into pnpm workspace</span
+              >
+              <span class="tag tag-chore">Chore</span>
+            </div>
+            <div class="commit-meta">
+              Unified task management across monorepo.
+            </div>
+          </div>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Exclude backend from frontend turbo tasks</span
+              >
+              <span class="tag tag-fix">Fix</span>
+            </div>
+            <div class="commit-meta">
+              Optimized CI pipeline to prevent redundant processing.
+            </div>
+          </div>
+          <div class="commit-item">
+            <div class="commit-header">
+              <span class="commit-subject"
+                >Auto-browser-open for local dev</span
+              >
+              <span class="tag tag-feat">Feat</span>
+            </div>
+            <div class="commit-meta">
+              Development server now opens API docs automatically on start.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="report-nav">
+        <a href="#" class="btn btn-secondary">← Previous Report</a>
+        <a href="#" class="btn btn-primary">Next Report →</a>
+      </div>
+    </main>
+
+    <script>
+      // Smooth scrolling for navigation
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Active state for navigation based on scroll
+      const sections = document.querySelectorAll("section, header");
+      const navLinks = document.querySelectorAll(".nav-links a");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (pageYOffset >= sectionTop - 150) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href").includes(current)) {
+            link.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

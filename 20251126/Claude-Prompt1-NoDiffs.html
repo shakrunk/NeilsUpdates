@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMLEB IIP Weekly Development Report | Nov 19-26, 2025</title>
+    <style>
+        :root {
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-300: #cbd5e1;
+            --slate-400: #94a3b8;
+            --slate-500: #64748b;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+            --blue-50: #eff6ff;
+            --blue-100: #dbeafe;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            --emerald-50: #ecfdf5;
+            --emerald-500: #10b981;
+            --emerald-600: #059669;
+            --amber-50: #fffbeb;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --rose-50: #fff1f2;
+            --rose-500: #f43f5e;
+            --violet-50: #f5f3ff;
+            --violet-500: #8b5cf6;
+            --violet-600: #7c3aed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--slate-50);
+            color: var(--slate-800);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--slate-900);
+            padding: 2rem 0;
+            overflow-y: auto;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-header {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid var(--slate-700);
+            margin-bottom: 1rem;
+        }
+
+        .nav-logo {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--blue-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-title {
+            color: var(--slate-100);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .nav-subtitle {
+            color: var(--slate-400);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .nav-section {
+            padding: 0.75rem 1.5rem 0.5rem;
+            color: var(--slate-500);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.6rem 1.5rem;
+            color: var(--slate-300);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: var(--slate-800);
+            color: var(--slate-100);
+        }
+
+        .nav-link.active {
+            background: var(--slate-800);
+            color: var(--blue-400);
+            border-left-color: var(--blue-500);
+        }
+
+        .nav-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 200;
+            background: var(--slate-900);
+            color: var(--slate-100);
+            border: none;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 260px;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--slate-800) 0%, var(--slate-900) 100%);
+            color: white;
+            padding: 4rem 3rem;
+        }
+
+        .header-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--blue-400);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .header-period {
+            font-size: 1.1rem;
+            color: var(--slate-300);
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--slate-400);
+            margin-top: 0.25rem;
+        }
+
+        /* Content Sections */
+        .content {
+            padding: 3rem;
+            max-width: 1000px;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--slate-200);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .section-icon.blue { background: var(--blue-100); color: var(--blue-600); }
+        .section-icon.emerald { background: var(--emerald-50); color: var(--emerald-600); }
+        .section-icon.amber { background: var(--amber-50); color: var(--amber-600); }
+        .section-icon.violet { background: var(--violet-50); color: var(--violet-600); }
+        .section-icon.rose { background: var(--rose-50); color: var(--rose-500); }
+
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--slate-800);
+        }
+
+        .section-summary {
+            color: var(--slate-600);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--slate-200);
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--blue-200);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: var(--slate-800);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-title .badge {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge.new { background: var(--emerald-50); color: var(--emerald-600); }
+        .badge.improved { background: var(--blue-50); color: var(--blue-600); }
+        .badge.fixed { background: var(--amber-50); color: var(--amber-600); }
+        .badge.refactored { background: var(--violet-50); color: var(--violet-600); }
+
+        .feature-desc {
+            color: var(--slate-600);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .feature-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--slate-500);
+        }
+
+        .feature-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Expandable Details */
+        .expandable {
+            cursor: pointer;
+        }
+
+        .expandable-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .expandable-icon {
+            transition: transform 0.2s ease;
+            font-size: 0.8rem;
+            color: var(--slate-400);
+        }
+
+        .expandable.open .expandable-icon {
+            transform: rotate(180deg);
+        }
+
+        .expandable-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--slate-100);
+        }
+
+        .expandable.open .expandable-content {
+            display: block;
+        }
+
+        .commit-list {
+            font-size: 0.8rem;
+            color: var(--slate-500);
+        }
+
+        .commit-item {
+            padding: 0.4rem 0;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .commit-hash {
+            font-family: 'SF Mono', Consolas, monospace;
+            color: var(--slate-400);
+            flex-shrink: 0;
+        }
+
+        /* Impact Summary */
+        .impact-box {
+            background: linear-gradient(135deg, var(--blue-50) 0%, var(--slate-50) 100%);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--blue-100);
+        }
+
+        .impact-title {
+            font-weight: 600;
+            color: var(--blue-700);
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .impact-list {
+            list-style: none;
+        }
+
+        .impact-list li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--slate-700);
+            font-size: 0.9rem;
+        }
+
+        .impact-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--blue-500);
+            font-weight: 600;
+        }
+
+        /* Technical Details Toggle */
+        .tech-toggle {
+            background: var(--slate-100);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--slate-600);
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .tech-toggle:hover {
+            background: var(--slate-200);
+        }
+
+        .tech-details {
+            display: none;
+            background: var(--slate-100);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            font-family: 'SF Mono', Consolas, monospace;
+            font-size: 0.75rem;
+            color: var(--slate-600);
+        }
+
+        .tech-details.visible {
+            display: block;
+        }
+
+        /* Navigation Footer */
+        .nav-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--slate-200);
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 1px solid var(--slate-200);
+            border-radius: 0.5rem;
+            color: var(--slate-600);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: var(--slate-50);
+            border-color: var(--slate-300);
+            color: var(--slate-800);
+        }
+
+        .nav-btn.primary {
+            background: var(--blue-600);
+            border-color: var(--blue-600);
+            color: white;
+        }
+
+        .nav-btn.primary:hover {
+            background: var(--blue-700);
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--slate-800);
+            color: var(--slate-400);
+            padding: 2rem 3rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                transform: translateX(-100%);
+            }
+
+            .nav.open {
+                transform: translateX(0);
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .header {
+                padding: 5rem 1.5rem 2rem;
+            }
+
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .nav-footer {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-btn {
+                justify-content: center;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 260px;
+            height: 3px;
+            background: var(--blue-500);
+            z-index: 50;
+            transition: width 0.1s ease;
+        }
+
+        @media (max-width: 768px) {
+            .scroll-progress {
+                left: 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+    </button>
+
+    <nav class="nav" id="nav">
+        <div class="nav-header">
+            <div class="nav-logo">RMLEB IIP</div>
+            <div class="nav-title">Weekly Report</div>
+            <div class="nav-subtitle">November 19–26, 2025</div>
+        </div>
+        
+        <div class="nav-section">Overview</div>
+        <a href="#summary" class="nav-link active">Executive Summary</a>
+        <a href="#highlights" class="nav-link">Key Highlights</a>
+        
+        <div class="nav-section">Deliverables</div>
+        <a href="#cpr-dashboard" class="nav-link">CPR Dashboard</a>
+        <a href="#api-architecture" class="nav-link">API Architecture</a>
+        <a href="#backend" class="nav-link">Backend Services</a>
+        <a href="#ui-components" class="nav-link">UI Components</a>
+        
+        <div class="nav-section">Operations</div>
+        <a href="#cicd" class="nav-link">CI/CD Pipeline</a>
+        <a href="#quality" class="nav-link">Code Quality</a>
+        <a href="#drc" class="nav-link">DRC Dashboard</a>
+        
+        <div class="nav-section">Planning</div>
+        <a href="#next-week" class="nav-link">Next Week</a>
+    </nav>
+
+    <main class="main">
+        <header class="header">
+            <div class="header-eyebrow">Development Status Report</div>
+            <h1>RMLEB Internal Information Portal</h1>
+            <div class="header-period">Week of November 19–26, 2025</div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">56</div>
+                    <div class="stat-label">Total Commits</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">111</div>
+                    <div class="stat-label">Files Modified</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">7</div>
+                    <div class="stat-label">Major Features</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Applications Updated</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Executive Summary -->
+            <section class="section" id="summary">
+                <div class="section-header">
+                    <div class="section-icon blue">📋</div>
+                    <h2>Executive Summary</h2>
+                </div>
+                <div class="section-summary">
+                    This week marked significant progress on the RMLEB Internal Information Portal, with the CPR Dashboard advancing from prototype to functional data integration. The Eye Donor analytics tab now connects to live backend services, enabling staff to view real-time metrics with advanced filtering capabilities. Substantial architectural improvements to the API layer ensure the platform is positioned for long-term maintainability and scalability.
+                </div>
+                
+                <div class="impact-box">
+                    <div class="impact-title">Business Impact Summary</div>
+                    <ul class="impact-list">
+                        <li><strong>Real-Time Data Access:</strong> Eye donor statistics now pull directly from the database, eliminating manual reporting delays</li>
+                        <li><strong>Enhanced Analytics:</strong> Age distribution reporting refined to 10-year intervals with recovery status tracking</li>
+                        <li><strong>Improved User Experience:</strong> New date range and category filters allow staff to customize views instantly</li>
+                        <li><strong>Data Transparency:</strong> Visual indicators now clearly distinguish between live and demonstration data</li>
+                        <li><strong>Developer Productivity:</strong> Automated browser launch and streamlined CI/CD reduce development overhead</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Key Highlights -->
+            <section class="section" id="highlights">
+                <div class="section-header">
+                    <div class="section-icon emerald">⭐</div>
+                    <h2>Key Highlights</h2>
+                </div>
+                <div class="section-summary">
+                    The most impactful accomplishments from this development cycle that directly benefit end users and organizational operations.
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Live Eye Donor Analytics
+                            <span class="badge new">New</span>
+                        </div>
+                        <div class="feature-desc">
+                            The Eye Donor tab now retrieves real-time data from the CPR database. Users can view current referral counts, recovery rates, and monthly trends without waiting for scheduled reports. Age distribution charts display donor demographics with recovered vs. unrecovered breakdowns.
+                        </div>
+                        <div class="feature-meta">
+                            <span>📊 12 components updated</span>
+                            <span>🔗 Full API integration</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Advanced Dashboard Filtering
+                            <span class="badge new">New</span>
+                        </div>
+                        <div class="feature-desc">
+                            New filtering system allows users to narrow dashboard data by custom date ranges, donor categories (Coroner, Hospital, Hospice, etc.), and referring institutions. Filters persist across tab navigation and update charts in real-time.
+                        </div>
+                        <div class="feature-meta">
+                            <span>📅 Date range selection</span>
+                            <span>🏥 Institution filtering</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Mock Data Transparency
+                            <span class="badge new">New</span>
+                        </div>
+                        <div class="feature-desc">
+                            Dashboard cards and charts now display a warning indicator when showing demonstration data rather than live information. This prevents any confusion about data authenticity during testing or when database connections are unavailable.
+                        </div>
+                        <div class="feature-meta">
+                            <span>⚠️ Visual warnings</span>
+                            <span>✅ Clear data provenance</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CPR Dashboard -->
+            <section class="section" id="cpr-dashboard">
+                <div class="section-header">
+                    <div class="section-icon blue">📈</div>
+                    <h2>CPR Dashboard Development</h2>
+                </div>
+                <div class="section-summary">
+                    The Clinical Performance Reporting dashboard received the largest share of development effort this week, transitioning the Eye Donor analytics from static mockups to fully functional, data-driven visualizations.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card expandable" onclick="toggleExpand(this)">
+                        <div class="expandable-header">
+                            <div class="feature-title">
+                                Eye Donor Data Integration
+                                <span class="badge new">New</span>
+                            </div>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="feature-desc">
+                            Complete rewrite of the Eye Donor tab to consume data from backend APIs. Created dedicated data fetching hooks, state management for loading/error states, and type-safe data transformation pipelines.
+                        </div>
+                        <div class="expandable-content">
+                            <div class="commit-list">
+                                <div class="commit-item"><span class="commit-hash">93d10bd</span> Integrate Eye Donor API and refactor date filtering</div>
+                                <div class="commit-item"><span class="commit-hash">558f242</span> Optimize filter dependency and harden types</div>
+                                <div class="commit-item"><span class="commit-hash">387947b</span> Migrate donor data fetching to CPRClient</div>
+                                <div class="commit-item"><span class="commit-hash">ebd71f5</span> Add mocked data support to Eye Donor tab</div>
+                            </div>
+                        </div>
+                        <div class="feature-meta">
+                            <span>📁 10+ files changed</span>
+                            <span>➕ ~400 lines added</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card expandable" onclick="toggleExpand(this)">
+                        <div class="expandable-header">
+                            <div class="feature-title">
+                                Global Filter Context
+                                <span class="badge new">New</span>
+                            </div>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="feature-desc">
+                            Implemented application-wide filter state using React Context. Filters for date range, donor category, and institution are now shared across all dashboard tabs, ensuring consistent views.
+                        </div>
+                        <div class="expandable-content">
+                            <div class="commit-list">
+                                <div class="commit-item"><span class="commit-hash">e7a795d</span> Refactor layout and implement filter context</div>
+                                <div class="commit-item"><span class="commit-hash">bc8208c</span> Add global filter UI to application header</div>
+                                <div class="commit-item"><span class="commit-hash">1204711</span> Update category filter options with real data</div>
+                            </div>
+                        </div>
+                        <div class="feature-meta">
+                            <span>🔄 State management</span>
+                            <span>📁 27 files reorganized</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card expandable" onclick="toggleExpand(this)">
+                        <div class="expandable-header">
+                            <div class="feature-title">
+                                Age Distribution Analytics
+                                <span class="badge improved">Improved</span>
+                            </div>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="feature-desc">
+                            Enhanced age distribution charts to show 10-year age brackets (previously 20-year) and separate recovered vs. unrecovered donor counts. Added percentage normalization for clearer comparisons.
+                        </div>
+                        <div class="expandable-content">
+                            <div class="commit-list">
+                                <div class="commit-item"><span class="commit-hash">4703602</span> Update eye donor age data mapping and display order</div>
+                                <div class="commit-item"><span class="commit-hash">131bdc4</span> Normalize age distribution chart data</div>
+                                <div class="commit-item"><span class="commit-hash">922efa6</span> Show all axis keys on Eye Donors charts</div>
+                            </div>
+                        </div>
+                        <div class="feature-meta">
+                            <span>📊 Granular reporting</span>
+                            <span>📈 Better visualization</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Architecture -->
+            <section class="section" id="api-architecture">
+                <div class="section-header">
+                    <div class="section-icon violet">🔌</div>
+                    <h2>API Architecture Overhaul</h2>
+                </div>
+                <div class="section-summary">
+                    The shared API client package was substantially refactored to align with backend endpoint specifications and support the new dashboard filtering capabilities.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card expandable" onclick="toggleExpand(this)">
+                        <div class="expandable-header">
+                            <div class="feature-title">
+                                Dashboard-Specific Client Architecture
+                                <span class="badge refactored">Refactored</span>
+                            </div>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="feature-desc">
+                            Replaced generic CRUD operations with specialized read-only methods for dashboard metrics. New CPRClient provides dedicated methods for Donors, Transplants, Distribution, Eye Details, and Institutions data.
+                        </div>
+                        <div class="expandable-content">
+                            <div class="commit-list">
+                                <div class="commit-item"><span class="commit-hash">a2412a8</span> Pivot CPR client to dashboard-specific architecture</div>
+                                <div class="commit-item"><span class="commit-hash">3bee4c6</span> Migrate CPR endpoints to POST and update filter schema</div>
+                                <div class="commit-item"><span class="commit-hash">22ff568</span> Update CPRClient tests to assert POST requests</div>
+                            </div>
+                        </div>
+                        <div class="feature-meta">
+                            <span>📁 7 files refactored</span>
+                            <span>➖ ~600 lines removed</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            POST Method Migration
+                            <span class="badge improved">Improved</span>
+                        </div>
+                        <div class="feature-desc">
+                            Converted all CPR dashboard data fetch methods from GET to POST requests. This enables complex filter payloads with date ranges and multi-select options to be passed as structured JSON bodies rather than query strings.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🔐 Better data handling</span>
+                            <span>📝 JSON payloads</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Vite Environment Compatibility
+                            <span class="badge fixed">Fixed</span>
+                        </div>
+                        <div class="feature-desc">
+                            Migrated environment variable access from Node.js-style <code>process.env</code> to Vite's <code>import.meta.env</code> for browser compatibility. Added proper TypeScript configuration for Vite client types.
+                        </div>
+                        <div class="feature-meta">
+                            <span>⚙️ Build system alignment</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Backend Services -->
+            <section class="section" id="backend">
+                <div class="section-header">
+                    <div class="section-icon amber">🖥️</div>
+                    <h2>Backend Services</h2>
+                </div>
+                <div class="section-summary">
+                    Server-side improvements focused on query capabilities, analytics accuracy, and developer experience enhancements.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card expandable" onclick="toggleExpand(this)">
+                        <div class="expandable-header">
+                            <div class="feature-title">
+                                Advanced Query Filtering
+                                <span class="badge new">New</span>
+                            </div>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="feature-desc">
+                            Replaced limited year/month filtering with comprehensive DashboardFilters supporting date ranges, category lists, and institution selections. SQL queries now join Organization and Relationship tables for advanced filtering.
+                        </div>
+                        <div class="expandable-content">
+                            <div class="commit-list">
+                                <div class="commit-item"><span class="commit-hash">f291574</span> Implement advanced dashboard filtering for CPR donors</div>
+                                <div class="commit-item"><span class="commit-hash">19c2b64</span> Refine donor age distribution to 10-year intervals</div>
+                                <div class="commit-item"><span class="commit-hash">f778163</span> Calculate donor recovery via EyeTissueRecovered join</div>
+                            </div>
+                        </div>
+                        <div class="feature-meta">
+                            <span>🔍 Complex queries</span>
+                            <span>📁 10 files updated</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Recovery Status Analytics
+                            <span class="badge improved">Improved</span>
+                        </div>
+                        <div class="feature-desc">
+                            Age distribution analytics now accurately report recovered vs. unrecovered donor counts by checking the EyeTissueRecovered table rather than relying on referral status strings. Handles ID format discrepancies between systems.
+                        </div>
+                        <div class="feature-meta">
+                            <span>✅ Accurate reporting</span>
+                            <span>🔗 Proper joins</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Developer Experience
+                            <span class="badge new">New</span>
+                        </div>
+                        <div class="feature-desc">
+                            Local development now automatically opens the API documentation in the browser when starting the server. Reduces friction for developers testing backend endpoints.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🚀 Auto browser launch</span>
+                            <span>📚 /docs endpoint</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Dependency Updates
+                            <span class="badge improved">Improved</span>
+                        </div>
+                        <div class="feature-desc">
+                            Updated FastAPI to version 0.122.0 with pinned Starlette compatibility. Ensures access to latest security patches and performance improvements.
+                        </div>
+                        <div class="feature-meta">
+                            <span>📦 FastAPI 0.122.0</span>
+                            <span>🔒 Security updates</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- UI Components -->
+            <section class="section" id="ui-components">
+                <div class="section-header">
+                    <div class="section-icon emerald">🎨</div>
+                    <h2>UI Component Library</h2>
+                </div>
+                <div class="section-summary">
+                    The shared UI component package received new features and styling refinements that benefit all dashboard applications.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Mock Data Warning Indicator
+                            <span class="badge new">New</span>
+                        </div>
+                        <div class="feature-desc">
+                            New MockDataIndicator component displays a popover warning when cards contain demonstration data. Integrates with Card and KPICard components via an <code>isMocked</code> prop.
+                        </div>
+                        <div class="feature-meta">
+                            <span>⚠️ User awareness</span>
+                            <span>📁 5 files added</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Configurable Chart Interpolation
+                            <span class="badge new">New</span>
+                        </div>
+                        <div class="feature-desc">
+                            LineChart and ComposedChart components now accept a <code>type</code> prop to customize curve interpolation (linear, monotone, step, etc.). Allows per-line configuration in composed charts.
+                        </div>
+                        <div class="feature-meta">
+                            <span>📈 Flexible charting</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Bar Chart Axis Control
+                            <span class="badge new">New</span>
+                        </div>
+                        <div class="feature-desc">
+                            New <code>showAllxKeys</code> prop forces bar charts to display all data point labels rather than auto-hiding for space. Essential for age distribution charts where every bracket matters.
+                        </div>
+                        <div class="feature-meta">
+                            <span>📊 Complete labels</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card expandable" onclick="toggleExpand(this)">
+                        <div class="expandable-header">
+                            <div class="feature-title">
+                                Filter Dropdown Enhancements
+                                <span class="badge improved">Improved</span>
+                            </div>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="feature-desc">
+                            Updated filter dropdowns with improved hover states, keyboard accessibility (<code>focus-visible</code>), configurable alignment, and clickable calendar icons for date pickers.
+                        </div>
+                        <div class="expandable-content">
+                            <div class="commit-list">
+                                <div class="commit-item"><span class="commit-hash">a801f9c</span> Update filters dropdown hover states and colors</div>
+                                <div class="commit-item"><span class="commit-hash">15fa2e9</span> Enable date picker on icon click</div>
+                                <div class="commit-item"><span class="commit-hash">4a82cf4</span> Refresh styling, add layout props, update logo</div>
+                            </div>
+                        </div>
+                        <div class="feature-meta">
+                            <span>♿ Accessibility</span>
+                            <span>🎯 Better UX</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Card Positioning Context
+                            <span class="badge fixed">Fixed</span>
+                        </div>
+                        <div class="feature-desc">
+                            Card and KPICard components now include relative positioning by default, ensuring tooltips, badges, and overlays position correctly within their parent containers.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🎯 Proper stacking</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Tailwind Class Updates
+                            <span class="badge fixed">Fixed</span>
+                        </div>
+                        <div class="feature-desc">
+                            Replaced deprecated <code>flex-shrink-0</code> with modern <code>shrink-0</code> utility class across multiple components for Tailwind v3 compatibility.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🔧 Deprecation fix</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CI/CD -->
+            <section class="section" id="cicd">
+                <div class="section-header">
+                    <div class="section-icon rose">⚙️</div>
+                    <h2>CI/CD Pipeline</h2>
+                </div>
+                <div class="section-summary">
+                    Infrastructure and automation improvements to ensure reliable builds and faster development cycles.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Backend Workspace Exclusion
+                            <span class="badge fixed">Fixed</span>
+                        </div>
+                        <div class="feature-desc">
+                            TurboRepo commands now explicitly filter out the Python backend workspace. Frontend tasks no longer attempt to run on the Python codebase, preventing execution errors.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🔧 Workflow fix</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Poetry 1.2+ Compatibility
+                            <span class="badge fixed">Fixed</span>
+                        </div>
+                        <div class="feature-desc">
+                            Updated Poetry install commands from deprecated <code>--no-dev</code> to <code>--without dev</code> syntax for Poetry 1.2+ standards compliance.
+                        </div>
+                        <div class="feature-meta">
+                            <span>📦 Modern tooling</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Dynamic PNPM Version
+                            <span class="badge improved">Improved</span>
+                        </div>
+                        <div class="feature-desc">
+                            Removed hardcoded pnpm version from workflows. Version now resolves dynamically from <code>packageManager</code> field in package.json, eliminating manual workflow updates.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🔄 Auto-sync</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            TurboRepo Test Optimization
+                            <span class="badge improved">Improved</span>
+                        </div>
+                        <div class="feature-desc">
+                            Removed unnecessary build dependencies from test pipeline and added explicit input definitions for better caching. Tests run faster without waiting for builds.
+                        </div>
+                        <div class="feature-meta">
+                            <span>⚡ Faster tests</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            EditorConfig Added
+                            <span class="badge new">New</span>
+                        </div>
+                        <div class="feature-desc">
+                            Added <code>.editorconfig</code> file to enforce consistent coding style (indentation, newlines) across all contributors regardless of their editor settings.
+                        </div>
+                        <div class="feature-meta">
+                            <span>📏 Code consistency</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Backend Monorepo Integration
+                            <span class="badge new">New</span>
+                        </div>
+                        <div class="feature-desc">
+                            Added backend to pnpm workspace configuration with package.json script aliases that bridge npm commands to Poetry tasks, enabling unified task management.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🔗 Unified workspace</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Quality -->
+            <section class="section" id="quality">
+                <div class="section-header">
+                    <div class="section-icon violet">✅</div>
+                    <h2>Code Quality & Testing</h2>
+                </div>
+                <div class="section-summary">
+                    Improvements to type safety, test reliability, and code cleanliness across the codebase.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Test Environment Configuration
+                            <span class="badge improved">Improved</span>
+                        </div>
+                        <div class="feature-desc">
+                            Added 'test' to the allowed ENVIRONMENT literal in backend settings, properly supporting test contexts. Removed unused fixtures to clean up test configuration.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🧪 Cleaner tests</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Type Hint Improvements
+                            <span class="badge improved">Improved</span>
+                        </div>
+                        <div class="feature-desc">
+                            Added type hints to query filter parameters in helpers and defined explicit interfaces (AgeChartData, MonthlyChartData) to eliminate <code>any</code> types in the data layer.
+                        </div>
+                        <div class="feature-meta">
+                            <span>📝 Type safety</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Test Selector Reliability
+                            <span class="badge fixed">Fixed</span>
+                        </div>
+                        <div class="feature-desc">
+                            Updated DateRangeFilter tests to specifically target input elements when selecting by label text, resolving ambiguity errors and ensuring correct element interactions.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🎯 Precise selectors</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Interceptor Test Hygiene
+                            <span class="badge fixed">Fixed</span>
+                        </div>
+                        <div class="feature-desc">
+                            Fixed unawaited async assertions in error handling tests. Mocked console output to suppress noise during test runs.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🧹 Clean output</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Assert Syntax Standardization
+                            <span class="badge refactored">Refactored</span>
+                        </div>
+                        <div class="feature-desc">
+                            Updated assertion statements in donor_service to wrap conditions in parentheses rather than error messages, preventing Python tuple-assertion ambiguity.
+                        </div>
+                        <div class="feature-meta">
+                            <span>🔧 Best practices</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DRC Dashboard -->
+            <section class="section" id="drc">
+                <div class="section-header">
+                    <div class="section-icon blue">📊</div>
+                    <h2>DRC Dashboard</h2>
+                </div>
+                <div class="section-summary">
+                    Initial structure and navigation setup for the Donor Recovery Dashboard application.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Tab Structure Implementation
+                            <span class="badge new">New</span>
+                        </div>
+                        <div class="feature-desc">
+                            Restructured dashboard into distinct "Organization Stats" and "Individual Stats" tabs. Organization tab displays KPI cards for Recovery Rating, Referrals, Tissues, etc. using the shared DynamicCard component.
+                        </div>
+                        <div class="feature-meta">
+                            <span>📁 4 files added</span>
+                            <span>🎯 Clear navigation</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-title">
+                            Layout Improvements
+                            <span class="badge fixed">Fixed</span>
+                        </div>
+                        <div class="feature-desc">
+                            Enabled full-width mode on PageLayout. Corrected header title from "Donor Recover Dashboard" to "Donor Recovery Dashboard."
+                        </div>
+                        <div class="feature-meta">
+                            <span>🎨 Visual polish</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Next Week -->
+            <section class="section" id="next-week">
+                <div class="section-header">
+                    <div class="section-icon emerald">🎯</div>
+                    <h2>Looking Ahead</h2>
+                </div>
+                <div class="section-summary">
+                    Planned focus areas and anticipated deliverables for the upcoming development cycle.
+                </div>
+
+                <div class="impact-box">
+                    <div class="impact-title">Upcoming Priorities</div>
+                    <ul class="impact-list">
+                        <li><strong>Transplant Tab Integration:</strong> Connect the Transplant Placement tab to backend APIs using the same patterns established for Eye Donors</li>
+                        <li><strong>DRC Dashboard API:</strong> Finalize backend specifications and begin data integration for Donor Recovery metrics</li>
+                        <li><strong>Institution Analytics:</strong> Build out the Institutions tab with detailed referring organization statistics</li>
+                        <li><strong>Performance Testing:</strong> Load test the filtering system with production-scale data volumes</li>
+                        <li><strong>Documentation:</strong> Update API documentation and component storybook with new features</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" style="background: var(--slate-50); border-style: dashed;">
+                    <div class="feature-title" style="color: var(--slate-500);">
+                        Note: Experimental Branch Excluded
+                    </div>
+                    <div class="feature-desc" style="color: var(--slate-500);">
+                        Commit 7df844f introduced dark mode theming and architecture documentation but was marked "DO NOT INCLUDE IN REPORTS" as it represents experimental work not yet ready for stakeholder review. These features may appear in future reports once validated.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Report Navigation -->
+            <div class="nav-footer">
+                <button class="nav-btn disabled" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Previous Report
+                </button>
+                <button class="nav-btn disabled" disabled>
+                    Next Report
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div>
+                    <strong>RMLEB Internal Information Portal</strong> — Weekly Development Report
+                </div>
+                <div>
+                    Generated November 26, 2025 • 56 commits analyzed
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Navigation toggle for mobile
+        const navToggle = document.getElementById('navToggle');
+        const nav = document.getElementById('nav');
+        
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('open');
+        });
+
+        // Close nav when clicking a link on mobile
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    nav.classList.remove('open');
+                }
+            });
+        });
+
+        // Active section highlighting
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function updateActiveSection() {
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 150) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Scroll progress indicator
+        const scrollProgress = document.getElementById('scrollProgress');
+        
+        function updateScrollProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = `${scrollPercent}%`;
+        }
+
+        // Expandable cards
+        function toggleExpand(element) {
+            element.classList.toggle('open');
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            updateActiveSection();
+            updateScrollProgress();
+        });
+
+        // Initial calls
+        updateActiveSection();
+        updateScrollProgress();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

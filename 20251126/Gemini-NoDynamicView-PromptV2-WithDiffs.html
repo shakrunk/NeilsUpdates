@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RMLEB IIP - Status Report</title>
+    <style>
+      :root {
+        --primary: #0f172a;
+        --secondary: #334155;
+        --accent: #2563eb;
+        --bg-gray: #f8fafc;
+        --border: #e2e8f0;
+        --success: #16a34a;
+        --warning: #d97706;
+        --danger: #dc2626;
+        --purple: #9333ea;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--primary);
+        background-color: var(--bg-gray);
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      header {
+        margin-bottom: 2rem;
+        border-bottom: 2px solid var(--border);
+        padding-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
+      .project-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .report-meta {
+        font-size: 0.9rem;
+        color: var(--secondary);
+        text-align: right;
+      }
+
+      /* Metrics Grid */
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .metric-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      .metric-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .metric-label {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--secondary);
+      }
+
+      /* Section Styling */
+      section {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        margin-bottom: 2rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.5rem;
+        color: var(--secondary);
+      }
+
+      h3 {
+        font-size: 1.1rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: var(--primary);
+      }
+
+      ul {
+        list-style-position: inside;
+        margin-left: 0.5rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Tables & Lists */
+      .commit-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .commit-card {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        transition: all 0.2s;
+      }
+
+      .commit-card:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .commit-header {
+        padding: 0.75rem 1rem;
+        background: #f1f5f9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .commit-body {
+        padding: 1rem;
+        border-top: 1px solid var(--border);
+        background: white;
+        font-size: 0.95rem;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.25em 0.6em;
+        font-size: 0.75rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.375rem;
+        margin-right: 0.5rem;
+      }
+
+      .badge-feat {
+        background-color: #dbeafe;
+        color: #1e40af;
+      }
+      .badge-fix {
+        background-color: #dcfce7;
+        color: #166534;
+      }
+      .badge-refactor {
+        background-color: #f3e8ff;
+        color: #6b21a8;
+      }
+      .badge-chore {
+        background-color: #f1f5f9;
+        color: #475569;
+      }
+      .badge-test {
+        background-color: #ffedd5;
+        color: #9a3412;
+      }
+      .badge-style {
+        background-color: #e0f2fe;
+        color: #075985;
+      }
+
+      /* Utilities */
+      .controls {
+        margin-bottom: 1.5rem;
+        display: flex;
+        gap: 1rem;
+      }
+
+      input[type="text"] {
+        padding: 0.5rem;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      code {
+        font-family: monospace;
+        background: #f1f5f9;
+        padding: 0.1rem 0.3rem;
+        border-radius: 4px;
+        font-size: 0.85em;
+      }
+
+      /* Print Styles */
+      @media print {
+        body {
+          background-color: white;
+          padding: 0;
+          color: black;
+          font-size: 11pt;
+        }
+
+        .no-print,
+        .controls,
+        button,
+        input {
+          display: none !important;
+        }
+
+        header {
+          margin-bottom: 1rem;
+        }
+
+        .metrics-grid {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0.5rem;
+        }
+
+        .metric-card {
+          padding: 0.5rem;
+          box-shadow: none;
+          border: 1px solid #000;
+        }
+
+        section {
+          padding: 0;
+          margin-bottom: 1.5rem;
+          box-shadow: none;
+          border: none;
+        }
+
+        h2 {
+          border-bottom: 2px solid #000;
+          color: #000;
+        }
+
+        /* Force expand details */
+        details {
+          display: block;
+        }
+        details > summary {
+          display: none;
+        }
+        .commit-body {
+          display: block !important;
+          border-top: 1px dotted #ccc;
+          padding-left: 0;
+        }
+        .commit-card {
+          border: none;
+          border-bottom: 1px solid #ccc;
+          margin-bottom: 0.5rem;
+          page-break-inside: avoid;
+        }
+        .commit-header {
+          background: none;
+          padding-left: 0;
+          font-weight: bold;
+        }
+
+        a {
+          text-decoration: none;
+          color: black;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <div class="project-title">RMLEB IIP Status Report</div>
+        <div>Internal Information Portal: CPR & DRC Modules</div>
+      </div>
+      <div class="report-meta">
+        <p><strong>Generated:</strong> November 26, 2025</p>
+        <p><strong>Period:</strong> Past 9 Days</p>
+        <p><strong>Author:</strong> Krishna A. Kumar</p>
+        <p class="no-print" style="margin-top: 5px; font-size: 0.8rem">
+          <em>Use Ctrl+P to print this report</em>
+        </p>
+      </div>
+    </header>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">64</div>
+        <div class="metric-label">Commits</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">139</div>
+        <div class="metric-label">Files Modified</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">API v1</div>
+        <div class="metric-label">Backend Target</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">Active</div>
+        <div class="metric-label">Dev Status</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Executive Summary</h2>
+      <p>
+        This sprint focused on the
+        <strong>stabilization and functional integration</strong> of the CPR
+        Dashboard. We transitioned from mocked data to live API consumption,
+        implementing complex SQL logic to accurately calculation Recovery Rates
+        (Recovered vs. Unrecovered) based on tissue inventory. A comprehensive
+        backend test suite was established (80+ tests), covering schemas,
+        services, and endpoints, significantly increasing deployment confidence.
+      </p>
+    </section>
+
+    <section>
+      <h2>Key Deliverables & Highlights</h2>
+
+      <h3>1. CPR Dashboard Integration</h3>
+      <ul>
+        <li>
+          <strong>Live Data Connection:</strong> Replaced all mock data hooks
+          with live calls to <code>/api/v1/cpr/donors</code>.
+        </li>
+        <li>
+          <strong>Advanced Filtering:</strong> Implemented global
+          <code>FilterContext</code> handling Date Ranges, Categories, and
+          Institutions. Migrated API calls from GET to POST to support complex
+          filter payloads.
+        </li>
+        <li>
+          <strong>Visualization Logic:</strong> Split "Donors Referred" into
+          Monthly Trends and Yearly Totals. Added visual indicators (Popovers)
+          for any remaining mock data contexts.
+        </li>
+      </ul>
+
+      <h3>2. Backend Architecture</h3>
+      <ul>
+        <li>
+          <strong>Test Suite Implementation:</strong> Added comprehensive
+          <code>pytest</code> infrastructure, including
+          <code>conftest</code> fixtures, DB mocking, and CI pipeline steps.
+        </li>
+        <li>
+          <strong>Recovery Logic:</strong> Refined business logic for
+          "Recovered" status. Now joins `EyeTissueRecovered` table rather than
+          relying on the referral status string, ensuring alignment with
+          inventory reality.
+        </li>
+        <li>
+          <strong>API Standardization:</strong> Bumped FastAPI and Pydantic
+          versions; standardized response schemas.
+        </li>
+      </ul>
+
+      <h3>3. Developer Experience & CI/CD</h3>
+      <ul>
+        <li>
+          <strong>Monorepo Hygiene:</strong> Integrated backend into PNPM
+          workspace. Optimized TurboRepo pipelines to separate backend/frontend
+          tasks.
+        </li>
+        <li>
+          <strong>Local Development:</strong> Added script to auto-open API
+          documentation upon server start.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Detailed Change Log</h2>
+
+      <div class="controls no-print">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search commits (e.g., 'test', 'fix', 'dashboard')..."
+          onkeyup="filterCommits()"
+        />
+        <button
+          onclick="expandAll()"
+          style="
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          Expand All
+        </button>
+        <button
+          onclick="collapseAll()"
+          style="
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          Collapse All
+        </button>
+      </div>
+
+      <div class="commit-list" id="commitList">
+        <details class="commit-card">
+          <summary class="commit-header">
+            <span
+              ><span class="badge badge-test">test</span> Backend Test Suite
+              Stabilization</span
+            >
+            <span class="no-print" style="font-size: 0.8rem; color: #666"
+              >9 days ago</span
+            >
+          </summary>
+          <div class="commit-body">
+            <p>
+              <strong>Subject:</strong> feat (backend): Add initial test suite
+              and fix related bugs
+            </p>
+            <p>
+              Included over 80 new tests, fixtures, and configuration. Fixed
+              `donor_service` bugs found during testing regarding age
+              distribution and row attribute access.
+            </p>
+          </div>
+        </details>
+
+        <details class="commit-card">
+          <summary class="commit-header">
+            <span
+              ><span class="badge badge-fix">fix</span> Donor Recovery
+              Calculation Logic</span
+            >
+            <span class="no-print" style="font-size: 0.8rem; color: #666"
+              >2 days ago</span
+            >
+          </summary>
+          <div class="commit-body">
+            <p>
+              <strong>Subject:</strong> fix (backend): Calculate donor recovery
+              via EyeTissueRecovered join
+            </p>
+            <p>
+              Changed logic for determining recovered vs. unrecovered counts.
+              Verifies existence of record in EyeTissueRecovered table rather
+              than relying on referral status string.
+            </p>
+          </div>
+        </details>
+
+        <details class="commit-card">
+          <summary class="commit-header">
+            <span
+              ><span class="badge badge-refactor">refactor</span> API Client to
+              POST & Dashboard Architecture</span
+            >
+            <span class="no-print" style="font-size: 0.8rem; color: #666"
+              >2 days ago</span
+            >
+          </summary>
+          <div class="commit-body">
+            <p>
+              <strong>Subject:</strong> refactor (api-client): Pivot cpr client
+              to dashboard-specific architecture
+            </p>
+            <p>
+              Converted CPR dashboard fetch methods from GET to POST to support
+              JSON body payloads for complex filters. Refactored endpoints to
+              map strictly to V1 analytics routes.
+            </p>
+          </div>
+        </details>
+
+        <details class="commit-card">
+          <summary class="commit-header">
+            <span
+              ><span class="badge badge-feat">feat</span> Eye Donor API
+              Integration</span
+            >
+            <span class="no-print" style="font-size: 0.8rem; color: #666"
+              >6 days ago</span
+            >
+          </summary>
+          <div class="commit-body">
+            <p>
+              <strong>Subject:</strong> feat (cpr-dashboard): Integrate Eye
+              Donor API and refactor date filtering
+            </p>
+            <p>
+              Replaced YearMonthFilter with DateRangeFilter. Implemented
+              `donorService` to interface with backend. Connected `EyeDonorsTab`
+              to live data.
+            </p>
+          </div>
+        </details>
+
+        <details class="commit-card">
+          <summary class="commit-header">
+            <span
+              ><span class="badge badge-feat">feat</span> Global Filter
+              Context</span
+            >
+            <span class="no-print" style="font-size: 0.8rem; color: #666"
+              >6 days ago</span
+            >
+          </summary>
+          <div class="commit-body">
+            <p>
+              <strong>Subject:</strong> feat (cpr-dashboard): refactor layout
+              and implement filter context
+            </p>
+            <p>
+              Implemented `FilterProvider` and `FilterContext` to manage global
+              state for date ranges, categories, and institutions across the
+              dashboard.
+            </p>
+          </div>
+        </details>
+
+        <details class="commit-card">
+          <summary class="commit-header">
+            <span
+              ><span class="badge badge-feat">feat</span> Mock Data
+              Indicator</span
+            >
+            <span class="no-print" style="font-size: 0.8rem; color: #666"
+              >19 hours ago</span
+            >
+          </summary>
+          <div class="commit-body">
+            <p>
+              <strong>Subject:</strong> feat (ui-components): Add visual
+              indicator for mocked data
+            </p>
+            <p>
+              Introduced a Popover component to warn users when displayed data
+              is for demonstration purposes. Added `isMocked` prop to Card
+              components.
+            </p>
+          </div>
+        </details>
+
+        <details class="commit-card">
+          <summary class="commit-header">
+            <span
+              ><span class="badge badge-feat">feat</span> Configurable Chart
+              Interpolation</span
+            >
+            <span class="no-print" style="font-size: 0.8rem; color: #666"
+              >15 hours ago</span
+            >
+          </summary>
+          <div class="commit-body">
+            <p>
+              <strong>Subject:</strong> feat (ui-components): Make chart line
+              interpolation configurable
+            </p>
+            <p>
+              Updates LineChart and ComposedChart to allow consumers to specify
+              curve interpolation (linear, monotone, step).
+            </p>
+          </div>
+        </details>
+
+        <details class="commit-card">
+          <summary class="commit-header">
+            <span
+              ><span class="badge badge-fix">fix</span> CI Pipeline
+              Optimization</span
+            >
+            <span class="no-print" style="font-size: 0.8rem; color: #666"
+              >14 hours ago</span
+            >
+          </summary>
+          <div class="commit-body">
+            <p>
+              <strong>Subject:</strong> fix (CI): Exclude backend from frontend
+              turbo tasks
+            </p>
+            <p>
+              Updates TurboRepo command to explicitly filter out the "backend"
+              workspace to prevent execution errors in frontend pipelines.
+            </p>
+          </div>
+        </details>
+
+        <details class="commit-card">
+          <summary class="commit-header">
+            <span
+              ><span class="badge badge-chore">chore</span> Update
+              Dependencies</span
+            >
+            <span class="no-print" style="font-size: 0.8rem; color: #666"
+              >2 days ago</span
+            >
+          </summary>
+          <div class="commit-body">
+            <p><strong>Subject:</strong> chore (deployment): Dependency Bump</p>
+            <p>
+              Major lockfile update. Updated production deps (axios,
+              react-router-dom, recharts) and dev deps (vite, tailwindcss).
+            </p>
+          </div>
+        </details>
+
+        <details class="commit-card">
+          <summary class="commit-header">
+            <span
+              ><span class="badge badge-feat">feat</span> DRC Dashboard
+              Restructure</span
+            >
+            <span class="no-print" style="font-size: 0.8rem; color: #666"
+              >7 days ago</span
+            >
+          </summary>
+          <div class="commit-body">
+            <p>
+              <strong>Subject:</strong> feat (drc-dashboard): restructure
+              dashboard into organization and individual tabs
+            </p>
+            <p>
+              Replaced generic dashboard view with distinct 'Organization Stats'
+              and 'Individual Stats' tabs.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <footer
+      style="
+        margin-top: 4rem;
+        border-top: 1px solid #ccc;
+        padding-top: 1rem;
+        display: none;
+      "
+    >
+      <p>
+        RMLEB Internal Information Portal | Confidential | Internal Use Only
+      </p>
+    </footer>
+
+    <script>
+      function filterCommits() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const list = document.getElementById("commitList");
+        const details = list.getElementsByTagName("details");
+
+        for (let i = 0; i < details.length; i++) {
+          const summary = details[i].getElementsByTagName("summary")[0];
+          const textValue = details[i].innerText || details[i].textContent;
+          if (textValue.toLowerCase().indexOf(filter) > -1) {
+            details[i].style.display = "";
+          } else {
+            details[i].style.display = "none";
+          }
+        }
+      }
+
+      function expandAll() {
+        const list = document.getElementById("commitList");
+        const details = list.getElementsByTagName("details");
+        for (let i = 0; i < details.length; i++) {
+          details[i].open = true;
+        }
+      }
+
+      function collapseAll() {
+        const list = document.getElementById("commitList");
+        const details = list.getElementsByTagName("details");
+        for (let i = 0; i < details.length; i++) {
+          details[i].open = false;
+        }
+      }
+
+      // Print Logic: Add specific class to footer when printing via CSS
+      // The CSS @media print handles the visibility of details/summary
+    </script>
+  </body>
+</html>

@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RMLEB IIP Project Status Report</title>
+    <style>
+      :root {
+        --primary-color: #003366; /* Rocky Mountain Lions Blue-ish */
+        --secondary-color: #0055a5;
+        --accent-color: #f0f4f8;
+        --text-dark: #333333;
+        --text-light: #666666;
+        --border-color: #e2e8f0;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+        --bg-body: #f8fafc;
+        --bg-card: #ffffff;
+      }
+
+      /* RESET & BASE */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background-color: var(--bg-body);
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* LAYOUT */
+      .sidebar {
+        width: 250px;
+        background-color: var(--bg-card);
+        border-right: 1px solid var(--border-color);
+        position: fixed;
+        height: 100vh;
+        padding: 2rem;
+        overflow-y: auto;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 100;
+      }
+
+      .main-content {
+        margin-left: 250px;
+        flex: 1;
+        padding: 2rem 3rem;
+        max-width: 1200px;
+      }
+
+      /* TYPOGRAPHY */
+      h1 {
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+        color: var(--secondary-color);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 0.5rem;
+      }
+      h3 {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+      p {
+        margin-bottom: 1rem;
+        color: var(--text-light);
+      }
+
+      /* COMPONENTS */
+      .card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-box {
+        background: var(--primary-color);
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .stat-box .number {
+        font-size: 2rem;
+        font-weight: bold;
+        display: block;
+      }
+      .stat-box .label {
+        font-size: 0.85rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      /* NAVIGATION (TOC) */
+      .toc-list {
+        list-style: none;
+      }
+      .toc-list li {
+        margin-bottom: 0.8rem;
+      }
+      .toc-list a {
+        text-decoration: none;
+        color: var(--text-light);
+        font-weight: 500;
+        transition: color 0.2s;
+        display: block;
+      }
+      .toc-list a:hover,
+      .toc-list a.active {
+        color: var(--secondary-color);
+        transform: translateX(5px);
+      }
+      .toc-list a.active {
+        font-weight: bold;
+        border-left: 3px solid var(--secondary-color);
+        padding-left: 8px;
+        margin-left: -11px;
+      }
+
+      /* COMMIT LOG STYLES */
+      .commit-controls {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .search-input {
+        flex: 1;
+        padding: 0.6rem;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-size: 0.9rem;
+      }
+
+      .commit-entry {
+        border-left: 3px solid var(--border-color);
+        padding-left: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .commit-entry:hover {
+        border-left-color: var(--secondary-color);
+      }
+
+      details {
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+      }
+
+      details summary {
+        padding: 0.8rem;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.95rem;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+
+      details summary::after {
+        content: "+";
+        font-weight: bold;
+        color: var(--secondary-color);
+      }
+
+      details[open] summary {
+        border-bottom: 1px solid var(--border-color);
+        background: white;
+        border-radius: 6px 6px 0 0;
+      }
+      details[open] summary::after {
+        content: "-";
+      }
+
+      .commit-details {
+        padding: 1rem;
+        background: white;
+        border-radius: 0 0 6px 6px;
+        font-size: 0.9rem;
+      }
+
+      .tag {
+        display: inline-block;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+      .tag.feat {
+        background: #d1fae5;
+        color: #065f46;
+      } /* Green */
+      .tag.fix {
+        background: #fee2e2;
+        color: #991b1b;
+      } /* Red */
+      .tag.refactor {
+        background: #e0f2fe;
+        color: #075985;
+      } /* Blue */
+      .tag.chore {
+        background: #f3f4f6;
+        color: #374151;
+      } /* Grey */
+
+      /* FOOTER NAV */
+      .footer-nav {
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+      }
+      .btn {
+        padding: 0.6rem 1.2rem;
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+      .btn:hover {
+        background: var(--accent-color);
+        border-color: var(--secondary-color);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        body {
+          flex-direction: column;
+        }
+        .sidebar {
+          position: relative;
+          width: 100%;
+          height: auto;
+          padding: 1rem;
+          border-right: none;
+          border-bottom: 1px solid var(--border-color);
+        }
+        .main-content {
+          margin-left: 0;
+          padding: 1.5rem;
+        }
+      }
+
+      /* === PRINT STYLES === */
+      @media print {
+        body {
+          background: white;
+          display: block;
+          color: black;
+        }
+        .sidebar,
+        .footer-nav,
+        .commit-controls,
+        .stat-box {
+          display: none !important;
+        }
+
+        .main-content {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          max-width: 100%;
+        }
+
+        h1,
+        h2,
+        h3 {
+          color: black !important;
+        }
+        h2 {
+          border-bottom: 1px solid black;
+        }
+
+        .stat-grid {
+          display: flex;
+          justify-content: space-between;
+          border: 1px solid #ccc;
+          padding: 10px;
+          margin-bottom: 20px;
+        }
+        .stat-box-print {
+          display: block !important;
+          text-align: left;
+          padding-right: 20px;
+        }
+
+        .card {
+          border: none;
+          box-shadow: none;
+          padding: 0;
+          margin-bottom: 2rem;
+        }
+
+        /* Force Expand Details */
+        details {
+          display: block;
+          border: none;
+          margin-bottom: 1.5rem;
+        }
+        details summary {
+          display: none;
+        } /* Hide the clickable toggle */
+        .commit-details {
+          display: block;
+          padding: 0;
+          border: none;
+        }
+
+        /* Format Commit Headers for Print */
+        .commit-entry-header {
+          display: block;
+          font-weight: bold;
+          margin-bottom: 5px;
+          font-size: 1.1em;
+          border-bottom: 1px dotted #ccc;
+          padding-bottom: 3px;
+        }
+
+        a {
+          text-decoration: none;
+          color: black;
+        }
+      }
+
+      /* Utility for print stats (hidden on screen) */
+      .print-stats {
+        display: none;
+      }
+      @media print {
+        .print-stats {
+          display: flex;
+          gap: 2rem;
+          margin-bottom: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div style="margin-bottom: 2rem">
+        <h2
+          style="
+            font-size: 1.2rem;
+            border: none;
+            margin: 0;
+            padding: 0;
+            color: var(--primary-color);
+          "
+        >
+          RMLEB IIP
+        </h2>
+        <p style="font-size: 0.8rem; margin: 0">Internal Information Portal</p>
+      </div>
+      <ul class="toc-list">
+        <li><a href="#summary" class="active">Executive Summary</a></li>
+        <li><a href="#stats">Statistics</a></li>
+        <li><a href="#impact">Impact Analysis</a></li>
+        <li><a href="#technical">Technical Highlights</a></li>
+        <li><a href="#changelog">Detailed Changelog</a></li>
+      </ul>
+      <div style="margin-top: auto; font-size: 0.8rem; color: #999">
+        Generated: Nov 26, 2025<br />
+        Auth: Krishna A. Kumar
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <header id="summary" style="margin-bottom: 2rem">
+        <h1>Project Status Report</h1>
+        <p>
+          <strong>Period:</strong> Past 7 Days | <strong>Project:</strong> RMLEB
+          IIP
+        </p>
+      </header>
+
+      <section class="card">
+        <h3>Executive Summary</h3>
+        <p>
+          This week focused heavily on <strong>data accuracy</strong> and
+          <strong>architectural hardening</strong>. Significant improvements
+          were made to the CPR Dashboard's donor analytics, specifically
+          regarding age distribution logic and recovery rate calculations. The
+          platform's API layer underwent a major refactor, migrating from
+          generic CRUD operations to domain-specific POST endpoints, improving
+          security and type safety. Additionally, the DRC Dashboard was
+          restructured to support distinct views for organizational versus
+          individual performance.
+        </p>
+      </section>
+
+      <section id="stats">
+        <div class="stat-grid">
+          <div class="stat-box">
+            <span class="number">56</span>
+            <span class="label">Total Commits</span>
+          </div>
+          <div class="stat-box">
+            <span class="number">111</span>
+            <span class="label">Files Changed</span>
+          </div>
+          <div class="stat-box">
+            <span class="number">1</span>
+            <span class="label">Contributor</span>
+          </div>
+          <div class="stat-box" style="background: var(--success-color)">
+            <span class="number">Stable</span>
+            <span class="label">Build Status</span>
+          </div>
+        </div>
+
+        <div class="print-stats">
+          <div><strong>Commits:</strong> 56</div>
+          <div><strong>Files:</strong> 111</div>
+          <div><strong>Contributor:</strong> Krishna A. Kumar</div>
+        </div>
+      </section>
+
+      <section id="impact">
+        <h2>Impact Analysis</h2>
+
+        <div class="card">
+          <h3>Department: CPR (Community/Professional Relations)</h3>
+          <ul>
+            <li>
+              <strong>Accurate Age Data:</strong> Age groups are now bucketed in
+              10-year intervals (0-9, 10-19, etc.) rather than 20-year buckets.
+              Recovery rates now correctly account for "Pending" vs. "Completed"
+              tissues.
+            </li>
+            <li>
+              <strong>Real Filter Data:</strong> Category filters now utilize
+              actual database values (Coroner, Hospital, Hospice) instead of
+              placeholders.
+            </li>
+            <li>
+              <strong>Mock Data Transparency:</strong> A new visual indicator
+              now warns users when they are viewing "Mocked/Demo" data to
+              prevent confusion during presentations.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Department: DRC (Donor Recovery Center)</h3>
+          <ul>
+            <li>
+              <strong>Dashboard Restructure:</strong> The dashboard has been
+              split into "Organization Stats" and "Individual Stats" tabs,
+              allowing for more targeted performance reviews.
+            </li>
+            <li>
+              <strong>Performance:</strong> Optimized data loading for KPI
+              cards.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Platform & Infrastructure</h3>
+          <ul>
+            <li>
+              <strong>API Reliability:</strong> Migrated key endpoints to `POST`
+              to support complex filter payloads (Dates, Institutions,
+              Categories).
+            </li>
+            <li>
+              <strong>Developer Experience:</strong> Local development
+              environment now auto-launches documentation. CI pipelines
+              optimized to exclude backend tasks from frontend workflows.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="technical">
+        <h2>Technical Deep Dive</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem">
+          <div>
+            <h3>Backend (FastAPI/Python)</h3>
+            <ul style="padding-left: 1.2rem; color: var(--text-light)">
+              <li>Removed unused `Any` type hints and deprecated fixtures.</li>
+              <li>
+                Implemented T-SQL joins for `EyeTissueRecovered` to accurately
+                calculate recovery status.
+              </li>
+              <li>
+                Standardized assertion syntax in tests to prevent tuple
+                ambiguity.
+              </li>
+              <li>Refactored `get_age_distribution` for dynamic sorting.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Frontend (React/TypeScript)</h3>
+            <ul style="padding-left: 1.2rem; color: var(--text-light)">
+              <li>
+                Implemented `GlobalFilterContext` to manage state across tabs.
+              </li>
+              <li>
+                Refactored `CPRClient` to remove generic CRUD in favor of
+                explicit domain methods.
+              </li>
+              <li>
+                Replaced Node-style `process.env` with Vite's `import.meta.env`.
+              </li>
+              <li>
+                Added `shrink-0` Tailwind classes to fix flexbox layout issues.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="changelog" style="margin-top: 2rem">
+        <h2>Detailed Changelog</h2>
+
+        <div class="commit-controls">
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search commits (e.g., 'fix', 'dashboard', 'api')..."
+            onkeyup="filterCommits()"
+          />
+        </div>
+
+        <div id="commitList">
+          <article class="commit-entry">
+            <div class="commit-entry-header" style="display: none">
+              feat (ui-components): Add visual indicator for mocked data
+            </div>
+            <details>
+              <summary>
+                <span class="tag feat">FEAT</span> Add visual indicator for
+                mocked data
+                <span
+                  style="
+                    font-weight: normal;
+                    font-size: 0.8em;
+                    margin-left: auto;
+                    margin-right: 10px;
+                  "
+                  >19h ago</span
+                >
+              </summary>
+              <div class="commit-details">
+                <p>
+                  <strong>Subject:</strong> feat (ui-components): Add visual
+                  indicator for mocked data
+                </p>
+                <p>
+                  Introduces a new MockDataIndicator component utilizing a
+                  Popover to warn users when displayed data is for demonstration
+                  purposes. Adds optional 'isMocked' prop to Card and KPICard
+                  components.
+                </p>
+                <p>
+                  <em
+                    >Files:
+                    packages/ui-components/src/components/MockDataIndicator/MocckDataIndicator.tsx,
+                    and 4 others.</em
+                  >
+                </p>
+              </div>
+            </details>
+          </article>
+
+          <article class="commit-entry">
+            <div class="commit-entry-header" style="display: none">
+              feat (cpr-dashboard): Add mocked data support to Eye Donor tab
+            </div>
+            <details>
+              <summary>
+                <span class="tag feat">FEAT</span> Add mocked data support to
+                Eye Donor tab
+                <span
+                  style="
+                    font-weight: normal;
+                    font-size: 0.8em;
+                    margin-left: auto;
+                    margin-right: 10px;
+                  "
+                  >18h ago</span
+                >
+              </summary>
+              <div class="commit-details">
+                <p>
+                  <strong>Subject:</strong> feat (cpr-dashboard): Add mocked
+                  data support to Eye Donor tab
+                </p>
+                <p>
+                  Updates the Eye Donor dashboard data flow to handle and
+                  display mocked data indicators. Refactors useEyeDonorData hook
+                  to preserve the mocked status during data transformation.
+                </p>
+                <p>
+                  <em
+                    >Files: apps/cpr-dashboard/src/hooks/useEyeDonorData.ts, and
+                    2 others.</em
+                  >
+                </p>
+              </div>
+            </details>
+          </article>
+
+          <article class="commit-entry">
+            <div class="commit-entry-header" style="display: none">
+              refactor (api-client): Pivot cpr client to dashboard-specific
+              architecture
+            </div>
+            <details>
+              <summary>
+                <span class="tag refactor">REFACTOR</span> Pivot cpr client to
+                dashboard-specific architecture
+                <span
+                  style="
+                    font-weight: normal;
+                    font-size: 0.8em;
+                    margin-left: auto;
+                    margin-right: 10px;
+                  "
+                  >2 days ago</span
+                >
+              </summary>
+              <div class="commit-details">
+                <p>
+                  <strong>Subject:</strong> refactor (api-client): Pivot cpr
+                  client to dashboard-specific architecture
+                </p>
+                <p>
+                  Replaces generic CRUD functionality with specialized read-only
+                  metric fetching. Implemented domain-specific methods (Donors,
+                  Transplants, Distribution, Eye Details, Institutions).
+                </p>
+                <p>
+                  <em
+                    >Files: packages/api-client/src/clients/cprClient.ts, and 6
+                    others.</em
+                  >
+                </p>
+              </div>
+            </details>
+          </article>
+
+          <article class="commit-entry">
+            <div class="commit-entry-header" style="display: none">
+              feat (backend): Split donor age distribution by recovery status
+            </div>
+            <details>
+              <summary>
+                <span class="tag feat">FEAT</span> Split donor age distribution
+                by recovery status
+                <span
+                  style="
+                    font-weight: normal;
+                    font-size: 0.8em;
+                    margin-left: auto;
+                    margin-right: 10px;
+                  "
+                  >2 days ago</span
+                >
+              </summary>
+              <div class="commit-details">
+                <p>
+                  <strong>Subject:</strong> feat (backend): Split donor age
+                  distribution by recovery status
+                </p>
+                <p>
+                  Updates the donor age distribution analytics to provide
+                  granular metrics based on referral status rather than a total
+                  aggregate count. Refactors SQL query to use conditional
+                  aggregation.
+                </p>
+                <p>
+                  <em
+                    >Files: backend/app/services/cpr/donor_service.py, and 2
+                    others.</em
+                  >
+                </p>
+              </div>
+            </details>
+          </article>
+
+          <article class="commit-entry">
+            <div class="commit-entry-header" style="display: none">
+              feat (cpr): Refine donor age distribution to 10-year intervals
+            </div>
+            <details>
+              <summary>
+                <span class="tag feat">FEAT</span> Refine donor age distribution
+                to 10-year intervals
+                <span
+                  style="
+                    font-weight: normal;
+                    font-size: 0.8em;
+                    margin-left: auto;
+                    margin-right: 10px;
+                  "
+                  >6 days ago</span
+                >
+              </summary>
+              <div class="commit-details">
+                <p>
+                  <strong>Subject:</strong> feat (cpr): Refine donor age
+                  distribution to 10-year intervals
+                </p>
+                <p>
+                  Replaced 20-year age buckets (0-20, 21-40) with 10-year
+                  buckets (0-9, 10-19, ...). Refactored sorting logic to dynamic
+                  calculation.
+                </p>
+                <p><em>Files: backend/app/services/cpr/donor_service.py</em></p>
+              </div>
+            </details>
+          </article>
+
+          <article class="commit-entry">
+            <div class="commit-entry-header" style="display: none">
+              feat (cpr-dashboard): implement global filter context
+            </div>
+            <details>
+              <summary>
+                <span class="tag feat">FEAT</span> Refactor layout and implement
+                filter context
+                <span
+                  style="
+                    font-weight: normal;
+                    font-size: 0.8em;
+                    margin-left: auto;
+                    margin-right: 10px;
+                  "
+                  >6 days ago</span
+                >
+              </summary>
+              <div class="commit-details">
+                <p>
+                  <strong>Subject:</strong> feat (cpr-dashboard): refactor
+                  layout and implement filter context
+                </p>
+                <p>
+                  Refactors dashboard to support global filter state. Implements
+                  FilterProvider and FilterContext. Moves TABS configuration to
+                  constants.
+                </p>
+                <p>
+                  <em
+                    >Files: apps/cpr-dashboard/src/contexts/FilterContext.tsx,
+                    and 26 others.</em
+                  >
+                </p>
+              </div>
+            </details>
+          </article>
+
+          <article class="commit-entry">
+            <div class="commit-entry-header" style="display: none">
+              feat (drc-dashboard): restructure dashboard into tabs
+            </div>
+            <details>
+              <summary>
+                <span class="tag feat">FEAT</span> Restructure dashboard into
+                organization/individual tabs
+                <span
+                  style="
+                    font-weight: normal;
+                    font-size: 0.8em;
+                    margin-left: auto;
+                    margin-right: 10px;
+                  "
+                  >7 days ago</span
+                >
+              </summary>
+              <div class="commit-details">
+                <p>
+                  <strong>Subject:</strong> feat (drc-dashboard): restructure
+                  dashboard into organization and individual tabs
+                </p>
+                <p>
+                  Replaces generic dashboard with distinct 'Organization Stats'
+                  and 'Individual Stats' tabs. Updates App.tsx routing.
+                </p>
+                <p>
+                  <em
+                    >Files: apps/drc-dashboard/src/pages/OrganizationTab.tsx,
+                    and 3 others.</em
+                  >
+                </p>
+              </div>
+            </details>
+          </article>
+
+          <article class="commit-entry">
+            <div class="commit-entry-header" style="display: none">
+              style (landing): Overhaul layout and visual design
+            </div>
+            <details>
+              <summary>
+                <span class="tag chore">STYLE</span> Overhaul landing page
+                layout and visual design
+                <span
+                  style="
+                    font-weight: normal;
+                    font-size: 0.8em;
+                    margin-left: auto;
+                    margin-right: 10px;
+                  "
+                  >7 days ago</span
+                >
+              </summary>
+              <div class="commit-details">
+                <p>
+                  <strong>Subject:</strong> style (landing): Overhaul layout and
+                  card visual design
+                </p>
+                <p>
+                  Center page content vertically, replace placeholder images
+                  with specific CPR/DRC graphics, and refactor Card component
+                  padding.
+                </p>
+                <p><em>Files: apps/landing/src/App.tsx</em></p>
+              </div>
+            </details>
+          </article>
+
+          <article class="commit-entry">
+            <div class="commit-entry-header" style="display: none">
+              chore (CI): Exclude backend from frontend turbo tasks
+            </div>
+            <details>
+              <summary>
+                <span class="tag chore">CHORE</span> Exclude backend from
+                frontend turbo tasks
+                <span
+                  style="
+                    font-weight: normal;
+                    font-size: 0.8em;
+                    margin-left: auto;
+                    margin-right: 10px;
+                  "
+                  >15h ago</span
+                >
+              </summary>
+              <div class="commit-details">
+                <p>
+                  <strong>Subject:</strong> fix (CI): Exclude backend from
+                  frontend turbo tasks
+                </p>
+                <p>
+                  Updates TurboRepo command to explicitly filter out the
+                  "backend" workspace to prevent execution errors in frontend
+                  pipelines.
+                </p>
+                <p><em>Files: .github/workflows/ci.yml</em></p>
+              </div>
+            </details>
+          </article>
+
+          <article class="commit-entry">
+            <div class="commit-entry-header" style="display: none">
+              test (backend): Resolve ambiguous selectors
+            </div>
+            <details>
+              <summary>
+                <span class="tag fix">TEST</span> Resolve ambiguous label
+                selectors
+                <span
+                  style="
+                    font-weight: normal;
+                    font-size: 0.8em;
+                    margin-left: auto;
+                    margin-right: 10px;
+                  "
+                  >14h ago</span
+                >
+              </summary>
+              <div class="commit-details">
+                <p>
+                  <strong>Subject:</strong> test (ui-components): Resolve
+                  ambiguous label selectors in DateRangeFilter
+                </p>
+                <p>
+                  Update test queries to specifically target input elements when
+                  selecting by label text.
+                </p>
+                <p>
+                  <em
+                    >Files:
+                    packages/ui-components/src/components/FilterDropdown/DateRangeFilter.test.tsx</em
+                  >
+                </p>
+              </div>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer-nav">
+        <a href="#" class="btn">&larr; Previous Report</a>
+        <a href="#" class="btn">Next Report &rarr;</a>
+      </footer>
+    </main>
+
+    <script>
+      // Simple search filter script
+      function filterCommits() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const list = document.getElementById("commitList");
+        const entries = list.getElementsByClassName("commit-entry");
+
+        for (let i = 0; i < entries.length; i++) {
+          const summary = entries[i].getElementsByTagName("summary")[0];
+          const details =
+            entries[i].getElementsByClassName("commit-details")[0];
+          const txtValue =
+            (summary.textContent || summary.innerText) +
+            " " +
+            (details.textContent || details.innerText);
+
+          if (txtValue.toLowerCase().indexOf(filter) > -1) {
+            entries[i].style.display = "";
+          } else {
+            entries[i].style.display = "none";
+          }
+        }
+      }
+
+      // Highlight TOC on scroll
+      const sections = document.querySelectorAll("section");
+      const navLi = document.querySelectorAll(".toc-list a");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (pageYOffset >= sectionTop - 60) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLi.forEach((a) => {
+          a.classList.remove("active");
+          if (a.getAttribute("href").includes(current)) {
+            a.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

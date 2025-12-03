@@ -1,2261 +1,2512 @@
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RMLEB IIP - Weekly Status Report</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>RMLEB IIP Status Report | Nov 19 - Dec 3, 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
       rel="stylesheet"
     />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Inter", "sans-serif"],
-            },
-            colors: {
-              rmleb: {
-                50: "#f0f9ff",
-                100: "#e0f2fe",
-                500: "#0ea5e9",
-                600: "#0284c7",
-                800: "#075985",
-                900: "#0c4a6e",
-              },
-            },
-          },
-        },
-      };
-    </script>
     <style>
-      /* Print Specific Styles */
-      @media print {
-        body {
-          font-size: 12pt;
-          color: #000;
-          background: #fff;
-        }
-        .no-print {
-          display: none !important;
-        }
-        .print-only {
-          display: block !important;
-        }
-        /* Force expansion of details/summary for printing */
-        details {
-          break-inside: avoid;
-        }
-        details > summary {
-          list-style: none;
-          font-weight: bold;
-          padding-bottom: 5px;
-          border-bottom: 1px solid #ccc;
-        }
-        details[open] > summary {
-          margin-bottom: 10px;
-        }
-        /* Ensure content inside details is visible even if closed on screen (handled via JS beforeprint, but fallback here) */
+      :root {
+        --color-primary: #1e3a5f;
+        --color-primary-light: #2d5a8b;
+        --color-primary-dark: #0f1f33;
+        --color-accent: #3b82f6;
+        --color-accent-light: #60a5fa;
+        --color-success: #059669;
+        --color-warning: #d97706;
+        --color-neutral-50: #f8fafc;
+        --color-neutral-100: #f1f5f9;
+        --color-neutral-200: #e2e8f0;
+        --color-neutral-300: #cbd5e1;
+        --color-neutral-400: #94a3b8;
+        --color-neutral-500: #64748b;
+        --color-neutral-600: #475569;
+        --color-neutral-700: #334155;
+        --color-neutral-800: #1e293b;
+        --color-neutral-900: #0f172a;
+        --font-display: "Source Serif 4", Georgia, serif;
+        --font-body:
+          "Source Sans 3", -apple-system, BlinkMacSystemFont, sans-serif;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        --shadow-lg:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        --radius: 8px;
+        --toc-width: 280px;
+      }
 
-        a {
-          text-decoration: none;
-          color: #000;
-        }
-        /* Layout adjustments */
-        .main-container {
-          width: 100% !important;
-          margin: 0 !important;
-          padding: 0 !important;
-          box-shadow: none !important;
-        }
-        .sidebar {
-          display: none !important;
-        }
-        .content-wrapper {
-          margin-left: 0 !important;
-          padding: 0 !important;
-        }
-        /* Page breaks */
-        h1,
-        h2 {
-          page-break-after: avoid;
-        }
-        .commit-card {
-          break-inside: avoid;
-          border: 1px solid #eee;
-          margin-bottom: 10px;
-        }
-      }
-    </style>
-    <style>
       *,
-      ::before,
-      ::after {
-        --tw-border-spacing-x: 0;
-        --tw-border-spacing-y: 0;
-        --tw-translate-x: 0;
-        --tw-translate-y: 0;
-        --tw-rotate: 0;
-        --tw-skew-x: 0;
-        --tw-skew-y: 0;
-        --tw-scale-x: 1;
-        --tw-scale-y: 1;
-        --tw-pan-x: ;
-        --tw-pan-y: ;
-        --tw-pinch-zoom: ;
-        --tw-scroll-snap-strictness: proximity;
-        --tw-gradient-from-position: ;
-        --tw-gradient-via-position: ;
-        --tw-gradient-to-position: ;
-        --tw-ordinal: ;
-        --tw-slashed-zero: ;
-        --tw-numeric-figure: ;
-        --tw-numeric-spacing: ;
-        --tw-numeric-fraction: ;
-        --tw-ring-inset: ;
-        --tw-ring-offset-width: 0px;
-        --tw-ring-offset-color: #fff;
-        --tw-ring-color: rgb(59 130 246 / 0.5);
-        --tw-ring-offset-shadow: 0 0 #0000;
-        --tw-ring-shadow: 0 0 #0000;
-        --tw-shadow: 0 0 #0000;
-        --tw-shadow-colored: 0 0 #0000;
-        --tw-blur: ;
-        --tw-brightness: ;
-        --tw-contrast: ;
-        --tw-grayscale: ;
-        --tw-hue-rotate: ;
-        --tw-invert: ;
-        --tw-saturate: ;
-        --tw-sepia: ;
-        --tw-drop-shadow: ;
-        --tw-backdrop-blur: ;
-        --tw-backdrop-brightness: ;
-        --tw-backdrop-contrast: ;
-        --tw-backdrop-grayscale: ;
-        --tw-backdrop-hue-rotate: ;
-        --tw-backdrop-invert: ;
-        --tw-backdrop-opacity: ;
-        --tw-backdrop-saturate: ;
-        --tw-backdrop-sepia: ;
-        --tw-contain-size: ;
-        --tw-contain-layout: ;
-        --tw-contain-paint: ;
-        --tw-contain-style: ;
-      }
-      ::backdrop {
-        --tw-border-spacing-x: 0;
-        --tw-border-spacing-y: 0;
-        --tw-translate-x: 0;
-        --tw-translate-y: 0;
-        --tw-rotate: 0;
-        --tw-skew-x: 0;
-        --tw-skew-y: 0;
-        --tw-scale-x: 1;
-        --tw-scale-y: 1;
-        --tw-pan-x: ;
-        --tw-pan-y: ;
-        --tw-pinch-zoom: ;
-        --tw-scroll-snap-strictness: proximity;
-        --tw-gradient-from-position: ;
-        --tw-gradient-via-position: ;
-        --tw-gradient-to-position: ;
-        --tw-ordinal: ;
-        --tw-slashed-zero: ;
-        --tw-numeric-figure: ;
-        --tw-numeric-spacing: ;
-        --tw-numeric-fraction: ;
-        --tw-ring-inset: ;
-        --tw-ring-offset-width: 0px;
-        --tw-ring-offset-color: #fff;
-        --tw-ring-color: rgb(59 130 246 / 0.5);
-        --tw-ring-offset-shadow: 0 0 #0000;
-        --tw-ring-shadow: 0 0 #0000;
-        --tw-shadow: 0 0 #0000;
-        --tw-shadow-colored: 0 0 #0000;
-        --tw-blur: ;
-        --tw-brightness: ;
-        --tw-contrast: ;
-        --tw-grayscale: ;
-        --tw-hue-rotate: ;
-        --tw-invert: ;
-        --tw-saturate: ;
-        --tw-sepia: ;
-        --tw-drop-shadow: ;
-        --tw-backdrop-blur: ;
-        --tw-backdrop-brightness: ;
-        --tw-backdrop-contrast: ;
-        --tw-backdrop-grayscale: ;
-        --tw-backdrop-hue-rotate: ;
-        --tw-backdrop-invert: ;
-        --tw-backdrop-opacity: ;
-        --tw-backdrop-saturate: ;
-        --tw-backdrop-sepia: ;
-        --tw-contain-size: ;
-        --tw-contain-layout: ;
-        --tw-contain-paint: ;
-        --tw-contain-style: ;
-      } /* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */
-      *,
-      ::after,
-      ::before {
+      *::before,
+      *::after {
         box-sizing: border-box;
-        border-width: 0;
-        border-style: solid;
-        border-color: #e5e7eb;
       }
-      ::after,
-      ::before {
-        --tw-content: "";
-      }
-      :host,
+
       html {
-        line-height: 1.5;
-        -webkit-text-size-adjust: 100%;
-        -moz-tab-size: 4;
-        tab-size: 4;
-        font-family: Inter, sans-serif;
-        font-feature-settings: normal;
-        font-variation-settings: normal;
-        -webkit-tap-highlight-color: transparent;
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
       }
+
       body {
         margin: 0;
-        line-height: inherit;
+        padding: 0;
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--color-neutral-800);
+        background: var(--color-neutral-50);
       }
-      hr {
-        height: 0;
-        color: inherit;
-        border-top-width: 1px;
-      }
-      abbr:where([title]) {
-        -webkit-text-decoration: underline dotted;
-        text-decoration: underline dotted;
-      }
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-size: inherit;
-        font-weight: inherit;
-      }
-      a {
-        color: inherit;
-        text-decoration: inherit;
-      }
-      b,
-      strong {
-        font-weight: bolder;
-      }
-      code,
-      kbd,
-      pre,
-      samp {
-        font-family:
-          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-          "Liberation Mono", "Courier New", monospace;
-        font-feature-settings: normal;
-        font-variation-settings: normal;
-        font-size: 1em;
-      }
-      small {
-        font-size: 80%;
-      }
-      sub,
-      sup {
-        font-size: 75%;
-        line-height: 0;
+
+      /* Header */
+      .site-header {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-primary-dark) 100%
+        );
+        color: white;
+        padding: 2rem 1.5rem;
         position: relative;
-        vertical-align: baseline;
+        overflow: hidden;
       }
-      sub {
-        bottom: -0.25em;
-      }
-      sup {
-        top: -0.5em;
-      }
-      table {
-        text-indent: 0;
-        border-color: inherit;
-        border-collapse: collapse;
-      }
-      button,
-      input,
-      optgroup,
-      select,
-      textarea {
-        font-family: inherit;
-        font-feature-settings: inherit;
-        font-variation-settings: inherit;
-        font-size: 100%;
-        font-weight: inherit;
-        line-height: inherit;
-        letter-spacing: inherit;
-        color: inherit;
-        margin: 0;
-        padding: 0;
-      }
-      button,
-      select {
-        text-transform: none;
-      }
-      button,
-      input:where([type="button"]),
-      input:where([type="reset"]),
-      input:where([type="submit"]) {
-        -webkit-appearance: button;
-        background-color: transparent;
-        background-image: none;
-      }
-      :-moz-focusring {
-        outline: auto;
-      }
-      :-moz-ui-invalid {
-        box-shadow: none;
-      }
-      progress {
-        vertical-align: baseline;
-      }
-      ::-webkit-inner-spin-button,
-      ::-webkit-outer-spin-button {
-        height: auto;
-      }
-      [type="search"] {
-        -webkit-appearance: textfield;
-        outline-offset: -2px;
-      }
-      ::-webkit-search-decoration {
-        -webkit-appearance: none;
-      }
-      ::-webkit-file-upload-button {
-        -webkit-appearance: button;
-        font: inherit;
-      }
-      summary {
-        display: list-item;
-      }
-      blockquote,
-      dd,
-      dl,
-      figure,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      hr,
-      p,
-      pre {
-        margin: 0;
-      }
-      fieldset {
-        margin: 0;
-        padding: 0;
-      }
-      legend {
-        padding: 0;
-      }
-      menu,
-      ol,
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      dialog {
-        padding: 0;
-      }
-      textarea {
-        resize: vertical;
-      }
-      input::placeholder,
-      textarea::placeholder {
-        opacity: 1;
-        color: #9ca3af;
-      }
-      [role="button"],
-      button {
-        cursor: pointer;
-      }
-      :disabled {
-        cursor: default;
-      }
-      audio,
-      canvas,
-      embed,
-      iframe,
-      img,
-      object,
-      svg,
-      video {
-        display: block;
-        vertical-align: middle;
-      }
-      img,
-      video {
-        max-width: 100%;
-        height: auto;
-      }
-      [hidden]:where(:not([hidden="until-found"])) {
-        display: none;
-      }
-      .fixed {
-        position: fixed;
-      }
-      .absolute {
+
+      .site-header::before {
+        content: "";
         position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        pointer-events: none;
       }
-      .relative {
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
         position: relative;
+        z-index: 1;
       }
-      .sticky {
-        position: sticky;
-      }
-      .left-3 {
-        left: 0.75rem;
-      }
-      .top-0 {
-        top: 0px;
-      }
-      .top-2\.5 {
-        top: 0.625rem;
-      }
-      .z-50 {
-        z-index: 50;
-      }
-      .mx-auto {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .mb-1 {
-        margin-bottom: 0.25rem;
-      }
-      .mb-12 {
-        margin-bottom: 3rem;
-      }
-      .mb-2 {
-        margin-bottom: 0.5rem;
-      }
-      .mb-3 {
-        margin-bottom: 0.75rem;
-      }
-      .mb-4 {
+
+      .header-top {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
         margin-bottom: 1rem;
       }
-      .mb-6 {
-        margin-bottom: 1.5rem;
-      }
-      .mb-8 {
-        margin-bottom: 2rem;
-      }
-      .mr-2 {
-        margin-right: 0.5rem;
-      }
-      .mt-0\.5 {
-        margin-top: 0.125rem;
-      }
-      .mt-1 {
-        margin-top: 0.25rem;
-      }
-      .mt-12 {
-        margin-top: 3rem;
-      }
-      .mt-2 {
-        margin-top: 0.5rem;
-      }
-      .mt-4 {
-        margin-top: 1rem;
-      }
-      .mt-6 {
-        margin-top: 1.5rem;
-      }
-      .mt-auto {
-        margin-top: auto;
-      }
-      .block {
-        display: block;
-      }
-      .flex {
-        display: flex;
-      }
-      .inline-flex {
-        display: inline-flex;
-      }
-      .grid {
-        display: grid;
-      }
-      .hidden {
-        display: none;
-      }
-      .h-2 {
-        height: 0.5rem;
-      }
-      .h-4 {
-        height: 1rem;
-      }
-      .h-5 {
-        height: 1.25rem;
-      }
-      .h-6 {
-        height: 1.5rem;
-      }
-      .h-8 {
-        height: 2rem;
-      }
-      .h-full {
-        height: 100%;
-      }
-      .min-h-screen {
-        min-height: 100vh;
-      }
-      .w-2 {
-        width: 0.5rem;
-      }
-      .w-4 {
-        width: 1rem;
-      }
-      .w-5 {
-        width: 1.25rem;
-      }
-      .w-6 {
-        width: 1.5rem;
-      }
-      .w-64 {
-        width: 16rem;
-      }
-      .w-8 {
-        width: 2rem;
-      }
-      .w-full {
-        width: 100%;
-      }
-      .max-w-4xl {
-        max-width: 56rem;
-      }
-      .max-w-7xl {
-        max-width: 80rem;
-      }
-      .flex-1 {
-        flex: 1 1 0%;
-      }
-      .cursor-pointer {
-        cursor: pointer;
-      }
-      .list-inside {
-        list-style-position: inside;
-      }
-      .list-disc {
-        list-style-type: disc;
-      }
-      .break-inside-avoid {
-        break-inside: avoid;
-      }
-      .grid-cols-1 {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-      }
-      .flex-col {
-        flex-direction: column;
-      }
-      .items-start {
-        align-items: flex-start;
-      }
-      .items-center {
-        align-items: center;
-      }
-      .justify-center {
-        justify-content: center;
-      }
-      .justify-between {
-        justify-content: space-between;
-      }
-      .gap-6 {
-        gap: 1.5rem;
-      }
-      .space-x-2 > :not([hidden]) ~ :not([hidden]) {
-        --tw-space-x-reverse: 0;
-        margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-        margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
-      }
-      .space-x-3 > :not([hidden]) ~ :not([hidden]) {
-        --tw-space-x-reverse: 0;
-        margin-right: calc(0.75rem * var(--tw-space-x-reverse));
-        margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
-      }
-      .space-x-4 > :not([hidden]) ~ :not([hidden]) {
-        --tw-space-x-reverse: 0;
-        margin-right: calc(1rem * var(--tw-space-x-reverse));
-        margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
-      }
-      .space-y-1 > :not([hidden]) ~ :not([hidden]) {
-        --tw-space-y-reverse: 0;
-        margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
-        margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
-      }
-      .space-y-2 > :not([hidden]) ~ :not([hidden]) {
-        --tw-space-y-reverse: 0;
-        margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-        margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
-      }
-      .space-y-3 > :not([hidden]) ~ :not([hidden]) {
-        --tw-space-y-reverse: 0;
-        margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
-        margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
-      }
-      .space-y-4 > :not([hidden]) ~ :not([hidden]) {
-        --tw-space-y-reverse: 0;
-        margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-        margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-      }
-      .overflow-hidden {
-        overflow: hidden;
-      }
-      .overflow-x-auto {
-        overflow-x: auto;
-      }
-      .overflow-y-auto {
-        overflow-y: auto;
-      }
-      .truncate {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      .rounded-full {
-        border-radius: 9999px;
-      }
-      .rounded-lg {
-        border-radius: 0.5rem;
-      }
-      .rounded-md {
-        border-radius: 0.375rem;
-      }
-      .rounded-r-lg {
-        border-top-right-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
-      }
-      .border {
-        border-width: 1px;
-      }
-      .border-b {
-        border-bottom-width: 1px;
-      }
-      .border-l-4 {
-        border-left-width: 4px;
-      }
-      .border-r {
-        border-right-width: 1px;
-      }
-      .border-t {
-        border-top-width: 1px;
-      }
-      .border-gray-200 {
-        --tw-border-opacity: 1;
-        border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
-      }
-      .border-gray-300 {
-        --tw-border-opacity: 1;
-        border-color: rgb(209 213 219 / var(--tw-border-opacity, 1));
-      }
-      .border-gray-500 {
-        --tw-border-opacity: 1;
-        border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
-      }
-      .border-green-500 {
-        --tw-border-opacity: 1;
-        border-color: rgb(34 197 94 / var(--tw-border-opacity, 1));
-      }
-      .border-purple-500 {
-        --tw-border-opacity: 1;
-        border-color: rgb(168 85 247 / var(--tw-border-opacity, 1));
-      }
-      .border-rmleb-500 {
-        --tw-border-opacity: 1;
-        border-color: rgb(14 165 233 / var(--tw-border-opacity, 1));
-      }
-      .bg-blue-100 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(219 234 254 / var(--tw-bg-opacity, 1));
-      }
-      .bg-blue-50 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(239 246 255 / var(--tw-bg-opacity, 1));
-      }
-      .bg-blue-500 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
-      }
-      .bg-gray-100 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
-      }
-      .bg-gray-50 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
-      }
-      .bg-gray-900 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
-      }
-      .bg-green-50 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(240 253 244 / var(--tw-bg-opacity, 1));
-      }
-      .bg-indigo-500 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(99 102 241 / var(--tw-bg-opacity, 1));
-      }
-      .bg-pink-500 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(236 72 153 / var(--tw-bg-opacity, 1));
-      }
-      .bg-purple-100 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(243 232 255 / var(--tw-bg-opacity, 1));
-      }
-      .bg-purple-50 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(250 245 255 / var(--tw-bg-opacity, 1));
-      }
-      .bg-red-100 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(254 226 226 / var(--tw-bg-opacity, 1));
-      }
-      .bg-rmleb-600 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(2 132 199 / var(--tw-bg-opacity, 1));
-      }
-      .bg-white {
-        --tw-bg-opacity: 1;
-        background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-      }
-      .bg-yellow-100 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(254 249 195 / var(--tw-bg-opacity, 1));
-      }
-      .p-3 {
-        padding: 0.75rem;
-      }
-      .p-4 {
-        padding: 1rem;
-      }
-      .p-5 {
-        padding: 1.25rem;
-      }
-      .p-6 {
-        padding: 1.5rem;
-      }
-      .px-2\.5 {
-        padding-left: 0.625rem;
-        padding-right: 0.625rem;
-      }
-      .px-3 {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-      }
-      .px-4 {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      .py-0\.5 {
-        padding-top: 0.125rem;
-        padding-bottom: 0.125rem;
-      }
-      .py-2 {
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-      }
-      .py-5 {
-        padding-top: 1.25rem;
-        padding-bottom: 1.25rem;
-      }
-      .pb-8 {
-        padding-bottom: 2rem;
-      }
-      .pl-10 {
-        padding-left: 2.5rem;
-      }
-      .pr-4 {
-        padding-right: 1rem;
-      }
-      .pt-4 {
-        padding-top: 1rem;
-      }
-      .pt-8 {
-        padding-top: 2rem;
-      }
-      .text-center {
-        text-align: center;
-      }
-      .font-mono {
-        font-family:
-          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-          "Liberation Mono", "Courier New", monospace;
-      }
-      .font-sans {
-        font-family: Inter, sans-serif;
-      }
-      .text-2xl {
-        font-size: 1.5rem;
-        line-height: 2rem;
-      }
-      .text-3xl {
-        font-size: 1.875rem;
-        line-height: 2.25rem;
-      }
-      .text-lg {
-        font-size: 1.125rem;
-        line-height: 1.75rem;
-      }
-      .text-sm {
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-      }
-      .text-xl {
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-      }
-      .text-xs {
+
+      .org-badge {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
         font-size: 0.75rem;
-        line-height: 1rem;
-      }
-      .font-bold {
-        font-weight: 700;
-      }
-      .font-medium {
-        font-weight: 500;
-      }
-      .font-semibold {
         font-weight: 600;
-      }
-      .uppercase {
         text-transform: uppercase;
-      }
-      .leading-6 {
-        line-height: 1.5rem;
-      }
-      .leading-relaxed {
-        line-height: 1.625;
-      }
-      .tracking-wide {
-        letter-spacing: 0.025em;
-      }
-      .tracking-wider {
         letter-spacing: 0.05em;
       }
-      .text-blue-800 {
-        --tw-text-opacity: 1;
-        color: rgb(30 64 175 / var(--tw-text-opacity, 1));
+
+      .report-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-weight: 600;
+        margin: 0 0 0.5rem 0;
+        letter-spacing: -0.01em;
       }
-      .text-gray-400 {
-        --tw-text-opacity: 1;
-        color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+
+      .report-subtitle {
+        font-size: 1.125rem;
+        opacity: 0.9;
+        margin: 0;
       }
-      .text-gray-500 {
-        --tw-text-opacity: 1;
-        color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+
+      .report-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
       }
-      .text-gray-600 {
-        --tw-text-opacity: 1;
-        color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+
+      .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
       }
-      .text-gray-700 {
-        --tw-text-opacity: 1;
-        color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+
+      .meta-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.7;
       }
-      .text-gray-800 {
-        --tw-text-opacity: 1;
-        color: rgb(31 41 55 / var(--tw-text-opacity, 1));
+
+      .meta-value {
+        font-size: 1.25rem;
+        font-weight: 600;
       }
-      .text-gray-900 {
-        --tw-text-opacity: 1;
-        color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+
+      .print-button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: auto;
+        padding: 0.625rem 1rem;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: var(--radius);
+        color: white;
+        font-family: var(--font-body);
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
       }
-      .text-green-400 {
-        --tw-text-opacity: 1;
-        color: rgb(74 222 128 / var(--tw-text-opacity, 1));
+
+      .print-button:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
       }
-      .text-green-500 {
-        --tw-text-opacity: 1;
-        color: rgb(34 197 94 / var(--tw-text-opacity, 1));
+
+      /* Commit Log Toolbar */
+      .commit-toolbar {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--color-neutral-200);
       }
-      .text-green-800 {
-        --tw-text-opacity: 1;
-        color: rgb(22 101 52 / var(--tw-text-opacity, 1));
+
+      .commit-toolbar-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
       }
-      .text-green-900 {
-        --tw-text-opacity: 1;
-        color: rgb(20 83 45 / var(--tw-text-opacity, 1));
+
+      .commit-search-wrapper {
+        flex: 1;
+        min-width: 200px;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--color-neutral-50);
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius);
+        padding: 0.625rem 1rem;
+        transition: all 0.15s ease;
       }
-      .text-indigo-500 {
-        --tw-text-opacity: 1;
-        color: rgb(99 102 241 / var(--tw-text-opacity, 1));
+
+      .commit-search-wrapper:focus-within {
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
       }
-      .text-pink-500 {
-        --tw-text-opacity: 1;
-        color: rgb(236 72 153 / var(--tw-text-opacity, 1));
+
+      .search-icon {
+        color: var(--color-neutral-400);
+        flex-shrink: 0;
       }
-      .text-purple-800 {
-        --tw-text-opacity: 1;
-        color: rgb(107 33 168 / var(--tw-text-opacity, 1));
+
+      .search-input {
+        flex: 1;
+        border: none;
+        font-size: 0.9375rem;
+        font-family: var(--font-body);
+        color: var(--color-neutral-800);
+        background: transparent;
+        outline: none;
       }
-      .text-purple-900 {
-        --tw-text-opacity: 1;
-        color: rgb(88 28 135 / var(--tw-text-opacity, 1));
+
+      .search-input::placeholder {
+        color: var(--color-neutral-400);
       }
-      .text-red-800 {
-        --tw-text-opacity: 1;
-        color: rgb(153 27 27 / var(--tw-text-opacity, 1));
+
+      .search-clear {
+        background: none;
+        border: none;
+        color: var(--color-neutral-400);
+        cursor: pointer;
+        padding: 0.25rem;
+        display: none;
       }
-      .text-rmleb-600 {
-        --tw-text-opacity: 1;
-        color: rgb(2 132 199 / var(--tw-text-opacity, 1));
+
+      .search-clear.visible {
+        display: block;
       }
-      .text-rmleb-800 {
-        --tw-text-opacity: 1;
-        color: rgb(7 89 133 / var(--tw-text-opacity, 1));
+
+      .search-results-count {
+        font-size: 0.8125rem;
+        color: var(--color-neutral-500);
+        white-space: nowrap;
       }
-      .text-rmleb-900 {
-        --tw-text-opacity: 1;
-        color: rgb(12 74 110 / var(--tw-text-opacity, 1));
+
+      .toolbar-actions {
+        display: flex;
+        gap: 0.5rem;
       }
-      .text-white {
-        --tw-text-opacity: 1;
-        color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+
+      .toolbar-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.5rem 0.875rem;
+        border: 1px solid var(--color-neutral-300);
+        border-radius: var(--radius);
+        background: white;
+        color: var(--color-neutral-700);
+        font-family: var(--font-body);
+        font-size: 0.8125rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
       }
-      .text-yellow-800 {
-        --tw-text-opacity: 1;
-        color: rgb(133 77 14 / var(--tw-text-opacity, 1));
+
+      .toolbar-btn:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+        background: var(--color-neutral-50);
       }
-      .antialiased {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+
+      .toolbar-btn svg {
+        width: 14px;
+        height: 14px;
       }
-      .shadow {
-        --tw-shadow:
-          0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-        --tw-shadow-colored:
-          0 1px 3px 0 var(--tw-shadow-color),
-          0 1px 2px -1px var(--tw-shadow-color);
-        box-shadow:
-          var(--tw-ring-offset-shadow, 0 0 #0000),
-          var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+      .module-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
       }
-      .shadow-sm {
-        --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-        --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-        box-shadow:
-          var(--tw-ring-offset-shadow, 0 0 #0000),
-          var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+      .module-filter-label {
+        font-size: 0.8125rem;
+        color: var(--color-neutral-500);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        margin-right: 0.25rem;
       }
-      .transition-colors {
-        transition-property:
-          color,
-          background-color,
-          border-color,
-          fill,
-          stroke,
-          -webkit-text-decoration-color;
-        transition-property:
-          color, background-color, border-color, text-decoration-color, fill,
-          stroke;
-        transition-property:
-          color,
-          background-color,
-          border-color,
-          text-decoration-color,
-          fill,
-          stroke,
-          -webkit-text-decoration-color;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
+
+      .module-btn {
+        padding: 0.375rem 0.75rem;
+        border: 1px solid var(--color-neutral-200);
+        border-radius: 9999px;
+        background: white;
+        color: var(--color-neutral-600);
+        font-family: var(--font-body);
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
       }
-      .transition-shadow {
-        transition-property: box-shadow;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
+
+      .module-btn:hover {
+        border-color: var(--color-neutral-400);
+        background: var(--color-neutral-50);
       }
-      .transition-transform {
-        transition-property: transform;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
+
+      .module-btn.active {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+        color: white;
       }
-      .hover\:bg-gray-50:hover {
-        --tw-bg-opacity: 1;
-        background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
+
+      .module-btn.active:hover {
+        background: var(--color-primary-light);
+        border-color: var(--color-primary-light);
       }
-      .hover\:text-gray-900:hover {
-        --tw-text-opacity: 1;
-        color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+
+      /* Layout */
+      .main-layout {
+        display: grid;
+        grid-template-columns: var(--toc-width) 1fr;
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
       }
-      .hover\:text-rmleb-600:hover {
-        --tw-text-opacity: 1;
-        color: rgb(2 132 199 / var(--tw-text-opacity, 1));
-      }
-      .hover\:shadow-md:hover {
-        --tw-shadow:
-          0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        --tw-shadow-colored:
-          0 4px 6px -1px var(--tw-shadow-color),
-          0 2px 4px -2px var(--tw-shadow-color);
-        box-shadow:
-          var(--tw-ring-offset-shadow, 0 0 #0000),
-          var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-      }
-      .focus\:border-transparent:focus {
-        border-color: transparent;
-      }
-      .focus\:outline-none:focus {
-        outline: 2px solid transparent;
-        outline-offset: 2px;
-      }
-      .focus\:ring-2:focus {
-        --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
-          var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-        --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-          calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-        box-shadow:
-          var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-          var(--tw-shadow, 0 0 #0000);
-      }
-      .focus\:ring-rmleb-500:focus {
-        --tw-ring-opacity: 1;
-        --tw-ring-color: rgb(14 165 233 / var(--tw-ring-opacity, 1));
-      }
-      .focus\:ring-offset-2:focus {
-        --tw-ring-offset-width: 2px;
-      }
-      .group[open] .group-open\:rotate-180 {
-        --tw-rotate: 180deg;
-        transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-          rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
-          skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
-          scaleY(var(--tw-scale-y));
-      }
-      .group:hover .group-hover\:bg-gray-100 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
-      }
-      @media (min-width: 640px) {
-        .sm\:col-span-2 {
-          grid-column: span 2 / span 2;
+
+      @media (max-width: 1024px) {
+        .main-layout {
+          grid-template-columns: 1fr;
         }
-        .sm\:mt-0 {
-          margin-top: 0px;
-        }
-        .sm\:grid {
-          display: grid;
-        }
-        .sm\:w-64 {
-          width: 16rem;
-        }
-        .sm\:grid-cols-3 {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-        .sm\:flex-row {
-          flex-direction: row;
-        }
-        .sm\:gap-4 {
-          gap: 1rem;
-        }
-        .sm\:rounded-lg {
-          border-radius: 0.5rem;
-        }
-        .sm\:px-6 {
-          padding-left: 1.5rem;
-          padding-right: 1.5rem;
-        }
       }
-      @media (min-width: 768px) {
-        .md\:ml-64 {
-          margin-left: 16rem;
-        }
-        .md\:block {
-          display: block;
-        }
-        .md\:hidden {
+
+      /* Table of Contents */
+      .toc-wrapper {
+        position: relative;
+      }
+
+      .toc {
+        position: sticky;
+        top: 1rem;
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+        padding: 1.5rem;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+      }
+
+      .toc-title {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin: 0 0 1rem 0;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--color-neutral-200);
+      }
+
+      .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .toc-item {
+        margin-bottom: 0.25rem;
+      }
+
+      .toc-link {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: var(--color-neutral-600);
+        text-decoration: none;
+        font-size: 0.875rem;
+        border-radius: 4px;
+        transition: all 0.15s ease;
+      }
+
+      .toc-link:hover {
+        background: var(--color-neutral-100);
+        color: var(--color-primary);
+      }
+
+      .toc-link.active {
+        background: var(--color-primary);
+        color: white;
+      }
+
+      .toc-section-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-neutral-400);
+        margin: 1rem 0 0.5rem 0.75rem;
+      }
+
+      @media (max-width: 1024px) {
+        .toc-wrapper {
           display: none;
         }
-        .md\:grid-cols-2 {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      /* Mobile TOC */
+      .mobile-toc-toggle {
+        display: none;
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        box-shadow: var(--shadow-lg);
+        cursor: pointer;
+        z-index: 1000;
+        font-size: 1.25rem;
+      }
+
+      @media (max-width: 1024px) {
+        .mobile-toc-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
-        .md\:p-12 {
-          padding: 3rem;
+      }
+
+      .mobile-toc-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1001;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .mobile-toc-overlay.active {
+        display: block;
+        opacity: 1;
+      }
+
+      .mobile-toc-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: var(--radius) var(--radius) 0 0;
+        padding: 1.5rem;
+        z-index: 1002;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+
+      .mobile-toc-panel.active {
+        transform: translateY(0);
+      }
+
+      /* Main Content */
+      .main-content {
+        min-width: 0;
+      }
+
+      /* Sections */
+      .section {
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+      }
+
+      .section-header {
+        padding: 1.25rem 1.5rem;
+        background: var(--color-neutral-50);
+        border-bottom: 1px solid var(--color-neutral-200);
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .section-icon {
+        width: 28px;
+        height: 28px;
+        background: var(--color-primary);
+        color: white;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+      }
+
+      .section-body {
+        padding: 1.5rem;
+      }
+
+      /* Executive Summary */
+      .executive-summary {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: var(--color-neutral-700);
+      }
+
+      .executive-summary p:first-child {
+        margin-top: 0;
+      }
+
+      .executive-summary p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Highlight Cards */
+      .highlights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+
+      .highlight-card {
+        background: var(--color-neutral-50);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        border-left: 4px solid var(--color-accent);
+      }
+
+      .highlight-card.feature {
+        border-left-color: var(--color-success);
+      }
+
+      .highlight-card.improvement {
+        border-left-color: var(--color-accent);
+      }
+
+      .highlight-card.fix {
+        border-left-color: var(--color-warning);
+      }
+
+      .highlight-title {
+        font-weight: 600;
+        color: var(--color-neutral-800);
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+      }
+
+      .highlight-description {
+        color: var(--color-neutral-600);
+        margin: 0;
+        font-size: 0.9375rem;
+      }
+
+      .highlight-tag {
+        display: inline-block;
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.125rem 0.5rem;
+        border-radius: 3px;
+        margin-bottom: 0.5rem;
+      }
+
+      .highlight-card.feature .highlight-tag {
+        background: rgba(5, 150, 105, 0.1);
+        color: var(--color-success);
+      }
+
+      .highlight-card.improvement .highlight-tag {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--color-accent);
+      }
+
+      .highlight-card.fix .highlight-tag {
+        background: rgba(217, 119, 6, 0.1);
+        color: var(--color-warning);
+      }
+
+      /* Technical Deep Dive */
+      .feature-group {
+        margin-bottom: 2rem;
+      }
+
+      .feature-group:last-child {
+        margin-bottom: 0;
+      }
+
+      .feature-group-title {
+        font-family: var(--font-display);
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--color-neutral-800);
+        margin: 0 0 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--color-neutral-200);
+      }
+
+      .feature-group-content {
+        color: var(--color-neutral-700);
+      }
+
+      .feature-group-content p {
+        margin: 0 0 1rem 0;
+      }
+
+      .feature-group-content p:last-child {
+        margin-bottom: 0;
+      }
+
+      .feature-list {
+        margin: 0.75rem 0;
+        padding-left: 1.25rem;
+      }
+
+      .feature-list li {
+        margin-bottom: 0.5rem;
+        color: var(--color-neutral-600);
+      }
+
+      .feature-list li:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Commit Details */
+      .commit-item {
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius);
+        margin-bottom: 0.75rem;
+        overflow: hidden;
+      }
+
+      .commit-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .commit-item.hidden {
+        display: none;
+      }
+
+      .commit-summary {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        cursor: pointer;
+        user-select: none;
+        list-style: none;
+        background: white;
+        transition: background 0.15s ease;
+      }
+
+      .commit-summary:hover {
+        background: var(--color-neutral-50);
+      }
+
+      .commit-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .commit-toggle {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        background: var(--color-neutral-100);
+        color: var(--color-neutral-500);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.75rem;
+        transition: all 0.15s ease;
+      }
+
+      details[open] .commit-toggle {
+        background: var(--color-primary);
+        color: white;
+        transform: rotate(90deg);
+      }
+
+      .commit-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .commit-subject {
+        font-weight: 600;
+        color: var(--color-neutral-800);
+        margin: 0 0 0.25rem 0;
+        font-size: 0.9375rem;
+      }
+
+      .commit-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        font-size: 0.8125rem;
+        color: var(--color-neutral-500);
+      }
+
+      .commit-hash {
+        font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+        background: var(--color-neutral-100);
+        padding: 0.125rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+      }
+
+      .commit-scope {
+        display: inline-block;
+        padding: 0.125rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .scope-backend {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      .scope-frontend {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      .scope-ui {
+        background: #f3e8ff;
+        color: #6b21a8;
+      }
+      .scope-ci {
+        background: #d1fae5;
+        color: #065f46;
+      }
+      .scope-api {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .scope-test {
+        background: #e0e7ff;
+        color: #3730a3;
+      }
+      .scope-chore {
+        background: var(--color-neutral-200);
+        color: var(--color-neutral-600);
+      }
+
+      .commit-details {
+        padding: 1rem 1.25rem;
+        padding-left: 3.5rem;
+        background: var(--color-neutral-50);
+        border-top: 1px solid var(--color-neutral-200);
+      }
+
+      .commit-description {
+        color: var(--color-neutral-700);
+        font-size: 0.9375rem;
+        margin: 0 0 1rem 0;
+        white-space: pre-wrap;
+      }
+
+      .commit-files {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .commit-files li {
+        font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+        font-size: 0.8125rem;
+        color: var(--color-neutral-600);
+        padding: 0.25rem 0;
+      }
+
+      .file-stat {
+        display: inline-block;
+        width: 80px;
+        font-size: 0.75rem;
+      }
+
+      .file-stat-add {
+        color: var(--color-success);
+      }
+      .file-stat-del {
+        color: #dc2626;
+      }
+
+      /* Impact Analysis */
+      .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .impact-card {
+        background: var(--color-neutral-50);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+      }
+
+      .impact-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .impact-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+      }
+
+      .impact-icon.cpr {
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        color: white;
+      }
+
+      .impact-icon.drc {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+      }
+
+      .impact-title {
+        font-weight: 600;
+        color: var(--color-neutral-800);
+        margin: 0;
+      }
+
+      .impact-subtitle {
+        font-size: 0.875rem;
+        color: var(--color-neutral-500);
+        margin: 0;
+      }
+
+      .impact-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .impact-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--color-neutral-200);
+        font-size: 0.9375rem;
+        color: var(--color-neutral-700);
+      }
+
+      .impact-list li:last-child {
+        border-bottom: none;
+      }
+
+      .impact-list li::before {
+        content: "→";
+        margin-right: 0.5rem;
+        color: var(--color-neutral-400);
+      }
+
+      /* Navigation Footer */
+      .report-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+      }
+
+      .nav-button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid var(--color-neutral-300);
+        border-radius: var(--radius);
+        background: white;
+        color: var(--color-neutral-700);
+        font-family: var(--font-body);
+        font-size: 0.9375rem;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        text-decoration: none;
+      }
+
+      .nav-button:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+        background: var(--color-neutral-50);
+      }
+
+      .nav-button.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .nav-button.disabled:hover {
+        border-color: var(--color-neutral-300);
+        color: var(--color-neutral-700);
+        background: white;
+      }
+
+      /* Site Footer */
+      .site-footer {
+        background: var(--color-neutral-800);
+        color: var(--color-neutral-300);
+        padding: 2rem 1.5rem;
+        text-align: center;
+        font-size: 0.875rem;
+      }
+
+      .site-footer a {
+        color: var(--color-accent-light);
+        text-decoration: none;
+      }
+
+      .site-footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Utility Classes */
+      .code {
+        font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+        font-size: 0.875em;
+        background: var(--color-neutral-100);
+        padding: 0.125rem 0.375rem;
+        border-radius: 3px;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      /* Print Styles */
+      @media print {
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
         }
-        .md\:text-4xl {
-          font-size: 2.25rem;
-          line-height: 2.5rem;
+
+        body {
+          background: white;
+          font-size: 11pt;
+          line-height: 1.5;
+          color: black;
         }
+
+        .site-header {
+          background: var(--color-primary) !important;
+          padding: 1rem;
+        }
+
+        .site-header::before {
+          display: none;
+        }
+
+        .report-title {
+          font-size: 18pt;
+        }
+
+        .report-subtitle {
+          font-size: 12pt;
+        }
+
+        .main-layout {
+          display: block;
+          padding: 1rem;
+          max-width: 100%;
+        }
+
+        /* Hide interactive elements */
+        .toc-wrapper,
+        .mobile-toc-toggle,
+        .mobile-toc-overlay,
+        .mobile-toc-panel,
+        .commit-toolbar,
+        .report-navigation,
+        .commit-toggle,
+        .nav-button,
+        .print-button {
+          display: none !important;
+        }
+
+        .section {
+          box-shadow: none;
+          border: 1px solid #ccc;
+          break-inside: avoid;
+          page-break-inside: avoid;
+          margin-bottom: 1rem;
+        }
+
+        .section-header {
+          background: #f5f5f5 !important;
+        }
+
+        /* Auto-expand all details */
+        details {
+          display: block !important;
+        }
+
+        details[open] summary ~ * {
+          display: block !important;
+        }
+
+        details summary {
+          display: block !important;
+          cursor: default;
+        }
+
+        .commit-item {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+
+        .commit-summary {
+          padding-left: 1rem;
+        }
+
+        .commit-details {
+          display: block !important;
+          padding-left: 1rem;
+        }
+
+        .highlight-card {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+
+        .impact-card {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+
+        .site-footer {
+          background: white !important;
+          color: black !important;
+          border-top: 1px solid #ccc;
+          padding: 1rem;
+        }
+
+        a {
+          color: black !important;
+          text-decoration: none !important;
+        }
+
+        h2,
+        h3 {
+          page-break-after: avoid;
+        }
+      }
+
+      @page {
+        margin: 0.75in;
+        size: letter;
       }
     </style>
   </head>
-  <body class="bg-gray-50 text-gray-800 font-sans antialiased">
-    <!-- Top Navigation (Mobile Only) -->
-    <header class="md:hidden bg-white shadow-sm p-4 sticky top-0 z-50 no-print">
-      <div class="flex justify-between items-center">
-        <h1 class="text-xl font-bold text-rmleb-900">RMLEB IIP Status</h1>
-        <button
-          onclick="
-            document.getElementById('mobile-menu').classList.toggle('hidden')
-          "
-          class="text-gray-500 focus:outline-none"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+  <body>
+    <header class="site-header">
+      <div class="header-content">
+        <div class="header-top">
+          <span class="org-badge">Rocky Mountain Lions Eye Bank</span>
+        </div>
+        <h1 class="report-title">
+          Internal Information Portal — Status Report
+        </h1>
+        <p class="report-subtitle">
+          Weekly Development Summary & Progress Update
+        </p>
+        <div class="report-meta">
+          <div class="meta-item">
+            <span class="meta-label">Reporting Period</span>
+            <span class="meta-value">Nov 19 – Dec 3, 2025</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Total Commits</span>
+            <span class="meta-value">91</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Files Modified</span>
+            <span class="meta-value">129</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Contributors</span>
+            <span class="meta-value">1</span>
+          </div>
+          <button
+            class="print-button"
+            onclick="window.print()"
+            aria-label="Print report"
           >
-            <path
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </button>
+            >
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path
+                d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+              ></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print
+          </button>
+        </div>
       </div>
-      <nav id="mobile-menu" class="hidden mt-4 space-y-2 border-t pt-4">
-        <a
-          href="#executive-summary"
-          class="block text-gray-700 hover:text-rmleb-600"
-          >Executive Summary</a
-        >
-        <a
-          href="#impact-analysis"
-          class="block text-gray-700 hover:text-rmleb-600"
-          >Impact Analysis</a
-        >
-        <a
-          href="#technical-deep-dive"
-          class="block text-gray-700 hover:text-rmleb-600"
-          >Technical Deep Dive</a
-        >
-        <a href="#commit-log" class="block text-gray-700 hover:text-rmleb-600"
-          >Commit History</a
-        >
-      </nav>
     </header>
 
-    <div class="flex max-w-7xl mx-auto min-h-screen">
-      <!-- Sidebar Navigation (Desktop) -->
-      <aside
-        class="hidden md:block w-64 bg-white border-r border-gray-200 fixed h-full overflow-y-auto no-print"
-      >
-        <div class="p-6">
-          <div class="flex items-center space-x-2 mb-8">
-            <div
-              class="w-8 h-8 bg-rmleb-600 rounded-lg flex items-center justify-center text-white font-bold"
-            >
-              R
-            </div>
-            <span class="text-lg font-bold text-gray-900">RMLEB IIP</span>
-          </div>
-          <nav class="space-y-1">
-            <a
-              href="#executive-summary"
-              class="flex items-center px-3 py-2 text-sm font-medium text-gray-900 rounded-md bg-gray-100 group"
-            >
-              <span class="truncate">Executive Summary</span>
-            </a>
-            <a
-              href="#highlights"
-              class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group"
-            >
-              <span class="truncate">Key Highlights</span>
-            </a>
-            <a
-              href="#impact-analysis"
-              class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group"
-            >
-              <span class="truncate">Impact Analysis</span>
-            </a>
-            <a
-              href="#technical-deep-dive"
-              class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group"
-            >
-              <span class="truncate">Technical Deep Dive</span>
-            </a>
-            <a
-              href="#commit-log"
-              class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group"
-            >
-              <span class="truncate">Commit History</span>
-            </a>
-          </nav>
-        </div>
-        <div class="p-6 mt-auto border-t border-gray-200">
-          <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">
-            Report Meta
-          </p>
-          <div class="text-sm text-gray-600">
-            <p><strong>Period:</strong> Last 7 Days</p>
-            <p><strong>Author:</strong> Krishna A. Kumar</p>
-            <p><strong>Commits:</strong> 35</p>
-          </div>
-        </div>
+    <div class="main-layout">
+      <aside class="toc-wrapper">
+        <nav class="toc" aria-label="Table of Contents">
+          <h2 class="toc-title">Contents</h2>
+          <ul class="toc-list">
+            <li class="toc-item">
+              <a href="#executive-summary" class="toc-link"
+                >Executive Summary</a
+              >
+            </li>
+            <li class="toc-item">
+              <a href="#key-highlights" class="toc-link">Key Highlights</a>
+            </li>
+            <p class="toc-section-label">Technical Details</p>
+            <li class="toc-item">
+              <a href="#transplants" class="toc-link"
+                >Transplants & Logistics</a
+              >
+            </li>
+            <li class="toc-item">
+              <a href="#backend-architecture" class="toc-link"
+                >Backend Architecture</a
+              >
+            </li>
+            <li class="toc-item">
+              <a href="#donor-analytics" class="toc-link">Donor Analytics</a>
+            </li>
+            <li class="toc-item">
+              <a href="#frontend-architecture" class="toc-link"
+                >Frontend Architecture</a
+              >
+            </li>
+            <p class="toc-section-label">Analysis</p>
+            <li class="toc-item">
+              <a href="#impact-analysis" class="toc-link">Impact Analysis</a>
+            </li>
+            <li class="toc-item">
+              <a href="#commit-log" class="toc-link">Full Commit Log</a>
+            </li>
+          </ul>
+        </nav>
       </aside>
 
-      <!-- Main Content -->
-      <main class="flex-1 md:ml-64 content-wrapper">
-        <div class="max-w-4xl mx-auto p-6 md:p-12 main-container">
-          <!-- Report Header -->
-          <div class="border-b border-gray-200 pb-8 mb-8">
-            <div class="flex justify-between items-start">
-              <div>
-                <p
-                  class="text-sm text-rmleb-600 font-semibold tracking-wide uppercase mb-1"
-                >
-                  Weekly Engineering Update
-                </p>
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-900">
-                  RMLEB IIP Status Report
-                </h1>
-                <p class="mt-2 text-gray-500">
-                  Project: Internal Information Portal | Date: Dec 3, 2025
-                </p>
-              </div>
-              <button
-                onclick="window.print()"
-                class="no-print inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rmleb-500"
-              >
-                <svg
-                  class="w-4 h-4 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
-                  ></path>
-                </svg>
-                Print Report
-              </button>
-            </div>
-          </div>
-
-          <!-- Executive Summary -->
-          <section id="executive-summary" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">
+      <main class="main-content">
+        <section id="executive-summary" class="section">
+          <header class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">📋</span>
               Executive Summary
             </h2>
-            <div
-              class="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
-            >
-              <p class="text-gray-700 leading-relaxed mb-4">
-                This week marked a significant milestone in the maturity of the
-                RMLEB IIP platform. The engineering team successfully
-                transitioned the database architecture from raw SQL execution to
-                <strong>SQLAlchemy Core</strong>, establishing a robust
-                foundation for future scalability and type safety.
+          </header>
+          <div class="section-body">
+            <div class="executive-summary">
+              <p>
+                This reporting period represents a pivotal maturation for the
+                RMLEB IIP, driven by the rollout of live data for the
+                <strong>Transplant Placement</strong> module and a foundational
+                modernization of the backend architecture.
               </p>
-              <p class="text-gray-700 leading-relaxed">
-                Simultaneously, we delivered high-value visual analytics for the
-                <strong>Transplant Placement</strong> and
-                <strong>Donor Recovery</strong> modules. Stakeholders can now
-                view real-time Domestic vs. International shipping reach,
-                placement utilization benchmarks, and granular donor
-                authorization statistics. These features directly support the
-                CPR team's hospital engagement strategies and the DRC's
-                operational oversight.
+              <p>
+                The <strong>CPR Dashboard</strong> now delivers real-time
+                logistics tracking, enabling stakeholders to visualize Domestic
+                vs. International reach and "Total Shipped Tissues" KPIs
+                directly from the database. This was coupled with the
+                implementation of a sophisticated benchmarking system, allowing
+                specific institution performance to be compared against global
+                averages.
+              </p>
+              <p>
+                On the technical front, we successfully migrated the entire data
+                access layer from raw PyODBC string queries to
+                <strong>SQLAlchemy Core</strong>. This significantly enhances
+                maintainability, security, and connection pooling efficiency.
+                Concurrently, a new global filtering system was deployed,
+                empowering users to slice data by precise date ranges,
+                organization categories, and specific institutions.
               </p>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- Key Highlights -->
-          <section id="highlights" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">
+        <section id="key-highlights" class="section">
+          <header class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">⭐</span>
               Key Highlights
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div
-                class="bg-blue-50 border-l-4 border-rmleb-500 p-4 rounded-r-lg"
-              >
-                <h3 class="font-bold text-rmleb-900 mb-2">
-                  KPIs &amp; Visualization
-                </h3>
-                <ul
-                  class="list-disc list-inside text-sm text-rmleb-800 space-y-1"
-                >
-                  <li>Real-time Domestic vs. International Shipment Reach.</li>
+          </header>
+          <div class="section-body">
+            <div class="highlights-grid">
+              <div class="highlight-card feature">
+                <span class="highlight-tag">Feature</span>
+                <h3 class="highlight-title">Transplant Logistics Live Data</h3>
+                <p class="highlight-description">
+                  Integrated real-time Domestic and International shipment KPIs,
+                  replacing static mock data. Added "Total Shipped Tissues" and
+                  Placement Percentage metrics.
+                </p>
+              </div>
+              <div class="highlight-card improvement">
+                <span class="highlight-tag">Refactor</span>
+                <h3 class="highlight-title">SQLAlchemy Migration</h3>
+                <p class="highlight-description">
+                  Replaced raw SQL strings with SQLAlchemy Core expressions
+                  across the backend. Improved type safety, connection pooling,
+                  and maintainability.
+                </p>
+              </div>
+              <div class="highlight-card feature">
+                <span class="highlight-tag">Feature</span>
+                <h3 class="highlight-title">Advanced Dashboard Filtering</h3>
+                <p class="highlight-description">
+                  Implemented comprehensive filtering via `DashboardFilters`
+                  schema, enabling granular queries by Date Range, Category
+                  (Coroner, Hospital), and Institution.
+                </p>
+              </div>
+              <div class="highlight-card feature">
+                <span class="highlight-tag">Feature</span>
+                <h3 class="highlight-title">Global Benchmarking Logic</h3>
+                <p class="highlight-description">
+                  New service logic compares filtered institution data against
+                  global performance benchmarks, providing context for KPI
+                  metrics.
+                </p>
+              </div>
+              <div class="highlight-card improvement">
+                <span class="highlight-tag">Improvement</span>
+                <h3 class="highlight-title">Refined Donor Demographics</h3>
+                <p class="highlight-description">
+                  Updated age distribution logic to use 10-year intervals (vs.
+                  20) and explicitly split counts by Recovered vs. Unrecovered
+                  status.
+                </p>
+              </div>
+              <div class="highlight-card fix">
+                <span class="highlight-tag">Fix</span>
+                <h3 class="highlight-title">API Standardization</h3>
+                <p class="highlight-description">
+                  Standardized API endpoints to synchronous execution (for
+                  blocking I/O) and migrated client methods from GET to POST for
+                  complex filter payloads.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="transplants" class="section">
+          <header class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">✈️</span>
+              Transplants & Logistics
+            </h2>
+          </header>
+          <div class="section-body">
+            <div class="feature-group">
+              <h3 class="feature-group-title">Shipment & Reach Analytics</h3>
+              <div class="feature-group-content">
+                <p>
+                  The Transplant Placement tab has been upgraded to provide a
+                  comprehensive view of tissue movement.
+                </p>
+                <ul class="feature-list">
                   <li>
-                    Placement Benchmarking (Utilization Rate vs. Global
-                    Average).
+                    <strong>Domestic vs. International:</strong> Implemented
+                    logic to calculate reach based on shipping destination
+                    country code (US vs Non-US).
                   </li>
                   <li>
-                    Total Shipped Tissues KPI (Transplant, Research, Training).
+                    <strong>Total Shipped KPI:</strong> Added endpoints to
+                    calculate total tissues shipped for Transplant, Research, or
+                    Training.
                   </li>
-                </ul>
-              </div>
-              <div
-                class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg"
-              >
-                <h3 class="font-bold text-green-900 mb-2">
-                  Architecture &amp; Stability
-                </h3>
-                <ul
-                  class="list-disc list-inside text-sm text-green-800 space-y-1"
-                >
                   <li>
-                    <strong>Major Migration:</strong> PyODBC replaced with
-                    SQLAlchemy Core.
+                    <strong>Live Data Integration:</strong> Replaced
+                    `TRANSPLANTS_CHART_US_MAP` mocks with
+                    `TRANSPLANTS_KPI_DOMESTIC` real-time feeds.
                   </li>
-                  <li>Improved Connection Pooling &amp; Error Handling.</li>
-                  <li>Standardized "Sync" Endpoints for Thread-Safety.</li>
-                </ul>
-              </div>
-              <div
-                class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg"
-              >
-                <h3 class="font-bold text-purple-900 mb-2">Donor Analytics</h3>
-                <ul
-                  class="list-disc list-inside text-sm text-purple-800 space-y-1"
-                >
-                  <li>Composite Charts: Referrals vs. Auth vs. Registered.</li>
-                  <li>Logic Refinement: Verified recoveries only.</li>
-                  <li>New Monthly Tissue Suitability categorization.</li>
-                </ul>
-              </div>
-              <div
-                class="bg-gray-50 border-l-4 border-gray-500 p-4 rounded-r-lg"
-              >
-                <h3 class="font-bold text-gray-900 mb-2">Quality Assurance</h3>
-                <ul
-                  class="list-disc list-inside text-sm text-gray-700 space-y-1"
-                >
-                  <li>Fixed date range boundary (off-by-one errors).</li>
-                  <li>Corrected schema typos (EyeTissueRecoveredId).</li>
-                  <li>Expanded mock data for robust offline testing.</li>
                 </ul>
               </div>
             </div>
-          </section>
+            <div class="feature-group">
+              <h3 class="feature-group-title">
+                Disposition & Placement Metrics
+              </h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>
+                    <strong>Disposition Charting:</strong> Visualizes tissue
+                    outcomes (Suitable, Placed, Pending, Expired) using new
+                    aggregation endpoints.
+                  </li>
+                  <li>
+                    <strong>Utilization Rates:</strong> Calculates Placement /
+                    Recovery ratios with new `PlacementData` schemas.
+                  </li>
+                  <li>
+                    <strong>Benchmark Comparison:</strong> Backend logic now
+                    calculates a "Global Benchmark" (clearing filters) alongside
+                    specific institution performance for context.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
-          <!-- Impact Analysis -->
-          <section id="impact-analysis" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">
+        <section id="backend-architecture" class="section">
+          <header class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">⚙️</span>
+              Backend Architecture
+            </h2>
+          </header>
+          <div class="section-body">
+            <div class="feature-group">
+              <h3 class="feature-group-title">SQLAlchemy Core Migration</h3>
+              <div class="feature-group-content">
+                <p>
+                  A massive refactor was undertaken to modernize the data access
+                  layer.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    <strong>Removed PyODBC Strings:</strong> Replaced
+                    error-prone string concatenation with Pythonic SQLAlchemy
+                    table definitions and expressions.
+                  </li>
+                  <li>
+                    <strong>Connection Pooling:</strong> Implemented `QueuePool`
+                    in `DatabaseManager` for efficient resource usage.
+                  </li>
+                  <li>
+                    <strong>Refactored Services:</strong> Completely rewrote
+                    `donor_service` and `transplant_service` to use the new
+                    expression language.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="feature-group">
+              <h3 class="feature-group-title">Advanced Filtering Engine</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>
+                    <strong>DashboardFilters Schema:</strong> Centralized
+                    Pydantic model handling `date_range`, `categories`, and
+                    `institutions`.
+                  </li>
+                  <li>
+                    <strong>Common Table Expressions (CTEs):</strong>
+                    Implemented reusable CTEs for complex filtering (e.g.,
+                    derived organization categories) to improve query
+                    readability and performance.
+                  </li>
+                  <li>
+                    <strong>Sync Endpoints:</strong> Converted database-heavy
+                    endpoints from `async def` to `def` to properly utilize
+                    FastAPI's thread pool for blocking I/O operations.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="donor-analytics" class="section">
+          <header class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">📊</span>
+              Donor Analytics
+            </h2>
+          </header>
+          <div class="section-body">
+            <div class="feature-group">
+              <h3 class="feature-group-title">Demographic Refinement</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>
+                    <strong>Granular Age Buckets:</strong> Shifted from 20-year
+                    to 10-year age intervals (0-9, 10-19, etc.) for better
+                    demographic insights.
+                  </li>
+                  <li>
+                    <strong>Recovery Status:</strong> Charts now explicitly
+                    split data into `recovered_count` and `unrecovered_count`
+                    based on `EyeTissueRecovered` table joins.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="feature-group">
+              <h3 class="feature-group-title">Composite Metrics</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>
+                    <strong>Authorization & Registration:</strong> Implemented
+                    business logic to count "Authorized" (NotReg + Auth Source)
+                    and "Registered" (Registry Status 'Y') donors.
+                  </li>
+                  <li>
+                    <strong>Yearly/Monthly Data:</strong> Connected composite
+                    charts to live APIs, supporting date range filtering.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="frontend-architecture" class="section">
+          <header class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">🎨</span>
+              Frontend Architecture
+            </h2>
+          </header>
+          <div class="section-body">
+            <div class="feature-group">
+              <h3 class="feature-group-title">Client & State Management</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>
+                    <strong>API Client Pivot:</strong> Refactored `CPRClient` to
+                    use domain-specific methods (e.g., `getTransplantDomestic`)
+                    rather than generic CRUD.
+                  </li>
+                  <li>
+                    <strong>POST-based Fetching:</strong> Switched read
+                    operations to `POST` to support complex JSON filter payloads
+                    in the request body.
+                  </li>
+                  <li>
+                    <strong>Global Filter Context:</strong> Implemented
+                    `FilterProvider` to manage state for Date, Category, and
+                    Institution selections across all tabs.
+                  </li>
+                  <li>
+                    <strong>Mock Data Indicators:</strong> Added `isMocked` prop
+                    to UI cards to visually warn users when live data is
+                    unavailable.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="impact-analysis" class="section">
+          <header class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">📈</span>
               Impact Analysis
             </h2>
-            <div class="overflow-hidden bg-white shadow sm:rounded-lg">
-              <div class="px-4 py-5 sm:px-6 bg-gray-50">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                  Departmental Benefits
-                </h3>
+          </header>
+          <div class="section-body">
+            <div class="impact-grid">
+              <div class="impact-card">
+                <div class="impact-header">
+                  <div class="impact-icon cpr">📊</div>
+                  <div>
+                    <h3 class="impact-title">CPR Team</h3>
+                    <p class="impact-subtitle">
+                      Community & Professional Relations
+                    </p>
+                  </div>
+                </div>
+                <ul class="impact-list">
+                  <li>
+                    <strong>Logistics Visibility:</strong> Instant insight into
+                    Domestic vs. International shipping reach.
+                  </li>
+                  <li>
+                    <strong>Performance Context:</strong> Ability to compare
+                    specific hospital performance against global benchmarks.
+                  </li>
+                  <li>
+                    <strong>Demographic Accuracy:</strong> More precise age
+                    breakdowns (10-year) for donor analysis.
+                  </li>
+                  <li>
+                    <strong>Drill-down Capability:</strong> Advanced filtering
+                    allows analysis by specific institution or category (e.g.,
+                    Coroners vs. Hospitals).
+                  </li>
+                </ul>
               </div>
-              <div class="border-t border-gray-200">
-                <dl>
-                  <div
-                    class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
-                  >
-                    <dt class="text-sm font-medium text-gray-500">CPR Team</dt>
-                    <dd
-                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                    >
-                      Can now present hospital partners with
-                      <strong>concrete evidence of reach</strong>
-                      (Domestic/International maps) and
-                      <strong>performance benchmarks</strong>. The new placement
-                      percentage metrics allow for data-driven discussions about
-                      the efficacy of donations from specific institutions
-                      compared to the global average.
-                    </dd>
+              <div class="impact-card">
+                <div class="impact-header">
+                  <div class="impact-icon drc">🏥</div>
+                  <div>
+                    <h3 class="impact-title">DRC Team</h3>
+                    <p class="impact-subtitle">Donor Recovery Center</p>
                   </div>
-                  <div
-                    class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
-                  >
-                    <dt class="text-sm font-medium text-gray-500">DRC Team</dt>
-                    <dd
-                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                    >
-                      Gains immediate visibility into
-                      <strong>Tissue Suitability trends</strong> and
-                      <strong>Recovery Authorization rates</strong>. The
-                      dashboard now differentiates between tissues recovered for
-                      Transplant vs. Research/Training, enabling better resource
-                      allocation and technician feedback loops.
-                    </dd>
-                  </div>
-                  <div
-                    class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
-                  >
-                    <dt class="text-sm font-medium text-gray-500">
-                      IT / Development
-                    </dt>
-                    <dd
-                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                    >
-                      The <strong>SQLAlchemy migration</strong> significantly
-                      reduces technical debt. It abstracts complex SQL
-                      generation, reduces the risk of SQL injection, and handles
-                      database connections more efficiently, ensuring the
-                      platform remains stable as data volume grows.
-                    </dd>
-                  </div>
-                </dl>
+                </div>
+                <ul class="impact-list">
+                  <li>
+                    <strong>Dashboard Structure:</strong> Separation of
+                    Organization vs. Individual statistics prepares the UI for
+                    technician-specific feedback.
+                  </li>
+                  <li>
+                    <strong>Performance Metrics:</strong> Backend foundation
+                    laid for "Utilization Rate" (Placement / Recovery) tracking.
+                  </li>
+                  <li>
+                    <strong>Data Integrity:</strong> SQLAlchemy migration
+                    ensures reliable data retrieval for critical recovery
+                    reports.
+                  </li>
+                </ul>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- Technical Deep Dive -->
-          <section id="technical-deep-dive" class="mb-12 break-inside-avoid">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">
-              Technical Deep Dive
+        <section id="commit-log" class="section">
+          <header class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">📝</span>
+              Full Commit Log
             </h2>
-
-            <!-- Feature Group 1 -->
-            <div class="mb-8">
-              <h3
-                class="text-xl font-semibold text-gray-800 mb-3 flex items-center"
-              >
-                <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                Backend Core &amp; Refactoring
-              </h3>
-              <div class="bg-white border border-gray-200 rounded-lg p-5">
-                <ul class="space-y-3 text-sm text-gray-600">
-                  <li class="flex items-start">
-                    <svg
-                      class="w-5 h-5 text-green-500 mr-2 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
-                    <span
-                      ><strong>SQLAlchemy Migration:</strong> Replaced raw
-                      string-based query builders in `utils/helpers.py` with
-                      SQLAlchemy Core expressions in `db/expressions.py`. This
-                      touches `donor_service` and `transplant_service`
-                      extensively.</span
-                    >
-                  </li>
-                  <li class="flex items-start">
-                    <svg
-                      class="w-5 h-5 text-green-500 mr-2 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
-                    <span
-                      ><strong>Schema Centralization:</strong> Moved `DateRange`
-                      and `DashboardFilters` to `schemas/common.py` to prevent
-                      circular imports and promote reuse.</span
-                    >
-                  </li>
-                  <li class="flex items-start">
-                    <svg
-                      class="w-5 h-5 text-green-500 mr-2 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
-                    <span
-                      ><strong>Sync Endpoints:</strong> Converted read-heavy API
-                      endpoints from `async def` to `def`. This allows FastAPI
-                      to run blocking DB operations in a separate thread pool,
-                      preventing event loop blocking.</span
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Feature Group 2 -->
-            <div class="mb-8">
-              <h3
-                class="text-xl font-semibold text-gray-800 mb-3 flex items-center"
-              >
-                <span class="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
-                Transplant Module
-              </h3>
-              <div class="bg-white border border-gray-200 rounded-lg p-5">
-                <ul class="space-y-3 text-sm text-gray-600">
-                  <li class="flex items-start">
-                    <svg
-                      class="w-5 h-5 text-indigo-500 mr-2 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                      ></path>
-                    </svg>
-                    <span
-                      ><strong>KPI - Reach:</strong> Implemented logic to
-                      calculate Domestic vs. International shipping based on
-                      `Organization.CountryCode`.</span
-                    >
-                  </li>
-                  <li class="flex items-start">
-                    <svg
-                      class="w-5 h-5 text-indigo-500 mr-2 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                      ></path>
-                    </svg>
-                    <span
-                      ><strong>KPI - Utilization:</strong> Added logic for
-                      Placement Percentage (Placed / Recovered) and Global
-                      Benchmarking (ignoring filters).</span
-                    >
-                  </li>
-                  <li class="flex items-start">
-                    <svg
-                      class="w-5 h-5 text-indigo-500 mr-2 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                      ></path>
-                    </svg>
-                    <span
-                      ><strong>Disposition Aggregation:</strong> Consolidated
-                      multiple API calls into a single `get_disposition_metrics`
-                      endpoint for performance.</span
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Feature Group 3 -->
-            <div class="mb-8">
-              <h3
-                class="text-xl font-semibold text-gray-800 mb-3 flex items-center"
-              >
-                <span class="w-2 h-2 bg-pink-500 rounded-full mr-2"></span>
-                Donor Module
-              </h3>
-              <div class="bg-white border border-gray-200 rounded-lg p-5">
-                <ul class="space-y-3 text-sm text-gray-600">
-                  <li class="flex items-start">
-                    <svg
-                      class="w-5 h-5 text-pink-500 mr-2 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                      ></path>
-                    </svg>
-                    <span
-                      ><strong>Composite Logic:</strong> Updated
-                      `get_monthly_composite` to join `DonorDesignation` and
-                      `Recovery`. Now accurately counts Registered vs.
-                      Authorized donors only when an actual recovery record
-                      exists (`etr.Id IS NOT NULL`).</span
-                    >
-                  </li>
-                  <li class="flex items-start">
-                    <svg
-                      class="w-5 h-5 text-pink-500 mr-2 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                      ></path>
-                    </svg>
-                    <span
-                      ><strong>Date Handling:</strong> Switched SQL filtering to
-                      half-open intervals (`&gt;= start AND &lt; end + 1 day`)
-                      to correctly capture records with timestamps on the end
-                      date.</span
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <!-- Detailed Commit Log -->
-          <section id="commit-log">
-            <div
-              class="flex flex-col sm:flex-row justify-between items-center mb-6"
-            >
-              <h2 class="text-2xl font-bold text-gray-900">
-                Detailed Commit History
-              </h2>
-              <!-- Search Bar (Hidden on Print) -->
-              <div class="relative w-full sm:w-64 mt-4 sm:mt-0 no-print">
-                <input
-                  type="text"
-                  id="commit-search"
-                  placeholder="Search commits..."
-                  class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rmleb-500 focus:border-transparent text-sm"
-                />
-                <div class="absolute left-3 top-2.5 text-gray-400">
+          </header>
+          <div class="section-body" id="commitList">
+            <div class="commit-toolbar">
+              <div class="commit-toolbar-row">
+                <div class="commit-search-wrapper">
                   <svg
-                    class="w-4 h-4"
+                    class="search-icon"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                   >
-                    <path
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <input
+                    type="text"
+                    class="search-input"
+                    id="commitSearch"
+                    placeholder="Search commits..."
+                  />
+                  <button
+                    class="search-clear"
+                    id="searchClear"
+                    aria-label="Clear search"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                    >
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                  <span class="search-results-count" id="searchCount"></span>
+                </div>
+                <div class="toolbar-actions">
+                  <button
+                    class="toolbar-btn"
+                    id="expandAll"
+                    aria-label="Expand all commits"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
                       stroke-width="2"
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    ></path>
-                  </svg>
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="7 13 12 18 17 13"></polyline>
+                      <polyline points="7 6 12 11 17 6"></polyline>
+                    </svg>
+                    Expand All
+                  </button>
+                  <button
+                    class="toolbar-btn"
+                    id="collapseAll"
+                    aria-label="Collapse all commits"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="17 11 12 6 7 11"></polyline>
+                      <polyline points="17 18 12 13 7 18"></polyline>
+                    </svg>
+                    Collapse All
+                  </button>
+                </div>
+              </div>
+              <div class="commit-toolbar-row">
+                <span class="module-filter-label">Filter by scope:</span>
+                <div class="module-filters">
+                  <button class="module-btn active" data-scope="all">
+                    All
+                  </button>
+                  <button class="module-btn" data-scope="frontend">
+                    Frontend
+                  </button>
+                  <button class="module-btn" data-scope="backend">
+                    Backend
+                  </button>
+                  <button class="module-btn" data-scope="ui">
+                    UI Components
+                  </button>
+                  <button class="module-btn" data-scope="api">
+                    API Client
+                  </button>
                 </div>
               </div>
             </div>
 
-            <div id="commit-list" class="space-y-4">
-              <!-- Commits will be generated here -->
-
-              <!-- Commit 08067c2 -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                        >feat</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >08067c2</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Integrate Domestic and International Shipment
-                        KPIs</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">14 hours ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Introduces key performance indicators (KPIs) for domestic
-                      reach and international shipments on the Transplant
-                      Placement dashboard tab.
-                    </p>
-                    <div class="bg-gray-900 rounded-md p-3 overflow-x-auto">
-                      <code class="text-xs text-green-400 font-mono">
-                        apps/cpr-dashboard/src/hooks/useTransplantData.ts | 22
-                        +++<br />
-                        apps/cpr-dashboard/src/tabs/TransplantPlacementTab.tsx |
-                        45 +++++++<br />
-                        packages/api-client/src/clients/cprClient.ts | 8 ++--
-                      </code>
-                    </div>
-                  </div>
-                </details>
-              </div>
-
-              <!-- Commit 208059f -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"
-                        >fix</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >208059f</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Correct typo in EyeTissueRecoveredId column name</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">14 hours ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Fixes a consistent typo in the shipment_item table schema
-                      and the corresponding join logic in the transplant service
-                      functions.
-                    </p>
-                    <div class="bg-gray-900 rounded-md p-3 overflow-x-auto">
-                      <code class="text-xs text-green-400 font-mono">
-                        backend/app/db/schema.py | 2 +-<br />
-                        backend/app/services/cpr/transplant_service.py | 4 ++--
-                      </code>
-                    </div>
-                  </div>
-                </details>
-              </div>
-
-              <!-- Commit 57a5caf (Major) -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
-                        >refactor</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >57a5caf</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Migrate database access from PyODBC to SQLAlchemy
-                        Core</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">19 hours ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Replaces raw string-based SQL query construction with
-                      SQLAlchemy Core expressions to improve maintainability,
-                      type safety, and connection pooling. A massive overhaul of
-                      the backend service layer.
-                    </p>
-                    <div class="bg-gray-900 rounded-md p-3 overflow-x-auto">
-                      <code class="text-xs text-green-400 font-mono">
-                        13 files changed, 561 insertions(+), 1007
-                        deletions(-)<br />
-                        backend/app/core/database.py | 191 +++---<br />
-                        backend/app/services/cpr/donor_service.py | 859
-                        +++---<br />
-                        backend/app/utils/helpers.py | 88 -------
-                      </code>
-                    </div>
-                  </div>
-                </details>
-              </div>
-
-              <!-- Commit 919d6aa -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                        >feat</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >919d6aa</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Add domestic and international shipping reach
-                        KPIs</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">14 hours ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Update DB schema to include Shipment/ShipmentItem tables
-                      and CountryCode. Implements logic to calculate reach based
-                      on shipping destination.
-                    </p>
-                  </div>
-                </details>
-              </div>
-
-              <!-- Commit da61642 -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
-                        >refactor</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >da61642</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Change API endpoints from async to sync</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">15 hours ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Converted endpoints to synchronous functions to utilize
-                      FastAPI's thread pool for blocking I/O.
-                    </p>
-                  </div>
-                </details>
-              </div>
-
-              <!-- Commit 77a04c6 -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                        >feat</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >77a04c6</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Add 'Total Shipped Tissues' KPI endpoint and
-                        logic</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">16 hours ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Calculates total shipped tissues filtered by outcome
-                      (Transplant, Research, Training).
-                    </p>
-                  </div>
-                </details>
-              </div>
-
-              <!-- Commit 80adc5e -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                        >feat</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >80adc5e</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Add placement metrics endpoint with global
-                        benchmarking</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">18 hours ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Refactors logic to calculate two distinct metrics
-                      (specific vs. benchmark) using a self-join strategy,
-                      clearing filters for the benchmark.
-                    </p>
-                  </div>
-                </details>
-              </div>
-
-              <!-- Commit 97b988f -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                        >feat</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >97b988f</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Implement disposition data fetching and
-                        visualization</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">22 hours ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Updates Dashboard to support real transplant disposition
-                      data, replacing granular KPI endpoints with a single
-                      aggregation.
-                    </p>
-                  </div>
-                </details>
-              </div>
-
-              <!-- Commit 0e9209e -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"
-                        >fix</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >0e9209e</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Correct date range boundary</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">2 days ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Resolves a date-related bug where queries were fetching an
-                      extra day of data by implementing strict end date
-                      filtering.
-                    </p>
-                  </div>
-                </details>
-              </div>
-
-              <!-- Commit 49334f1 -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                        >feat</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >49334f1</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Implement logic for yearly donor composite
-                        endpoint</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">2 days ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Adds joins for Patient, DonorDesignation, and Recovery
-                      tables to calculate precise metrics for yearly composites.
-                    </p>
-                  </div>
-                </details>
-              </div>
-
-              <!-- Commit e238289 -->
-              <div
-                class="commit-card bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-              >
-                <details class="group">
-                  <summary
-                    class="flex justify-between items-center p-4 cursor-pointer bg-gray-50 group-hover:bg-gray-100 transition-colors"
-                  >
-                    <div class="flex items-center space-x-3">
-                      <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
-                        >docs</span
-                      >
-                      <span class="font-mono text-sm text-gray-500"
-                        >e238289</span
-                      >
-                      <span class="text-sm font-semibold text-gray-900"
-                        >Add comprehensive architectural context</span
-                      >
-                    </div>
-                    <div class="flex items-center space-x-4">
-                      <span class="text-xs text-gray-500">7 days ago</span>
-                      <svg
-                        class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </summary>
-                  <div class="p-4 border-t border-gray-200 bg-white">
-                    <p class="text-gray-700 text-sm mb-4">
-                      Adds detailed docstrings defining architectural patterns
-                      (Facade, Thin Interface) and 12-Factor strategies.
-                    </p>
-                  </div>
-                </details>
-              </div>
-            </div>
-            <div class="mt-6 text-center text-sm text-gray-500 no-print">
-              <p>
-                Showing selection of key commits. Total commits this period: 35.
-              </p>
-            </div>
-          </section>
-
-          <!-- Navigation Footer -->
-          <div
-            class="flex justify-between mt-12 pt-8 border-t border-gray-200 no-print"
-          >
-            <button
-              class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
-              onclick="window.location.href = '003.html'"
+            <details
+              class="commit-item"
+              data-scope="frontend"
+              data-search="feat dashboard Integrate Domestic and International Shipment KPIs"
             >
-              ← Previous Report
-            </button>
-            <button
-              class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
-              onclick="alert('This is the most current report.')"
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (dashboard): Integrate Domestic and International
+                    Shipment KPIs
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">08067c2</span>
+                    <span class="commit-scope scope-frontend">dashboard</span>
+                    <span>14 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Introduces key performance indicators (KPIs) for domestic
+                  reach and international shipments on the Transplant Placement
+                  dashboard tab.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="backend"
+              data-search="fix backend Correct typo in EyeTissueRecoveredId column name"
             >
-              Next Report →
-            </button>
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    fix (backend): Correct typo in EyeTissueRecoveredId column
+                    name
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">208059f</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>14 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Fixes a consistent typo in the `shipment_item` table schema
+                  and the corresponding join logic in the transplant service
+                  functions.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="backend"
+              data-search="feat backend Add domestic and international shipping reach KPIs"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (backend): Add domestic and international shipping
+                    reach KPIs
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">919d6aa</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>15 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Update DB schema to include `Shipment` and `ShipmentItem`
+                  tables. Add `CountryCode` column to the `Organization` table.
+                  Implement service layer logic.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="api"
+              data-search="refactor api-client Rename chart endpoints to domestic/international KPI"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    refactor (api-client): Rename chart endpoints to
+                    domestic/international KPI
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">e152cd5</span>
+                    <span class="commit-scope scope-api">api-client</span>
+                    <span>16 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Renames the TRANSPLANTS_CHART_US_MAP and
+                  TRANSPLANTS_CHART_STATE_SHIPPING endpoints to
+                  TRANSPLANTS_KPI_DOMESTIC and TRANSPLANTS_KPI_INTERNATIONAL.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="backend"
+              data-search="refactor backend Change API endpoints from async to sync"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    refactor (backend): Change API endpoints from async to sync
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">da61642</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>16 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Standardizes the endpoint definitions to synchronous
+                  functions, relying on FastAPI to execute blocking I/O
+                  (database operations) in its thread pool.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="frontend"
+              data-search="feat cpr-dashboard Integrate total shipped tissue KPI with API"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (cpr-dashboard): Integrate total shipped tissue KPI
+                    with API
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">9f02d6c</span>
+                    <span class="commit-scope scope-frontend"
+                      >cpr-dashboard</span
+                    >
+                    <span>16 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Update CPRClient to include getTransplantShipment method.
+                  Replace unused TRANSPLANTS_CHART_MONTHLY_PCT endpoint.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="backend"
+              data-search="feat backend Add Total Shipped Tissues KPI endpoint and logic"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (backend\cpr): Add 'Total Shipped Tissues' KPI endpoint
+                    and logic
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">77a04c6</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>17 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Introduces the necessary components to calculate and expose
+                  the 'Total Shipped Tissues' metric on the CPR dashboard.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="frontend"
+              data-search="feat cpr-dashboard Integrate real percentage data into LineChart"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (cpr-dashboard): Integrate real percentage data into
+                    LineChart
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">18c3aeb</span>
+                    <span class="commit-scope scope-frontend"
+                      >cpr-dashboard</span
+                    >
+                    <span>18 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Replaces the hardcoded, mocked data in the Transplant
+                  Placement tab's LineChart with live data fetched from the
+                  useTransplantData hook.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="backend"
+              data-search="feat backend Add placement metrics endpoint with global benchmarking"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (backend\cpr): Add placement metrics endpoint with
+                    global benchmarking
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">80adc5e</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>18 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Implements the Placement Percentage chart data source,
+                  allowing comparison between filtered results and global
+                  averages.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="backend"
+              data-search="refactor backend Migrate database access from PyODBC to SQLAlchemy Core"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    refactor (backend): Migrate database access from PyODBC to
+                    SQLAlchemy Core
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">57a5caf</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>19 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Replaces raw string-based SQL query construction with
+                  SQLAlchemy Core expressions to improve maintainability, type
+                  safety, and connection pooling.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="api"
+              data-search="feat api-client Replace transplant KPI endpoints with disposition chart data"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (api-client): Replace transplant KPI endpoints with
+                    disposition chart data
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">5bba3fb</span>
+                    <span class="commit-scope scope-api">api-client</span>
+                    <span>23 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Add getTransplantDispositions method to CPRClient. Remove
+                  deprecated individual KPI endpoints.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="backend"
+              data-search="feat backend Add DateRange and DashboardFilters schemas"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (cpr): Add DateRange and DashboardFilters schemas
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">69b1873</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>24 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Introduces Pydantic models to define the structure for
+                  dashboard filtering: DateRange, DashboardFilters.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="frontend"
+              data-search="feat cpr-dashboard Integrate yearly donor chart with live api data"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (cpr-dashboard): Integrate yearly donor chart with live
+                    api data
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">5c81470</span>
+                    <span class="commit-scope scope-frontend"
+                      >cpr-dashboard</span
+                    >
+                    <span>2 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Update useEyeDonorData hook to fetch yearlyData in parallel
+                  with existing metrics. Replace hardcoded chart mock data.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="backend"
+              data-search="docs backend Add comprehensive architectural context and design patterns"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    docs (backend): Add comprehensive architectural context and
+                    design patterns
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">e238289</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>7 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Adds detailed docstrings and comments across the backend to
+                  explicitly define architectural patterns and business logic.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="backend"
+              data-search="refactor backend cpr Centralize query logic and implement derived categories"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    refactor (backend): Centralize query logic and implement
+                    derived categories
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">163a7ad</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>7 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Refactors the CPR Donor Service to use centralized SQL
+                  constants and Common Table Expressions (CTEs) for improved
+                  organization categorization.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="ui"
+              data-search="feat ui-components Add visual indicator for mocked data"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (ui-components): Add visual indicator for mocked data
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">0b30aab</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>8 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Introduces a new MockDataIndicator component utilizing a
+                  Popover to warn users when displayed data is for demonstration
+                  purposes.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="api"
+              data-search="refactor api-client Pivot cpr client to dashboard-specific architecture"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    refactor (api-client): Pivot cpr client to
+                    dashboard-specific architecture
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">a2412a8</span>
+                    <span class="commit-scope scope-api">api-client</span>
+                    <span>9 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Replaces generic CRUD functionality with specialized read-only
+                  metric fetching to support the CPR Dashboard requirements.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="backend"
+              data-search="feat backend implement advanced dashboard filtering for CPR donors"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (backend): implement advanced dashboard filtering for
+                    CPR donors
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">f291574</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>13 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Replaces the limited YearMonthFilter with a comprehensive
+                  DashboardFilters schema to support specific Date Ranges,
+                  Categories, and Institutions.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="frontend"
+              data-search="feat cpr-dashboard refactor layout and implement filter context"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (cpr-dashboard): refactor layout and implement filter
+                    context
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">e7a795d</span>
+                    <span class="commit-scope scope-frontend"
+                      >cpr-dashboard</span
+                    >
+                    <span>13 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Implements FilterProvider and FilterContext to manage global
+                  state for date ranges, categories, and institutions.
+                </p>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-scope="frontend"
+              data-search="feat drc-dashboard restructure dashboard into organization and individual tabs"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (drc-dashboard): restructure dashboard into
+                    organization and individual tabs
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">8869f4b</span>
+                    <span class="commit-scope scope-frontend"
+                      >drc-dashboard</span
+                    >
+                    <span>2 weeks ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Replaces the generic Dashboard view with distinct
+                  'Organization Stats' and 'Individual Stats' tabs.
+                </p>
+              </div>
+            </details>
           </div>
-        </div>
+        </section>
+
+        <nav class="report-navigation" aria-label="Report navigation">
+          <button
+            onclick="window.location.href = '003.html'"
+            class="nav-button"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Previous Report
+          </button>
+          <button
+            onclick="alert('This is the current report.')"
+            class="nav-button disabled"
+            disabled
+          >
+            Next Report
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </nav>
       </main>
     </div>
 
-    <!-- Scripts -->
-    <script>
-      // Search Functionality
-      document
-        .getElementById("commit-search")
-        .addEventListener("keyup", function (e) {
-          const searchTerm = e.target.value.toLowerCase();
-          const cards = document.querySelectorAll(".commit-card");
+    <button
+      class="mobile-toc-toggle"
+      id="mobileTocToggle"
+      aria-label="Open table of contents"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
 
-          cards.forEach((card) => {
-            const text = card.innerText.toLowerCase();
-            if (text.includes(searchTerm)) {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
-            }
-          });
+    <div class="mobile-toc-overlay" id="mobileTocOverlay"></div>
+    <div class="mobile-toc-panel" id="mobileTocPanel">
+      <h2 class="toc-title">Contents</h2>
+      <ul class="toc-list">
+        <li class="toc-item">
+          <a href="#executive-summary" class="toc-link mobile-toc-link"
+            >Executive Summary</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#key-highlights" class="toc-link mobile-toc-link"
+            >Key Highlights</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#transplants" class="toc-link mobile-toc-link"
+            >Transplants & Logistics</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#backend-architecture" class="toc-link mobile-toc-link"
+            >Backend Architecture</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#donor-analytics" class="toc-link mobile-toc-link"
+            >Donor Analytics</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#frontend-architecture" class="toc-link mobile-toc-link"
+            >Frontend Architecture</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#impact-analysis" class="toc-link mobile-toc-link"
+            >Impact Analysis</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#commit-log" class="toc-link mobile-toc-link"
+            >Full Commit Log</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <footer class="site-footer">
+      <p>RMLEB Internal Information Portal — Generated Dec 03, 2025</p>
+      <p>
+        For questions or feedback, contact
+        <a href="mailto:kkumar@corneas.org">kkumar@corneas.org</a>
+      </p>
+    </footer>
+
+    <script>
+      // Search functionality
+      const searchInput = document.getElementById("commitSearch");
+      const searchClear = document.getElementById("searchClear");
+      const searchCount = document.getElementById("searchCount");
+      const commitItems = document.querySelectorAll(".commit-item");
+
+      function performSearch() {
+        const query = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        searchClear.classList.toggle("visible", query.length > 0);
+
+        commitItems.forEach((item) => {
+          const searchData = item.getAttribute("data-search").toLowerCase();
+          const isMatch = query === "" || searchData.includes(query);
+
+          item.classList.toggle("hidden", !isMatch);
+          if (isMatch) visibleCount++;
         });
 
-      // Print Handling: Expand all details before print
+        if (query.length > 0) {
+          searchCount.textContent = `${visibleCount} of ${commitItems.length} commits`;
+        } else {
+          searchCount.textContent = "";
+        }
+      }
+
+      searchInput.addEventListener("input", performSearch);
+      searchClear.addEventListener("click", () => {
+        searchInput.value = "";
+        performSearch();
+        searchInput.focus();
+      });
+
+      // Mobile TOC
+      const mobileTocToggle = document.getElementById("mobileTocToggle");
+      const mobileTocOverlay = document.getElementById("mobileTocOverlay");
+      const mobileTocPanel = document.getElementById("mobileTocPanel");
+      const mobileTocLinks = document.querySelectorAll(".mobile-toc-link");
+
+      function openMobileToc() {
+        mobileTocOverlay.classList.add("active");
+        mobileTocPanel.classList.add("active");
+      }
+
+      function closeMobileToc() {
+        mobileTocOverlay.classList.remove("active");
+        mobileTocPanel.classList.remove("active");
+      }
+
+      mobileTocToggle.addEventListener("click", openMobileToc);
+      mobileTocOverlay.addEventListener("click", closeMobileToc);
+      mobileTocLinks.forEach((link) => {
+        link.addEventListener("click", closeMobileToc);
+      });
+
+      // Active TOC tracking
+      const tocLinks = document.querySelectorAll(
+        ".toc-link:not(.mobile-toc-link)",
+      );
+      const sections = document.querySelectorAll("section[id]");
+
+      function updateActiveToc() {
+        let current = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (pageYOffset >= sectionTop - 150) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        tocLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", updateActiveToc);
+      updateActiveToc();
+
+      // Auto-expand all details for print
       window.addEventListener("beforeprint", () => {
-        document.querySelectorAll("details").forEach((el) => {
-          el.setAttribute("open", "true");
+        document
+          .querySelectorAll("details")
+          .forEach((d) => d.setAttribute("open", ""));
+      });
+
+      // Expand/Collapse All
+      const expandAllBtn = document.getElementById("expandAll");
+      const collapseAllBtn = document.getElementById("collapseAll");
+
+      expandAllBtn.addEventListener("click", () => {
+        document.querySelectorAll(".commit-item").forEach((item) => {
+          item.setAttribute("open", "");
         });
       });
 
-      // Optional: Collapse back after print (can be jarring, maybe leave open)
-      // window.addEventListener('afterprint', () => { ... });
+      collapseAllBtn.addEventListener("click", () => {
+        document.querySelectorAll(".commit-item").forEach((item) => {
+          item.removeAttribute("open");
+        });
+      });
+
+      // Scope filtering
+      const scopeButtons = document.querySelectorAll(".module-btn");
+      let activeScope = "all";
+
+      function filterByScope(scope) {
+        activeScope = scope;
+        scopeButtons.forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.scope === scope);
+        });
+        applyFilters();
+      }
+
+      function applyFilters() {
+        const query = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        commitItems.forEach((item) => {
+          const searchData = item.getAttribute("data-search").toLowerCase();
+          const itemScope = item.getAttribute("data-scope") || "";
+
+          const matchesSearch = query === "" || searchData.includes(query);
+          const matchesScope =
+            activeScope === "all" || itemScope === activeScope;
+
+          const isVisible = matchesSearch && matchesScope;
+          item.classList.toggle("hidden", !isVisible);
+          if (isVisible) visibleCount++;
+        });
+
+        searchClear.classList.toggle("visible", query.length > 0);
+
+        if (query.length > 0 || activeScope !== "all") {
+          searchCount.textContent = `${visibleCount} of ${commitItems.length} commits`;
+        } else {
+          searchCount.textContent = "";
+        }
+      }
+
+      // Override performSearch to use applyFilters
+      searchInput.removeEventListener("input", performSearch);
+      searchInput.addEventListener("input", applyFilters);
+
+      searchClear.removeEventListener("click", () => {});
+      searchClear.addEventListener("click", () => {
+        searchInput.value = "";
+        applyFilters();
+        searchInput.focus();
+      });
+
+      scopeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => filterByScope(btn.dataset.scope));
+      });
     </script>
   </body>
 </html>

@@ -1,0 +1,4312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RMLEB IIP Status Report | Dec 2 – Dec 10, 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-primary: #1e3a5f;
+        --color-primary-light: #2d5a8b;
+        --color-primary-dark: #0f1f33;
+        --color-accent: #3b82f6;
+        --color-accent-light: #60a5fa;
+        --color-success: #059669;
+        --color-warning: #d97706;
+        --color-neutral-50: #f8fafc;
+        --color-neutral-100: #f1f5f9;
+        --color-neutral-200: #e2e8f0;
+        --color-neutral-300: #cbd5e1;
+        --color-neutral-400: #94a3b8;
+        --color-neutral-500: #64748b;
+        --color-neutral-600: #475569;
+        --color-neutral-700: #334155;
+        --color-neutral-800: #1e293b;
+        --color-neutral-900: #0f172a;
+        --font-display: "Source Serif 4", Georgia, serif;
+        --font-body:
+          "Source Sans 3", -apple-system, BlinkMacSystemFont, sans-serif;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        --shadow-lg:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        --radius: 8px;
+        --toc-width: 280px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--color-neutral-800);
+        background: var(--color-neutral-50);
+      }
+
+      /* Header */
+      .site-header {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-primary-dark) 100%
+        );
+        color: white;
+        padding: 2rem 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .site-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        pointer-events: none;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header-top {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .org-badge {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .report-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-weight: 600;
+        margin: 0 0 0.5rem 0;
+        letter-spacing: -0.01em;
+      }
+
+      .report-subtitle {
+        font-size: 1.125rem;
+        opacity: 0.9;
+        margin: 0;
+      }
+
+      .report-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .meta-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.7;
+      }
+
+      .meta-value {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .print-button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: auto;
+        padding: 0.625rem 1rem;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: var(--radius);
+        color: white;
+        font-family: var(--font-body);
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .print-button:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* Commit Log Toolbar */
+      .commit-toolbar {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--color-neutral-200);
+      }
+
+      .commit-toolbar-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .commit-search-wrapper {
+        flex: 1;
+        min-width: 200px;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--color-neutral-50);
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius);
+        padding: 0.625rem 1rem;
+        transition: all 0.15s ease;
+      }
+
+      .commit-search-wrapper:focus-within {
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .search-icon {
+        color: var(--color-neutral-400);
+        flex-shrink: 0;
+      }
+
+      .search-input {
+        flex: 1;
+        border: none;
+        font-size: 0.9375rem;
+        font-family: var(--font-body);
+        color: var(--color-neutral-800);
+        background: transparent;
+        outline: none;
+      }
+
+      .search-input::placeholder {
+        color: var(--color-neutral-400);
+      }
+
+      .search-clear {
+        background: none;
+        border: none;
+        color: var(--color-neutral-400);
+        cursor: pointer;
+        padding: 0.25rem;
+        display: none;
+      }
+
+      .search-clear.visible {
+        display: block;
+      }
+
+      .search-results-count {
+        font-size: 0.8125rem;
+        color: var(--color-neutral-500);
+        white-space: nowrap;
+      }
+
+      .toolbar-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .toolbar-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.5rem 0.875rem;
+        border: 1px solid var(--color-neutral-300);
+        border-radius: var(--radius);
+        background: white;
+        color: var(--color-neutral-700);
+        font-family: var(--font-body);
+        font-size: 0.8125rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .toolbar-btn:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+        background: var(--color-neutral-50);
+      }
+
+      .toolbar-btn svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .module-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .module-filter-label {
+        font-size: 0.8125rem;
+        color: var(--color-neutral-500);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        margin-right: 0.25rem;
+      }
+
+      .module-btn {
+        padding: 0.375rem 0.75rem;
+        border: 1px solid var(--color-neutral-200);
+        border-radius: 9999px;
+        background: white;
+        color: var(--color-neutral-600);
+        font-family: var(--font-body);
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .module-btn:hover {
+        border-color: var(--color-neutral-400);
+        background: var(--color-neutral-50);
+      }
+
+      .module-btn.active {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+        color: white;
+      }
+
+      .module-btn.active:hover {
+        background: var(--color-primary-light);
+        border-color: var(--color-primary-light);
+      }
+
+      /* Layout */
+      .main-layout {
+        display: grid;
+        grid-template-columns: var(--toc-width) 1fr;
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+      }
+
+      @media (max-width: 1024px) {
+        .main-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Table of Contents */
+      .toc-wrapper {
+        position: relative;
+      }
+
+      .toc {
+        position: sticky;
+        top: 1rem;
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+        padding: 1.5rem;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+      }
+
+      .toc-title {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin: 0 0 1rem 0;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--color-neutral-200);
+      }
+
+      .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .toc-item {
+        margin-bottom: 0.25rem;
+      }
+
+      .toc-link {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: var(--color-neutral-600);
+        text-decoration: none;
+        font-size: 0.875rem;
+        border-radius: 4px;
+        transition: all 0.15s ease;
+      }
+
+      .toc-link:hover {
+        background: var(--color-neutral-100);
+        color: var(--color-primary);
+      }
+
+      .toc-link.active {
+        background: var(--color-primary);
+        color: white;
+      }
+
+      .toc-section-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-neutral-400);
+        margin: 1rem 0 0.5rem 0.75rem;
+      }
+
+      @media (max-width: 1024px) {
+        .toc-wrapper {
+          display: none;
+        }
+      }
+
+      /* Mobile TOC */
+      .mobile-toc-toggle {
+        display: none;
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        box-shadow: var(--shadow-lg);
+        cursor: pointer;
+        z-index: 1000;
+        font-size: 1.25rem;
+      }
+
+      @media (max-width: 1024px) {
+        .mobile-toc-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      .mobile-toc-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1001;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .mobile-toc-overlay.active {
+        display: block;
+        opacity: 1;
+      }
+
+      .mobile-toc-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: var(--radius) var(--radius) 0 0;
+        padding: 1.5rem;
+        z-index: 1002;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+
+      .mobile-toc-panel.active {
+        transform: translateY(0);
+      }
+
+      /* Main Content */
+      .main-content {
+        min-width: 0;
+      }
+
+      /* Sections */
+      .section {
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+      }
+
+      .section-header {
+        padding: 1.25rem 1.5rem;
+        background: var(--color-neutral-50);
+        border-bottom: 1px solid var(--color-neutral-200);
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .section-icon {
+        width: 28px;
+        height: 28px;
+        background: var(--color-primary);
+        color: white;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+      }
+
+      .section-body {
+        padding: 1.5rem;
+      }
+
+      /* Executive Summary */
+      .executive-summary {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: var(--color-neutral-700);
+      }
+
+      .executive-summary p:first-child {
+        margin-top: 0;
+      }
+      .executive-summary p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Highlight Cards */
+      .highlights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+
+      .highlight-card {
+        background: var(--color-neutral-50);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        border-left: 4px solid var(--color-accent);
+      }
+
+      .highlight-card.feature {
+        border-left-color: var(--color-success);
+      }
+      .highlight-card.improvement {
+        border-left-color: var(--color-accent);
+      }
+      .highlight-card.fix {
+        border-left-color: var(--color-warning);
+      }
+      .highlight-card.refactor {
+        border-left-color: #8b5cf6;
+      }
+
+      .highlight-title {
+        font-weight: 600;
+        color: var(--color-neutral-800);
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+      }
+
+      .highlight-description {
+        color: var(--color-neutral-600);
+        margin: 0;
+        font-size: 0.9375rem;
+      }
+
+      .highlight-tag {
+        display: inline-block;
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.125rem 0.5rem;
+        border-radius: 3px;
+        margin-bottom: 0.5rem;
+      }
+
+      .highlight-card.feature .highlight-tag {
+        background: rgba(5, 150, 105, 0.1);
+        color: var(--color-success);
+      }
+
+      .highlight-card.improvement .highlight-tag {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--color-accent);
+      }
+
+      .highlight-card.fix .highlight-tag {
+        background: rgba(217, 119, 6, 0.1);
+        color: var(--color-warning);
+      }
+
+      .highlight-card.refactor .highlight-tag {
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+      }
+
+      /* Technical Deep Dive */
+      .feature-group {
+        margin-bottom: 2rem;
+      }
+      .feature-group:last-child {
+        margin-bottom: 0;
+      }
+
+      .feature-group-title {
+        font-family: var(--font-display);
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--color-neutral-800);
+        margin: 0 0 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--color-neutral-200);
+      }
+
+      .feature-group-content {
+        color: var(--color-neutral-700);
+      }
+
+      .feature-group-content p {
+        margin: 0 0 1rem 0;
+      }
+      .feature-group-content p:last-child {
+        margin-bottom: 0;
+      }
+
+      .feature-list {
+        margin: 0.75rem 0;
+        padding-left: 1.25rem;
+      }
+      .feature-list li {
+        margin-bottom: 0.5rem;
+        color: var(--color-neutral-600);
+      }
+      .feature-list li:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Commit Details */
+      .commit-item {
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius);
+        margin-bottom: 0.75rem;
+        overflow: hidden;
+      }
+
+      .commit-item:last-child {
+        margin-bottom: 0;
+      }
+      .commit-item.hidden {
+        display: none;
+      }
+
+      .commit-summary {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        cursor: pointer;
+        user-select: none;
+        list-style: none;
+        background: white;
+        transition: background 0.15s ease;
+      }
+
+      .commit-summary:hover {
+        background: var(--color-neutral-50);
+      }
+      .commit-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .commit-toggle {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        background: var(--color-neutral-100);
+        color: var(--color-neutral-500);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.75rem;
+        transition: all 0.15s ease;
+      }
+
+      details[open] .commit-toggle {
+        background: var(--color-primary);
+        color: white;
+        transform: rotate(90deg);
+      }
+
+      .commit-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .commit-subject {
+        font-weight: 600;
+        color: var(--color-neutral-800);
+        margin: 0 0 0.25rem 0;
+        font-size: 0.9375rem;
+      }
+
+      .commit-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        font-size: 0.8125rem;
+        color: var(--color-neutral-500);
+      }
+
+      .commit-hash {
+        font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+        background: var(--color-neutral-100);
+        padding: 0.125rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+      }
+
+      .commit-scope {
+        display: inline-block;
+        padding: 0.125rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .scope-backend {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      .scope-frontend {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      .scope-ui {
+        background: #f3e8ff;
+        color: #6b21a8;
+      }
+      .scope-ci {
+        background: #d1fae5;
+        color: #065f46;
+      }
+      .scope-api {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .scope-test {
+        background: #e0e7ff;
+        color: #3730a3;
+      }
+      .scope-chore {
+        background: var(--color-neutral-200);
+        color: var(--color-neutral-600);
+      }
+      .scope-docs {
+        background: #fce7f3;
+        color: #9d174d;
+      }
+      .scope-refactor {
+        background: #f5f3ff;
+        color: #5b21b6;
+      }
+
+      .commit-details {
+        padding: 1rem 1.25rem;
+        padding-left: 3.5rem;
+        background: var(--color-neutral-50);
+        border-top: 1px solid var(--color-neutral-200);
+      }
+
+      .commit-description {
+        color: var(--color-neutral-700);
+        font-size: 0.9375rem;
+        margin: 0 0 1rem 0;
+        white-space: pre-wrap;
+      }
+
+      .commit-files {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .commit-files li {
+        font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+        font-size: 0.8125rem;
+        color: var(--color-neutral-600);
+        padding: 0.25rem 0;
+      }
+
+      .file-stat {
+        display: inline-block;
+        min-width: 60px;
+        font-size: 0.75rem;
+      }
+
+      .stat-add {
+        color: var(--color-success);
+      }
+      .stat-del {
+        color: #dc2626;
+      }
+
+      /* Impact Analysis */
+      .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .impact-card {
+        background: var(--color-neutral-50);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+      }
+
+      .impact-title {
+        font-family: var(--font-display);
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin: 0 0 1rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .impact-badge {
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        background: var(--color-success);
+        color: white;
+        margin-left: auto;
+      }
+
+      .impact-badge.moderate {
+        background: var(--color-accent);
+      }
+      .impact-badge.low {
+        background: var(--color-neutral-400);
+      }
+
+      .impact-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .impact-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--color-neutral-200);
+        font-size: 0.9375rem;
+        color: var(--color-neutral-700);
+      }
+      .impact-list li:last-child {
+        border-bottom: none;
+      }
+
+      /* Report Navigation */
+      .report-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--color-neutral-200);
+      }
+
+      .nav-button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        background: white;
+        border: 1px solid var(--color-neutral-300);
+        border-radius: var(--radius);
+        color: var(--color-neutral-700);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.15s ease;
+      }
+
+      .nav-button:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+      }
+
+      .nav-button.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      /* Footer */
+      .site-footer {
+        background: var(--color-neutral-100);
+        padding: 2rem 1.5rem;
+        text-align: center;
+        color: var(--color-neutral-500);
+        font-size: 0.875rem;
+        border-top: 1px solid var(--color-neutral-200);
+      }
+
+      .site-footer p {
+        margin: 0.25rem 0;
+      }
+
+      .site-footer a {
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+
+      .site-footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Print Styles */
+      @media print {
+        body {
+          background: white;
+          font-size: 11pt;
+          line-height: 1.5;
+          color: black;
+        }
+
+        .site-header {
+          background: none !important;
+          color: black;
+          padding: 1rem 0;
+          border-bottom: 2px solid #333;
+        }
+
+        .site-header::before {
+          display: none;
+        }
+
+        .org-badge {
+          background: #eee;
+          color: #333;
+        }
+
+        .report-title {
+          color: black;
+          font-size: 24pt;
+        }
+        .report-subtitle {
+          color: #333;
+        }
+
+        .meta-value {
+          font-size: 12pt;
+        }
+
+        .print-button,
+        .mobile-toc-toggle,
+        .mobile-toc-overlay,
+        .mobile-toc-panel,
+        .toc-wrapper,
+        .commit-toolbar,
+        .report-nav,
+        .search-clear,
+        .toolbar-actions,
+        .module-filters {
+          display: none !important;
+        }
+
+        .main-layout {
+          display: block;
+          padding: 0;
+          max-width: none;
+        }
+
+        .section {
+          box-shadow: none;
+          border: 1px solid #ddd;
+          page-break-inside: avoid;
+          margin-bottom: 1rem;
+        }
+
+        .section-header {
+          background: #f5f5f5;
+          border-bottom: 1px solid #ddd;
+        }
+
+        .section-title {
+          color: #333;
+        }
+        .section-icon {
+          display: none;
+        }
+
+        /* Auto-expand all details for print */
+        details {
+          display: block !important;
+        }
+        details[open] summary ~ * {
+          display: block !important;
+        }
+        details summary {
+          list-style: none;
+          cursor: default;
+        }
+        details summary::-webkit-details-marker {
+          display: none;
+        }
+
+        .commit-item {
+          border: 1px solid #ccc;
+          page-break-inside: avoid;
+        }
+
+        .commit-toggle {
+          display: none;
+        }
+
+        .commit-details {
+          display: block !important;
+          padding-left: 1.25rem;
+          background: #fafafa;
+        }
+
+        .commit-summary {
+          background: white;
+        }
+
+        .highlight-card {
+          border-left-width: 3px;
+          background: #fafafa;
+        }
+
+        .impact-card {
+          background: #fafafa;
+        }
+
+        .site-footer {
+          background: none;
+          border-top: 1px solid #ddd;
+          padding: 1rem 0;
+        }
+
+        a {
+          color: #333;
+          text-decoration: none;
+        }
+        a[href]::after {
+          content: none !important;
+        }
+      }
+
+      @page {
+        margin: 0.75in;
+        size: letter;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-content">
+        <div class="header-top">
+          <span class="org-badge">Rocky Mountain Lions Eye Bank</span>
+          <button class="print-button" onclick="window.print()">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path
+                d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+              ></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print Report
+          </button>
+        </div>
+        <h1 class="report-title">
+          Internal Information Portal — Status Report
+        </h1>
+        <p class="report-subtitle">
+          Development Progress: December 2 – December 10, 2025
+        </p>
+        <div class="report-meta">
+          <div class="meta-item">
+            <span class="meta-label">Time Period</span>
+            <span class="meta-value">8 Days</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Total Commits</span>
+            <span class="meta-value">51</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Contributors</span>
+            <span class="meta-value">1</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Files Modified</span>
+            <span class="meta-value">59</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <aside class="toc-wrapper">
+        <nav class="toc">
+          <h2 class="toc-title">Contents</h2>
+          <ul class="toc-list">
+            <li class="toc-item">
+              <a href="#executive-summary" class="toc-link"
+                >Executive Summary</a
+              >
+            </li>
+            <li class="toc-item">
+              <a href="#key-highlights" class="toc-link">Key Highlights</a>
+            </li>
+            <p class="toc-section-label">Technical Details</p>
+            <li class="toc-item">
+              <a href="#cpr-dashboard" class="toc-link">CPR Dashboard</a>
+            </li>
+            <li class="toc-item">
+              <a href="#backend-api" class="toc-link">Backend API</a>
+            </li>
+            <li class="toc-item">
+              <a href="#ui-components" class="toc-link">UI Components</a>
+            </li>
+            <li class="toc-item">
+              <a href="#api-client" class="toc-link">API Client Package</a>
+            </li>
+            <p class="toc-section-label">Operations</p>
+            <li class="toc-item">
+              <a href="#testing-quality" class="toc-link"
+                >Testing &amp; Quality</a
+              >
+            </li>
+            <li class="toc-item">
+              <a href="#devops" class="toc-link">DevOps &amp; CI/CD</a>
+            </li>
+            <p class="toc-section-label">Analysis</p>
+            <li class="toc-item">
+              <a href="#impact-analysis" class="toc-link">Impact Analysis</a>
+            </li>
+            <li class="toc-item">
+              <a href="#commit-log" class="toc-link">Full Commit Log</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">😋 Manually-Added Note From Neil</h2>
+          </div>
+          <div class="section-body">
+            <div class="executive-summary">
+              <p>
+                Just wanted to manually add something in here before the rest of
+                the main report. I love that the AI creating these reports sees
+                the progress each week and just immediately assumes that it's a
+                team of developers that are working on this :)))
+              </p>
+              <p>
+                Another thing not mentioned in this report that I thought was
+                worth mentioning is that the main infrastructure is now in
+                place. I won't share the url here as this is a site I'm hosting
+                myself that pretty much anybody can access, but I'll send them
+                to you on teams for you to check out when you're on the network.
+              </p>
+            </div>
+          </div>
+        </section>
+        <!-- Executive Summary -->
+        <section id="executive-summary" class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                  ></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </span>
+              Executive Summary
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="executive-summary">
+              <p>
+                This sprint delivered
+                <strong
+                  >substantial advancements in data visualization
+                  capabilities</strong
+                >
+                across the RMLEB Internal Information Portal. The primary focus
+                was enhancing the CPR Dashboard with interactive geographic
+                visualizations and completing full-stack integration for
+                multiple analytical modules.
+              </p>
+
+              <p>
+                The team implemented
+                <strong>choropleth map visualizations</strong> using MapLibre
+                GL, enabling stakeholders to visualize eye tissue distribution
+                globally and domestically at the state level. This represents a
+                significant upgrade in how RMLEB can present geographic insights
+                to Community & Professional Relations teams during hospital
+                presentations.
+              </p>
+
+              <p>
+                Chart components received major enhancements including
+                <strong>dual Y-axis support</strong>,
+                <strong>loading skeleton states</strong>, and
+                <strong>configurable data labels</strong>. These improvements
+                provide cleaner visual presentations and better user feedback
+                during data fetching operations. The Eye Donors Tab now displays
+                referral trends alongside registration and authorization data on
+                separate axes for improved readability.
+              </p>
+
+              <p>
+                Backend services were expanded with
+                <strong
+                  >new endpoints for distribution metrics, institution
+                  analytics, and eye details KPIs</strong
+                >. Each service includes production queries with proper
+                filtering, mock data generators for development, and
+                comprehensive Pydantic schemas for validation.
+              </p>
+
+              <p>
+                Testing infrastructure was optimized with DateRangeFilter test
+                rewrites that significantly reduce execution time, and the
+                backend consolidated its linting toolchain by replacing Black
+                with Ruff for faster, more comprehensive code quality checks.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Key Highlights -->
+        <section id="key-highlights" class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon>
+                </svg>
+              </span>
+              Key Highlights
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="highlights-grid">
+              <div class="highlight-card feature">
+                <span class="highlight-tag">Feature</span>
+                <h3 class="highlight-title">Geographic Map Visualizations</h3>
+                <p class="highlight-description">
+                  Implemented choropleth maps for Distribution and Transplant
+                  Placement tabs showing global tissue distribution and US
+                  state-level shipping data using MapLibre GL.
+                </p>
+              </div>
+
+              <div class="highlight-card feature">
+                <span class="highlight-tag">Feature</span>
+                <h3 class="highlight-title">Dual Y-Axis Chart Support</h3>
+                <p class="highlight-description">
+                  ComposedChart now supports rendering data on secondary
+                  right-side Y-axis, enabling Eye Donors tab to display referral
+                  lines alongside registration/authorization bars.
+                </p>
+              </div>
+
+              <div class="highlight-card feature">
+                <span class="highlight-tag">Feature</span>
+                <h3 class="highlight-title">Loading Skeleton States</h3>
+                <p class="highlight-description">
+                  All chart components (BarChart, LineChart, ComposedChart) now
+                  display animated skeleton UIs during data fetching, improving
+                  perceived performance.
+                </p>
+              </div>
+
+              <div class="highlight-card feature">
+                <span class="highlight-tag">Feature</span>
+                <h3 class="highlight-title">Full-Stack Institution Metrics</h3>
+                <p class="highlight-description">
+                  Complete data pipeline for Institution Eye Donor Comparison
+                  and Percentage charts with backend services, API endpoints,
+                  and frontend hooks.
+                </p>
+              </div>
+
+              <div class="highlight-card improvement">
+                <span class="highlight-tag">Improvement</span>
+                <h3 class="highlight-title">Chart Data Labels &amp; Styling</h3>
+                <p class="highlight-description">
+                  Added configurable data labels, stroke width customization,
+                  Y-axis padding, and grid visibility controls to enhance chart
+                  readability.
+                </p>
+              </div>
+
+              <div class="highlight-card refactor">
+                <span class="highlight-tag">Refactor</span>
+                <h3 class="highlight-title">Linter Consolidation</h3>
+                <p class="highlight-description">
+                  Replaced Black formatter with Ruff for faster formatting and
+                  linting. Consolidated lint command runs ruff format, ruff
+                  check, and mypy in sequence.
+                </p>
+              </div>
+
+              <div class="highlight-card fix">
+                <span class="highlight-tag">Fix</span>
+                <h3 class="highlight-title">Test Optimization</h3>
+                <p class="highlight-description">
+                  DateRangeFilter tests rewritten using React Aria accessibility
+                  patterns with user.paste for faster execution within default
+                  timeouts.
+                </p>
+              </div>
+
+              <div class="highlight-card fix">
+                <span class="highlight-tag">Fix</span>
+                <h3 class="highlight-title">Distribution Query Accuracy</h3>
+                <p class="highlight-description">
+                  Corrected distribution service to use DISTINCT counts, proper
+                  LEFT JOINs, and exclude discarded tissues for accurate
+                  reporting.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CPR Dashboard -->
+        <section id="cpr-dashboard" class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="3" y1="9" x2="21" y2="9"></line>
+                  <line x1="9" y1="21" x2="9" y2="9"></line>
+                </svg>
+              </span>
+              CPR Dashboard
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="feature-group">
+              <h3 class="feature-group-title">Eye Donors Tab Enhancements</h3>
+              <div class="feature-group-content">
+                <p>
+                  The Eye Donors Tab received significant visualization
+                  improvements to better present referral, registration, and
+                  authorization trends. The chart now uses a
+                  <strong>dual-axis layout</strong> where referral data displays
+                  on the right Y-axis, preventing scale compression issues when
+                  comparing referral counts against the larger bar data.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    Moved referral line to secondary right Y-axis with 'natural'
+                    curve interpolation
+                  </li>
+                  <li>
+                    Increased referral line stroke width to 3px for visual
+                    emphasis
+                  </li>
+                  <li>
+                    Added data labels to line points with configurable
+                    positioning and offset
+                  </li>
+                  <li>
+                    Configured separate Y-axis padding (80px top for left axis)
+                    for breathing room
+                  </li>
+                  <li>Hidden grid lines for cleaner visual presentation</li>
+                  <li>
+                    Integrated loading skeleton state during data fetching
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">
+                Distribution Tab — Global Map Visualization
+              </h3>
+              <div class="feature-group-content">
+                <p>
+                  A new interactive choropleth map was added to visualize eye
+                  tissue distribution globally. The map uses
+                  <strong>MapLibre GL</strong> with dynamic layer styling based
+                  on shipment counts per country, providing stakeholders with
+                  geographic context for international reach.
+                </p>
+                <ul class="feature-list">
+                  <li>Integrated MapLibre GL with react-map-gl wrapper</li>
+                  <li>
+                    Added horizontal bar chart showing distribution by country
+                    (sorted by shipment count)
+                  </li>
+                  <li>
+                    Implemented useDistributionData hook for parallel KPI
+                    fetching
+                  </li>
+                  <li>
+                    Displays Eye Tissue Shipment, Domestic Reach, and Global
+                    Reach metrics
+                  </li>
+                  <li>Refactored layout to CSS Grid for improved structure</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">
+                Transplant Placement Tab — US State Choropleth
+              </h3>
+              <div class="feature-group-content">
+                <p>
+                  The Transplant Placement tab now includes a
+                  <strong>US state-level choropleth map</strong> showing
+                  domestic tissue distribution. This allows CPR teams to quickly
+                  identify geographic patterns in transplant placements.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    State-level visualization with color intensity based on
+                    shipment counts
+                  </li>
+                  <li>
+                    Bar chart limited to top 8 states for focused insights
+                  </li>
+                  <li>
+                    Added Domestic Reach and International Reach KPI cards
+                  </li>
+                  <li>Standardized KPI card heights (h-17) for alignment</li>
+                  <li>Centralized type exports in src/types/index.ts</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">
+                Institutions Tab — Full-Stack Integration
+              </h3>
+              <div class="feature-group-content">
+                <p>
+                  Completed the data pipeline from database to visualization for
+                  institution-level donor metrics. The tab now displays
+                  <strong>dynamic data</strong> comparing eye donor referrals,
+                  authorizations, and registrations by institution type.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    Created useInstitutionData hook for data fetching and state
+                    management
+                  </li>
+                  <li>
+                    Connected to getInstitutionChartEyeDonors and
+                    getInstitutionChartPercentages endpoints
+                  </li>
+                  <li>
+                    Replaced hardcoded static data with API-driven content
+                  </li>
+                  <li>
+                    Added isMocked visualization support to dashboard cards
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">
+                Eye Details Tab — KPI Integration
+              </h3>
+              <div class="feature-group-content">
+                <p>
+                  The Eye Details tab now fetches and displays
+                  <strong>live KPI metrics</strong> for Recovered, Discarded,
+                  and Pending tissues with proper loading and mock state
+                  handling.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    Created useEyeDetailsData hook fetching KPIs in parallel
+                  </li>
+                  <li>Implemented data memoization for KPI card props</li>
+                  <li>Mapped API responses to internal DetailsData type</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Backend API -->
+        <section id="backend-api" class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+              </span>
+              Backend API
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="feature-group">
+              <h3 class="feature-group-title">
+                Distribution Service &amp; Endpoints
+              </h3>
+              <div class="feature-group-content">
+                <p>
+                  New service layer and API endpoints for country-wise
+                  distribution metrics. The query includes refined logic for
+                  accurate counts.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    Added
+                    <code>POST /api/v1/cpr/chart/distribution</code> endpoint
+                  </li>
+                  <li>
+                    Implemented get_distribution_data with DISTINCT
+                    EyeTissueRecoveredId counting
+                  </li>
+                  <li>
+                    Uses LEFT JOIN (isouter=True) for patient, referral,
+                    organization, country tables
+                  </li>
+                  <li>
+                    Excludes discarded tissues (Outcome != 8) and undefined
+                    outcomes
+                  </li>
+                  <li>Retrieves full country name instead of country code</li>
+                  <li>Created CountryDistributionData Pydantic schema</li>
+                  <li>Added mock data generator for development</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">State Distribution Endpoint</h3>
+              <div class="feature-group-content">
+                <p>
+                  Geospatial endpoint for US state-level shipment aggregation to
+                  power the Transplant Placement map.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    Added
+                    <code>POST /api/v1/cpr/chart/state-shipping</code> endpoint
+                  </li>
+                  <li>Implemented get_state_distribution_data service</li>
+                  <li>
+                    Updated organization table schema to include StateCode
+                  </li>
+                  <li>Created StateDistributionData Pydantic model</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">Institution Service</h3>
+              <div class="feature-group-content">
+                <p>
+                  Backend service for aggregating donor metrics by institution
+                  type with comprehensive endpoints.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    Created institution_service with SQLAlchemy aggregation
+                    logic
+                  </li>
+                  <li>
+                    Added institutions router with raw comparison and percentage
+                    endpoints
+                  </li>
+                  <li>
+                    Implemented RawData and PercentageData Pydantic schemas
+                  </li>
+                  <li>
+                    Fixed attribute access and object instantiation issues
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">Eye Details Service</h3>
+              <div class="feature-group-content">
+                <p>
+                  Service layer for Recovered, Discarded, and Pending tissue
+                  KPIs with dedicated endpoints.
+                </p>
+                <ul class="feature-list">
+                  <li>Added eye_details router with three KPI endpoints</li>
+                  <li>Implemented eye_details_service with query logic</li>
+                  <li>Created DetailsKPI schema and mock data generators</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">
+                Transplant Service — Domestic &amp; International Reach
+              </h3>
+              <div class="feature-group-content">
+                <p>
+                  New KPI calculations for domestic and international shipping
+                  reach metrics.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    Added <code>POST /kpi/domestic-reach</code> and
+                    <code>/kpi/international-reach</code> endpoints
+                  </li>
+                  <li>
+                    Added Shipment and ShipmentItem table definitions to schema
+                  </li>
+                  <li>
+                    Implemented service logic based on destination country (US
+                    vs Non-US)
+                  </li>
+                  <li>
+                    Fixed typo: EyeTissueRacoveredId → EyeTissueRecoveredId
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">Database Schema Updates</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>Added Country SQLAlchemy table definition</li>
+                  <li>Added CountryCode to Organization table</li>
+                  <li>Added Shipment and ShipmentItem tables</li>
+                  <li>
+                    Updated OrganizationCategories CTE to include CountryCode
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- UI Components -->
+        <section id="ui-components" class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </span>
+              UI Components Package
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="feature-group">
+              <h3 class="feature-group-title">ComposedChart Enhancements</h3>
+              <div class="feature-group-content">
+                <p>
+                  Major feature additions to the ComposedChart component for
+                  complex multi-series visualizations.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    <strong>Dual Y-Axis Support:</strong> Optional yAxisId
+                    ('left' | 'right') for bars, lines, and areas with
+                    auto-detection and conditional right axis rendering
+                  </li>
+                  <li>
+                    <strong>Data Labels:</strong> Integrated LabelList with
+                    configurable labelPosition and labelOffset
+                  </li>
+                  <li>
+                    <strong>Stroke Customization:</strong> strokeWidth property
+                    per line (default: 2)
+                  </li>
+                  <li>
+                    <strong>Y-Axis Padding:</strong> Separate top/bottom padding
+                    for left and right axes; defaults to { top: 20, bottom: 0 }
+                  </li>
+                  <li>
+                    <strong>Loading Skeleton:</strong> Custom skeleton UI with
+                    pulse animations representing bars, lines, axes, and legend
+                  </li>
+                  <li>
+                    <strong>Grid Alignment:</strong> Grid aligned to primary
+                    left axis
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">
+                BarChart &amp; LineChart Loading States
+              </h3>
+              <div class="feature-group-content">
+                <p>
+                  Both chart components now require an
+                  <code>isLoading</code> prop and display skeleton UIs during
+                  data fetching.
+                </p>
+                <ul class="feature-list">
+                  <li>Pulse animation skeletons matching chart structure</li>
+                  <li>LineChart height prop now accepts string percentages</li>
+                  <li>Default left margin adjusted to 0</li>
+                  <li>XAxis padding added to prevent label clipping</li>
+                  <li>Integrated custom ChartTooltip in LineChart</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">RegionHighlightMap Component</h3>
+              <div class="feature-group-content">
+                <p>
+                  New reusable component encapsulating MapLibre GL logic for
+                  choropleth-style geographic visualizations.
+                </p>
+                <ul class="feature-list">
+                  <li>Added maplibre-gl dependency to ui-components package</li>
+                  <li>Exported for consumption in host applications</li>
+                  <li>
+                    Replaced inline MapLibre implementations in dashboard tabs
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">KPICard &amp; Type Updates</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>
+                    Added optional classNames prop for custom height/styling
+                  </li>
+                  <li>
+                    Applied classNames to both card container and loading
+                    skeleton
+                  </li>
+                  <li>
+                    Fixed skeleton to conditionally render change indicator
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">DateRangeFilter Improvements</h3>
+              <div class="feature-group-content">
+                <p>
+                  Styling and accessibility fixes for the date range filter
+                  component.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    Fixed Tailwind CSS data attribute selectors (data-[state] →
+                    data-state)
+                  </li>
+                  <li>Removed redundant header text</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- API Client Package -->
+        <section id="api-client" class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                  ></path>
+                </svg>
+              </span>
+              API Client Package
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="feature-group">
+              <h3 class="feature-group-title">New CPRClient Methods</h3>
+              <div class="feature-group-content">
+                <p>
+                  Extended the CPRClient with methods for all new backend
+                  endpoints.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    <code>getDistChartDistribution</code> — Fetch country
+                    distribution chart data
+                  </li>
+                  <li>
+                    <code>getTransplantChartStateShipping</code> — Fetch US
+                    state shipping data
+                  </li>
+                  <li>
+                    <code>getInstitutionChartEyeDonors</code> — Fetch
+                    institution comparison data
+                  </li>
+                  <li>
+                    <code>getInstitutionChartPercentages</code> — Fetch
+                    institution percentage data
+                  </li>
+                  <li>
+                    <code>getEyeDetailsRecovered</code>,
+                    <code>getEyeDetailsDiscarded</code>,
+                    <code>getEyeDetailsPending</code> — KPI endpoints
+                  </li>
+                  <li>
+                    <code>getTransplantDomestic</code>,
+                    <code>getTransplantInternational</code> — Reach KPIs
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">Configuration Updates</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>
+                    Updated default API baseURL from localhost to internal IP
+                    192.168.10.247 for local development
+                  </li>
+                  <li>
+                    Added corresponding endpoints to CPR_ENDPOINTS configuration
+                  </li>
+                  <li>
+                    Removed unused API client methods and associated test cases
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Testing & Quality -->
+        <section id="testing-quality" class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 11 12 14 22 4"></polyline>
+                  <path
+                    d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                  ></path>
+                </svg>
+              </span>
+              Testing &amp; Quality
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="feature-group">
+              <h3 class="feature-group-title">
+                DateRangeFilter Test Optimization
+              </h3>
+              <div class="feature-group-content">
+                <p>
+                  Major rewrite of DateRangeFilter tests to align with React
+                  Aria accessibility patterns and significantly reduce execution
+                  time.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    Replaced standard input interactions with spinbutton
+                    manipulation helpers
+                  </li>
+                  <li>
+                    Updated fillDate helper to use
+                    <code>user.paste</code> instead of
+                    <code>user.keyboard</code>
+                  </li>
+                  <li>
+                    Enabled <code>skipHover</code> in userEvent setup to reduce
+                    event loop overhead
+                  </li>
+                  <li>
+                    Tests now pass within default timeout duration (reverted
+                    timeout increase)
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">Backend Test Fixes</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>Fixed attribute access in HealthEndpoint</li>
+                  <li>Fixed object instantiation in InstitutionService</li>
+                  <li>
+                    Temporarily disabled DatabaseManager, HealthEndpoint, and
+                    Donor composite tests pending rewrites
+                  </li>
+                  <li>
+                    Updated test helpers for MonthlyData and YearlyData schemas
+                    (ref, auth, reg fields)
+                  </li>
+                  <li>Removed obsolete filter tests</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">Unit Test Updates</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>BarChart tests updated for new isLoading prop</li>
+                  <li>LineChart tests updated for new isLoading prop</li>
+                  <li>ComposedChart tests updated for new isLoading prop</li>
+                  <li>CPRClient test cases updated for renamed methods</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- DevOps & CI/CD -->
+        <section id="devops" class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                  ></path>
+                </svg>
+              </span>
+              DevOps &amp; CI/CD
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="feature-group">
+              <h3 class="feature-group-title">Linter Consolidation</h3>
+              <div class="feature-group-content">
+                <p>
+                  Replaced Black formatter with Ruff for faster, more
+                  comprehensive code quality tooling.
+                </p>
+                <ul class="feature-list">
+                  <li>
+                    Removed <code>black</code> dependency from pyproject.toml
+                  </li>
+                  <li>
+                    Added consolidated <code>lint</code> script to package.json
+                  </li>
+                  <li>
+                    Lint command executes: ruff format → ruff check → mypy type
+                    checking
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">Dependency Management</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>
+                    Multiple dependency bump commits for security and
+                    compatibility
+                  </li>
+                  <li>
+                    Added react-map-gl and maplibre-gl for geographic
+                    visualizations
+                  </li>
+                  <li>Added maplibre-gl to ui-components package</li>
+                  <li>
+                    pnpm-lock.yaml updates reflecting 4000+ line changes for new
+                    dependencies
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-group">
+              <h3 class="feature-group-title">Configuration Updates</h3>
+              <div class="feature-group-content">
+                <ul class="feature-list">
+                  <li>Added codebook.toml configuration</li>
+                  <li>Updated vite.config.ts for cpr-dashboard</li>
+                  <li>
+                    Updated vitest.config.ts timeout settings (reverted after
+                    test optimization)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Impact Analysis -->
+        <section id="impact-analysis" class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+              </span>
+              Impact Analysis
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="impact-grid">
+              <div class="impact-card">
+                <h3 class="impact-title">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                  CPR Team
+                  <span class="impact-badge">High</span>
+                </h3>
+                <ul class="impact-list">
+                  <li>
+                    <strong>Geographic Insights:</strong> New choropleth maps
+                    for global and US state-level distribution visualization
+                  </li>
+                  <li>
+                    <strong>Enhanced Eye Donors Charts:</strong> Dual-axis
+                    layout separates referral trends from registration data
+                  </li>
+                  <li>
+                    <strong>Institution Comparisons:</strong> Live data
+                    replacing static placeholders for institution metrics
+                  </li>
+                  <li>
+                    <strong>Eye Details KPIs:</strong> Real-time Recovered,
+                    Discarded, and Pending tissue metrics
+                  </li>
+                  <li>
+                    <strong>Improved UX:</strong> Loading skeletons provide
+                    feedback during data fetching
+                  </li>
+                </ul>
+              </div>
+
+              <div class="impact-card">
+                <h3 class="impact-title">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect
+                      x="2"
+                      y="3"
+                      width="20"
+                      height="14"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                  DRC Team
+                  <span class="impact-badge moderate">Moderate</span>
+                </h3>
+                <ul class="impact-list">
+                  <li>
+                    <strong>Shared Components:</strong> All chart loading states
+                    and enhancements available for DRC Dashboard
+                  </li>
+                  <li>
+                    <strong>RegionHighlightMap:</strong> Reusable component
+                    ready for DRC geographic visualizations
+                  </li>
+                  <li>
+                    <strong>KPICard Styling:</strong> Flexible height/styling
+                    options for custom layouts
+                  </li>
+                </ul>
+              </div>
+
+              <div class="impact-card">
+                <h3 class="impact-title">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                  Development Team
+                  <span class="impact-badge">High</span>
+                </h3>
+                <ul class="impact-list">
+                  <li>
+                    <strong>Faster Linting:</strong> Ruff replaces Black for
+                    quicker format/lint cycles
+                  </li>
+                  <li>
+                    <strong>Test Performance:</strong> DateRangeFilter tests
+                    optimized to run within default timeouts
+                  </li>
+                  <li>
+                    <strong>Reusable Components:</strong> RegionHighlightMap
+                    encapsulates MapLibre complexity
+                  </li>
+                  <li>
+                    <strong>API Consistency:</strong> All new endpoints follow
+                    established patterns with mock support
+                  </li>
+                  <li>
+                    <strong>Type Safety:</strong> Comprehensive Pydantic schemas
+                    for all new data structures
+                  </li>
+                </ul>
+              </div>
+
+              <div class="impact-card">
+                <h3 class="impact-title">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                    ></path>
+                  </svg>
+                  Data Integrity
+                  <span class="impact-badge">High</span>
+                </h3>
+                <ul class="impact-list">
+                  <li>
+                    <strong>Distribution Accuracy:</strong> DISTINCT counts
+                    prevent double-counting tissues
+                  </li>
+                  <li>
+                    <strong>Complete Data:</strong> LEFT JOINs ensure shipments
+                    counted even with incomplete metadata
+                  </li>
+                  <li>
+                    <strong>Filtered Results:</strong> Excludes discarded
+                    tissues and undefined outcomes
+                  </li>
+                  <li>
+                    <strong>Schema Typo Fix:</strong> Corrected
+                    EyeTissueRecoveredId column name
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Full Commit Log -->
+        <section id="commit-log" class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="section-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <line x1="1.05" y1="12" x2="7" y2="12"></line>
+                  <line x1="17.01" y1="12" x2="22.96" y2="12"></line>
+                </svg>
+              </span>
+              Full Commit Log
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="commit-toolbar">
+              <div class="commit-toolbar-row">
+                <div class="commit-search-wrapper">
+                  <svg
+                    class="search-icon"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <input
+                    type="text"
+                    id="commitSearch"
+                    class="search-input"
+                    placeholder="Search commits..."
+                  />
+                  <button id="searchClear" class="search-clear">×</button>
+                  <span id="searchCount" class="search-results-count"></span>
+                </div>
+                <div class="toolbar-actions">
+                  <button id="expandAll" class="toolbar-btn">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="7 13 12 18 17 13"></polyline>
+                      <polyline points="7 6 12 11 17 6"></polyline>
+                    </svg>
+                    Expand All
+                  </button>
+                  <button id="collapseAll" class="toolbar-btn">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="17 11 12 6 7 11"></polyline>
+                      <polyline points="17 18 12 13 7 18"></polyline>
+                    </svg>
+                    Collapse All
+                  </button>
+                </div>
+              </div>
+              <div class="commit-toolbar-row">
+                <span class="module-filter-label">Filter by scope:</span>
+                <div class="module-filters">
+                  <button
+                    class="module-btn active"
+                    data-scope="all"
+                    onclick="filterByScope('all')"
+                  >
+                    All
+                  </button>
+                  <button
+                    class="module-btn"
+                    data-scope="frontend"
+                    onclick="filterByScope('frontend')"
+                  >
+                    Frontend
+                  </button>
+                  <button
+                    class="module-btn"
+                    data-scope="backend"
+                    onclick="filterByScope('backend')"
+                  >
+                    Backend
+                  </button>
+                  <button
+                    class="module-btn"
+                    data-scope="ui"
+                    onclick="filterByScope('ui')"
+                  >
+                    UI Components
+                  </button>
+                  <button
+                    class="module-btn"
+                    data-scope="test"
+                    onclick="filterByScope('test')"
+                  >
+                    Testing
+                  </button>
+                  <button
+                    class="module-btn"
+                    data-scope="chore"
+                    onclick="filterByScope('chore')"
+                  >
+                    Chore
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Commit 1 -->
+            <details
+              class="commit-item"
+              data-search="062386c feat dashboard improve chart readability eyedonorstab grid lines label offset krishna kumar"
+              data-scope="frontend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (dashboard): Improve chart readability in EyeDonorsTab
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">062386c</span>
+                    <span class="commit-scope scope-frontend">frontend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>10 minutes ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Hides the grid lines and adjusts the label offset for the line
+                  charts in the Eye Donors Totals section. This provides a
+                  cleaner visual presentation by removing distracting grid lines
+                  and ensuring data labels are properly positioned.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+3</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 2 -->
+            <details
+              class="commit-item"
+              data-search="92b469a feat ui-components charts line stroke strokewidth data label labellist composedchart linechart krishna kumar"
+              data-scope="ui"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (ui-components\charts): Add line stroke customization
+                    and data label support
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">92b469a</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>22 minutes ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Enhances line configuration in both ComposedChart and
+                  LineChart components: - Allows strokeWidth to be specified per
+                  line. - Introduces labelPosition and labelOffset properties to
+                  control data labels. - Integrates LabelList from Recharts to
+                  display data labels.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+9</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    packages/ui-components/src/components/Chart/ComposedChart.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+21</span>
+                      <span class="stat-del">-3</span></span
+                    >
+                    packages/ui-components/src/components/Chart/LineChart.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 3 -->
+            <details
+              class="commit-item"
+              data-search="2f4f60d feat ui-components charts yaxispadding left right axis composedchart eyedonorstab krishna kumar"
+              data-scope="ui"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (ui-components\charts): Allow separate Y-axis padding
+                    for left and right axes
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">2f4f60d</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>47 minutes ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  The ComposedChart component's yAxisPadding prop is updated to
+                  allow separate top and bottom padding for the left and right
+                  Y-axes. Refactors the prop to: { left?: AxisPadding; right?:
+                  AxisPadding }. EyeDonorsTab updated to apply 80px top padding
+                  only to the left Y-axis.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+2</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+20</span>
+                      <span class="stat-del">-5</span></span
+                    >
+                    packages/ui-components/src/components/Chart/ComposedChart.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 4 -->
+            <details
+              class="commit-item"
+              data-search="efddc2c feat ui-components chart yaxispadding composedchart breathing room krishna kumar"
+              data-scope="ui"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (ui-components\Chart): Add configurable Y-axis padding
+                    to ComposedChart
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">efddc2c</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>68 minutes ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Introduces an optional yAxisPadding prop to
+                  ComposedChartProps. Creates 'breathing room' above the tallest
+                  bar or point. Default padding: { top: 20, bottom: 0 }.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+7</span>
+                      <span class="stat-del">-2</span></span
+                    >
+                    packages/ui-components/src/components/Chart/ComposedChart.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 5 -->
+            <details
+              class="commit-item"
+              data-search="5ed9ff9 feat ui-components data labels lines composedchart labellist krishna kumar"
+              data-scope="ui"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (ui-components): Add support for data labels on lines
+                    in ComposedChart
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">5ed9ff9</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>2 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Adds the LabelList component inside the Line component for
+                  each line series in the ComposedChart. Allows data points on
+                  line charts to be labeled directly with their values.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+4</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    packages/ui-components/src/components/Chart/ComposedChart.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 6 -->
+            <details
+              class="commit-item"
+              data-search="fd26ae4 feat charts strokewidth composedchart line eyedonorstab reff referrer krishna kumar"
+              data-scope="ui"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (charts): Allow customizing line strokeWidth in
+                    ComposedChart
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">fd26ae4</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>2 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Introduces strokeWidth property to lines configuration.
+                  Defaults to 2 if not provided. EyeDonorsTab uses this to
+                  increase 'reff' line thickness from 2 to 3 for better visual
+                  emphasis.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+20</span>
+                      <span class="stat-del">-2</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+3</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    packages/ui-components/src/components/Chart/ComposedChart.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 7 -->
+            <details
+              class="commit-item"
+              data-search="ab53cf3 feat cpr-dashboard dual-axis eye donors chart yaxisid right left natural curve krishna kumar"
+              data-scope="frontend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (cpr-dashboard): Use dual-axis layout for Eye Donors
+                    chart
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">ab53cf3</span>
+                    <span class="commit-scope scope-frontend">frontend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>2 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Moves the referral data line to the secondary Y-axis to
+                  improve readability against the registration and authorization
+                  bars. Sets yAxisId: 'right' for the 'reff' line, binds bars to
+                  'left' axis, updates referral line curve to 'natural'.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+6</span>
+                      <span class="stat-del">-6</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 8 -->
+            <details
+              class="commit-item"
+              data-search="defcc89 feat ui-components dual y-axis composedchart right left yaxisid bar line area krishna kumar"
+              data-scope="ui"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (ui-components): Add dual Y-axis support to
+                    ComposedChart
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">defcc89</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>2 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Updates the ComposedChart component to support rendering data
+                  on a secondary right-side Y-axis. Extends Bar, Line, and Area
+                  props to accept yAxisId ('left' | 'right'). Auto-detects right
+                  axis need and conditionally renders it.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+31</span>
+                      <span class="stat-del">-6</span></span
+                    >
+                    packages/ui-components/src/components/Chart/ComposedChart.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 9 -->
+            <details
+              class="commit-item"
+              data-search="a728be4 chore deployment dependency bump pnpm-lock krishna kumar"
+              data-scope="chore"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    chore (deployment): Dependency Bump
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">a728be4</span>
+                    <span class="commit-scope scope-chore">chore</span>
+                    <span>Krishna Kumar</span>
+                    <span>3 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    pnpm-lock.yaml
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 10 -->
+            <details
+              class="commit-item"
+              data-search="80cc3c2 feat ui-components charttooltip linechart recharts tooltip krishna kumar"
+              data-scope="ui"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (ui-components): Integrate custom ChartTooltip in
+                    LineChart
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">80cc3c2</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>3 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Updates the LineChart component to use the custom ChartTooltip
+                  instead of the default Recharts Tooltip. Ensures consistent
+                  styling and data presentation across application charts.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+3</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    packages/ui-components/src/components/Chart/LineChart.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 11 -->
+            <details
+              class="commit-item"
+              data-search="c10349d test ui-components daterangefilter optimize user.paste skiphover timeout krishna kumar"
+              data-scope="test"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    test (ui-components): Optimize DateRangeFilter tests and
+                    revert timeout
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">c10349d</span>
+                    <span class="commit-scope scope-test">test</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>4 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Updates fillDate helper to use user.paste instead of
+                  user.keyboard and enables skipHover in userEvent setup. These
+                  changes significantly reduce event loop overhead and
+                  re-renders for React Aria components, allowing tests to pass
+                  within default timeout.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+18</span>
+                      <span class="stat-del">-18</span></span
+                    >
+                    packages/ui-components/src/components/FilterDropdown/DateRangeFilter.test.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    packages/ui-components/vitest.config.ts
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 12 -->
+            <details
+              class="commit-item"
+              data-search="4b66c8b refactor ui-components daterangefilter tests react aria spinbutton tailwind data-state krishna kumar"
+              data-scope="test"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    refactor (ui-components): Rewrite DateRangeFilter tests and
+                    fix styling selectors
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">4b66c8b</span>
+                    <span class="commit-scope scope-test">test</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>5 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Rewrites DateRangeFilter.test.tsx to align with React Aria
+                  accessibility patterns using spinbutton manipulation helpers.
+                  Fixes Tailwind CSS data attribute selectors (data-[state] →
+                  data-state). Removes redundant header text. Increases test
+                  timeout in vitest.config.ts.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+165</span>
+                      <span class="stat-del">-297</span></span
+                    >
+                    packages/ui-components/src/components/FilterDropdown/DateRangeFilter.test.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+6</span>
+                      <span class="stat-del">-6</span></span
+                    >
+                    packages/ui-components/src/components/FilterDropdown/DateRangeFilter.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    packages/ui-components/vitest.config.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+6</span>
+                      <span class="stat-del">-7</span></span
+                    >
+                    pnpm-lock.yaml
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 13 -->
+            <details
+              class="commit-item"
+              data-search="e775fe2 chore backend black ruff lint mypy consolidate krishna kumar"
+              data-scope="backend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    chore (backend): Replace Black with Ruff and consolidate
+                    lint commands
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">e775fe2</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>5 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Removes black dependency from pyproject.toml in favor of ruff.
+                  Adds consolidated lint script to package.json that executes
+                  ruff formatting, ruff linting, and mypy type checking in
+                  sequence.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+2</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    backend/package.json
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+0</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    backend/pyproject.toml
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 14 -->
+            <details
+              class="commit-item"
+              data-search="00d7a71 wip work in progress eyedonorstab daterangefilter barchart codebook krishna kumar"
+              data-scope="frontend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">wip</p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">00d7a71</span>
+                    <span class="commit-scope scope-frontend">frontend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>9 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+44</span>
+                      <span class="stat-del">-44</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+2</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/TransplantPlacementTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+7</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    codebook.toml
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+2</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    package.json
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+7</span>
+                      <span class="stat-del">-2</span></span
+                    >
+                    packages/ui-components/src/components/Chart/BarChart.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+153</span>
+                      <span class="stat-del">-271</span></span
+                    >
+                    packages/ui-components/src/components/FilterDropdown/DateRangeFilter.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+4196</span>
+                      <span class="stat-del">-2436</span></span
+                    >
+                    pnpm-lock.yaml
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 15 -->
+            <details
+              class="commit-item"
+              data-search="24191bc fix backend logic errors healthendpoint institutionservice tests disabled krishna kumar"
+              data-scope="backend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    fix (backend): Resolve logic errors and disable broken tests
+                    to unblock pipeline
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">24191bc</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>25 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Fixes attribute access in HealthEndpoint and object
+                  instantiation in InstitutionService. Temporarily comments out
+                  DatabaseManager, HealthEndpoint, and Donor composite tests to
+                  unblock pipeline. Updates test helpers for MonthlyData and
+                  YearlyData schemas.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    backend/app/api/v1/endpoints/health.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+9</span>
+                      <span class="stat-del">-9</span></span
+                    >
+                    backend/app/services/cpr/institution_service.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+99</span>
+                      <span class="stat-del">-99</span></span
+                    >
+                    backend/tests/api/v1/cpr/test_donors.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+26</span>
+                      <span class="stat-del">-27</span></span
+                    >
+                    backend/tests/api/v1/test_health.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+235</span>
+                      <span class="stat-del">-235</span></span
+                    >
+                    backend/tests/test_database.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+4</span>
+                      <span class="stat-del">-55</span></span
+                    >
+                    backend/tests/test_schemas.py
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 16-20 (Dependency Bumps) -->
+            <details
+              class="commit-item"
+              data-search="80e16e1 chore deployment dependency bump pnpm-lock krishna kumar"
+              data-scope="chore"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    chore (deployment): Dependency Bump
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">80e16e1</span>
+                    <span class="commit-scope scope-chore">chore</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>26 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    package.json
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+29</span>
+                      <span class="stat-del">-29</span></span
+                    >
+                    pnpm-lock.yaml
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 21 -->
+            <details
+              class="commit-item"
+              data-search="54dd6f8 fix cpr-dashboard loading state charts showgrid composedchart barchart krishna kumar"
+              data-scope="frontend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    fix (cpr-dashboard): Pass loading state to charts and hide
+                    unnecessary grids
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">54dd6f8</span>
+                    <span class="commit-scope scope-frontend">frontend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>27 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Passes the loading state to ComposedChart components in
+                  EyeDonorsTab to display loading skeleton while fetching data.
+                  Sets showGrid={false} on BarChart instances for visual
+                  clarity.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+4</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 22 -->
+            <details
+              class="commit-item"
+              data-search="01059eb feat ui-components loading skeleton composedchart isloading pulse animation krishna kumar"
+              data-scope="ui"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (ui-components): Add loading state skeleton to
+                    ComposedChart
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">01059eb</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>27 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Introduces isLoading prop to ComposedChart. When true, renders
+                  custom skeleton UI with pulse animations representing bars,
+                  lines, axes, and legend. Updates unit tests for new required
+                  prop.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+13</span>
+                      <span class="stat-del">-3</span></span
+                    >
+                    packages/ui-components/src/components/Chart/ComposedChart.test.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+101</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    packages/ui-components/src/components/Chart/ComposedChart.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 23 -->
+            <details
+              class="commit-item"
+              data-search="8d75d54 refactor cpr-dashboard regionhighlightmap distributiontab transplantplacementtab maplibre krishna kumar"
+              data-scope="frontend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    refactor (cpr-dashboard): Implement RegionHighlightMap in
+                    dashboard tabs
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">8d75d54</span>
+                    <span class="commit-scope scope-frontend">frontend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>29 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Replaces inline MapLibre implementations in DistributionTab
+                  and TransplantPlacementTab with shared RegionHighlightMap
+                  component. Removes redundant styles and map configuration.
+                  Centralizes type exports.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+19</span>
+                      <span class="stat-del">-58</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/DistributionTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+15</span>
+                      <span class="stat-del">-55</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/TransplantPlacementTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+2</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    apps/cpr-dashboard/src/types/index.ts
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 24 -->
+            <details
+              class="commit-item"
+              data-search="075bc6a feat ui-components regionhighlightmap maplibre-gl choropleth krishna kumar"
+              data-scope="ui"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (ui-components): Add RegionHighlightMap component
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">075bc6a</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>29 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Introduces RegionHighlightMap to encapsulate MapLibre logic
+                  for choropleth-style visualizations. Adds maplibre-gl
+                  dependency to ui-components package. Exports component for
+                  consumption.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    packages/ui-components/package.json
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+76</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    packages/ui-components/src/components/Chart/RegionHighlightMap.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    packages/ui-components/src/components/Chart/index.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+3</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    pnpm-lock.yaml
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 25 -->
+            <details
+              class="commit-item"
+              data-search="a18dc08 refactor cpr-dashboard kpi heights h-17 state distribution barchart transplantplacementtab krishna kumar"
+              data-scope="frontend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    refactor (cpr-dashboard): Standardize KPI heights and update
+                    State Distribution chart
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">a18dc08</span>
+                    <span class="commit-scope scope-frontend">frontend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>31 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Implements classNames prop to set fixed h-17 height for
+                  KPICard components. Updates State Distribution BarChart:
+                  centers title, enables showAllxKeys, disables grid, limits to
+                  top 8 states, corrects data key from 'tissue' to 'shipments'.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+14</span>
+                      <span class="stat-del">-5</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/TransplantPlacementTab.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 26 -->
+            <details
+              class="commit-item"
+              data-search="02e7f4b feat ui-components types classnames kpicard custom styling height krishna kumar"
+              data-scope="ui"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (ui-components, types): Add classNames prop to KPICard
+                    component
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">02e7f4b</span>
+                    <span class="commit-scope scope-ui">ui-components</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>31 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Introduces optional classNames prop to KPICard for custom
+                  styling. Applied to both main container and loading skeleton
+                  for consistent sizing.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+6</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    packages/types/src/ui/component.types.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+4</span>
+                      <span class="stat-del">-2</span></span
+                    >
+                    packages/ui-components/src/components/Chart/KPICard.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 27 -->
+            <details
+              class="commit-item"
+              data-search="7364b8a feat cpr-dashboard backend skeleton loading states barchart linechart isloading krishna kumar"
+              data-scope="frontend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (cpr-dashboard, backend\cpr): Implement skeleton
+                    loading states for chart components
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">7364b8a</span>
+                    <span class="commit-scope scope-frontend">frontend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>31 hours ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Updates BarChart and LineChart in ui-components to accept
+                  mandatory isLoading prop. Implements pulse animation skeleton
+                  UI. Updates height prop in LineChart to accept string
+                  percentages. Integrates loading states into all cpr-dashboard
+                  tabs.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/DistributionTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+2</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/EyeDonorsTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+3</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/InstitutionsTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+7</span>
+                      <span class="stat-del">-2</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/TransplantPlacementTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+29</span>
+                      <span class="stat-del">-5</span></span
+                    >
+                    packages/ui-components/src/components/Chart/BarChart.test.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+103</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    packages/ui-components/src/components/Chart/BarChart.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    packages/ui-components/src/components/Chart/KPICard.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+15</span>
+                      <span class="stat-del">-2</span></span
+                    >
+                    packages/ui-components/src/components/Chart/LineChart.test.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+92</span>
+                      <span class="stat-del">-2</span></span
+                    >
+                    packages/ui-components/src/components/Chart/LineChart.tsx
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 28 -->
+            <details
+              class="commit-item"
+              data-search="bd77d95 feat dashboard map visualizations react-map-gl maplibre choropleth distribution transplant krishna kumar"
+              data-scope="frontend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (dashboard): Implement map visualizations for
+                    distribution tabs
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">bd77d95</span>
+                    <span class="commit-scope scope-frontend">frontend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>2 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Adds react-map-gl and maplibre-gl dependencies. Updates
+                  DistributionTab to render global choropleth map. Updates
+                  TransplantPlacementTab to render US State choropleth map.
+                  Integrates getTransplantChartStateShipping endpoint via
+                  useTransplantData hook.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    apps/cpr-dashboard/package.json
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+21</span>
+                      <span class="stat-del">-7</span></span
+                    >
+                    apps/cpr-dashboard/src/hooks/useTransplantData.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+64</span>
+                      <span class="stat-del">-7</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/DistributionTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+54</span>
+                      <span class="stat-del">-33</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/TransplantPlacementTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+7</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    apps/cpr-dashboard/src/types/cpr.types.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+2</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    package.json
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+6</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    packages/api-client/src/clients/cprClient.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    packages/api-client/src/config/endpoints.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+543</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    pnpm-lock.yaml
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 29 -->
+            <details
+              class="commit-item"
+              data-search="55e703c feat backend state distribution endpoint statecode organization statedistributiondata mock krishna kumar"
+              data-scope="backend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (backend): Add state distribution endpoint and
+                    organization schema
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">55e703c</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>2 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Updates organization table schema to include StateCode. Adds
+                  StateDistributionData Pydantic model. Implements
+                  get_state_distribution_data service. Exposes new endpoint
+                  /chart/state-shipping. Adds mock data for state distribution.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+24</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    backend/app/api/v1/endpoints/cpr/transplants.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+41</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/db/mock_data/cpr.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/db/schema.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+19</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/schemas/cpr/transplants.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+68</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    backend/app/services/cpr/transplant_service.py
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Commit 30 -->
+            <details
+              class="commit-item"
+              data-search="bde4103 fix cpr-dashboard distribution query distinct leftjoin outcome discard krishna kumar"
+              data-scope="backend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    fix (cpr-dashboard): Correct distribution query logic and
+                    data aggregation
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">bde4103</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>6 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Refines get_distribution_data query: uses DISTINCT
+                  EyeTissueRecoveredId to prevent double-counting, switches to
+                  isouter=True (LEFT JOIN), adds WHERE clauses to exclude
+                  discarded tissues (Outcome != 8), handles None values for
+                  country.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+13</span>
+                      <span class="stat-del">-6</span></span
+                    >
+                    backend/app/services/cpr/distribution_service.py
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- Additional commits (31-51) abbreviated for space -->
+            <details
+              class="commit-item"
+              data-search="1442e76 feat backend country name distribution full name krishna kumar"
+              data-scope="backend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (backend): Use full country name for distribution data
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">1442e76</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>6 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Updates get_distribution_data service to retrieve full country
+                  name instead of country code. Adds Country SQLAlchemy table
+                  definition. Joins Country table in query.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+8</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/db/schema.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+7</span>
+                      <span class="stat-del">-2</span></span
+                    >
+                    backend/app/services/cpr/distribution_service.py
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-search="7179c9d feat cpr institution donor metrics full stack sqlalchemy endpoints pydantic krishna kumar"
+              data-scope="backend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (cpr): Implement institution donor metrics full stack
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">7179c9d</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>7 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Implements full data pipeline for Institution Eye Donor
+                  Comparison and Percentage charts. Backend: institution_service
+                  with SQLAlchemy, institutions router, Pydantic schemas, mock
+                  data. Client: updated CPRClient methods. Frontend:
+                  useInstitutionData hook.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+1</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    apps/cpr-dashboard/src/hooks/index.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+76</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    apps/cpr-dashboard/src/hooks/useInstitutionData.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+34</span>
+                      <span class="stat-del">-20</span></span
+                    >
+                    apps/cpr-dashboard/src/tabs/InstitutionsTab.tsx
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+23</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    apps/cpr-dashboard/src/types/cpr.types.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+61</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/api/v1/endpoints/cpr/institutions.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+11</span>
+                      <span class="stat-del">-3</span></span
+                    >
+                    backend/app/api/v1/router.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+52</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/db/mock_data/cpr.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+73</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/schemas/cpr/institutions.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+113</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/services/cpr/institution_service.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+2</span>
+                      <span class="stat-del">-2</span></span
+                    >
+                    packages/api-client/src/clients/cprClient.test.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+4</span>
+                      <span class="stat-del">-4</span></span
+                    >
+                    packages/api-client/src/clients/cprClient.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+2</span>
+                      <span class="stat-del">-2</span></span
+                    >
+                    packages/api-client/src/config/endpoints.ts
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-search="d326590 feat backend eye details kpi endpoints recovered discarded pending mock krishna kumar"
+              data-scope="backend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (cpr-dashboard): Integrate Eye Details KPIs in
+                    EyeDetailsTab
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">d326590</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>7 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Backend: Added eye_details router with three KPI endpoints.
+                  Service: eye_details_service with query logic. Schema:
+                  DetailsKPI. Mock: data generators for development.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+80</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/api/v1/endpoints/cpr/eye_details.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+10</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/api/v1/router.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+72</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/db/mock_data/cpr.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+28</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/schemas/cpr/eye_details.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+117</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/services/cpr/eye_details_service.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+12</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    packages/api-client/src/clients/cprClient.ts
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+3</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    packages/api-client/src/config/endpoints.ts
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <details
+              class="commit-item"
+              data-search="919d6aa feat backend domestic international shipping reach kpi shipment shipmentitem krishna kumar"
+              data-scope="backend"
+            >
+              <summary class="commit-summary">
+                <span class="commit-toggle">▶</span>
+                <div class="commit-info">
+                  <p class="commit-subject">
+                    feat (backend): Add domestic and international shipping
+                    reach KPIs
+                  </p>
+                  <div class="commit-meta">
+                    <span class="commit-hash">919d6aa</span>
+                    <span class="commit-scope scope-backend">backend</span>
+                    <span>Krishna A. Kumar</span>
+                    <span>8 days ago</span>
+                  </div>
+                </div>
+              </summary>
+              <div class="commit-details">
+                <p class="commit-description">
+                  Updates DB schema with Shipment and ShipmentItem tables. Adds
+                  CountryCode to Organization table. Implements service logic to
+                  calculate reach based on shipping destination (US vs Non-US).
+                  Exposes POST endpoints for domestic and international reach
+                  KPIs.
+                </p>
+                <ul class="commit-files">
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+36</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/api/v1/endpoints/cpr/transplants.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+48</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/db/mock_data/cpr.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+18</span>
+                      <span class="stat-del">-0</span></span
+                    >
+                    backend/app/db/schema.py
+                  </li>
+                  <li>
+                    <span class="file-stat"
+                      ><span class="stat-add">+86</span>
+                      <span class="stat-del">-1</span></span
+                    >
+                    backend/app/services/cpr/transplant_service.py
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- Report Navigation -->
+        <nav class="report-nav">
+          <a href="004.html" class="nav-button">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Previous Report
+          </a>
+          <a href="#" class="nav-button disabled">
+            Next Report
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+        </nav>
+      </main>
+    </div>
+
+    <button
+      class="mobile-toc-toggle"
+      id="mobileTocToggle"
+      aria-label="Open table of contents"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+
+    <div class="mobile-toc-overlay" id="mobileTocOverlay"></div>
+    <div class="mobile-toc-panel" id="mobileTocPanel">
+      <h2 class="toc-title">Contents</h2>
+      <ul class="toc-list">
+        <li class="toc-item">
+          <a href="#executive-summary" class="toc-link mobile-toc-link"
+            >Executive Summary</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#key-highlights" class="toc-link mobile-toc-link"
+            >Key Highlights</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#cpr-dashboard" class="toc-link mobile-toc-link"
+            >CPR Dashboard</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#backend-api" class="toc-link mobile-toc-link"
+            >Backend API</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#ui-components" class="toc-link mobile-toc-link"
+            >UI Components</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#api-client" class="toc-link mobile-toc-link"
+            >API Client Package</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#testing-quality" class="toc-link mobile-toc-link"
+            >Testing &amp; Quality</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#devops" class="toc-link mobile-toc-link"
+            >DevOps &amp; CI/CD</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#impact-analysis" class="toc-link mobile-toc-link"
+            >Impact Analysis</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="#commit-log" class="toc-link mobile-toc-link"
+            >Full Commit Log</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <footer class="site-footer">
+      <p>RMLEB Internal Information Portal — Generated Dec 10, 2025</p>
+      <p>
+        For questions or feedback, contact
+        <a href="mailto:kkumar@corneas.org">kkumar@corneas.org</a>
+      </p>
+    </footer>
+
+    <script>
+      // Search functionality
+      const searchInput = document.getElementById("commitSearch");
+      const searchClear = document.getElementById("searchClear");
+      const searchCount = document.getElementById("searchCount");
+      const commitItems = document.querySelectorAll(".commit-item");
+
+      let activeScope = "all";
+
+      function applyFilters() {
+        const query = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        searchClear.classList.toggle("visible", query.length > 0);
+
+        commitItems.forEach((item) => {
+          const searchData = item.getAttribute("data-search").toLowerCase();
+          const itemScope = item.getAttribute("data-scope") || "";
+
+          const matchesSearch = query === "" || searchData.includes(query);
+          const matchesScope =
+            activeScope === "all" || itemScope === activeScope;
+
+          const isVisible = matchesSearch && matchesScope;
+          item.classList.toggle("hidden", !isVisible);
+          if (isVisible) visibleCount++;
+        });
+
+        if (query.length > 0 || activeScope !== "all") {
+          searchCount.textContent = `${visibleCount} of ${commitItems.length} commits`;
+        } else {
+          searchCount.textContent = "";
+        }
+      }
+
+      searchInput.addEventListener("input", applyFilters);
+      searchClear.addEventListener("click", () => {
+        searchInput.value = "";
+        applyFilters();
+        searchInput.focus();
+      });
+
+      // Scope filtering
+      function filterByScope(scope) {
+        activeScope = scope;
+        document.querySelectorAll(".module-btn").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.scope === scope);
+        });
+        applyFilters();
+      }
+
+      // Mobile TOC
+      const mobileTocToggle = document.getElementById("mobileTocToggle");
+      const mobileTocOverlay = document.getElementById("mobileTocOverlay");
+      const mobileTocPanel = document.getElementById("mobileTocPanel");
+      const mobileTocLinks = document.querySelectorAll(".mobile-toc-link");
+
+      function openMobileToc() {
+        mobileTocOverlay.classList.add("active");
+        mobileTocPanel.classList.add("active");
+      }
+
+      function closeMobileToc() {
+        mobileTocOverlay.classList.remove("active");
+        mobileTocPanel.classList.remove("active");
+      }
+
+      mobileTocToggle.addEventListener("click", openMobileToc);
+      mobileTocOverlay.addEventListener("click", closeMobileToc);
+      mobileTocLinks.forEach((link) => {
+        link.addEventListener("click", closeMobileToc);
+      });
+
+      // Active TOC tracking
+      const tocLinks = document.querySelectorAll(
+        ".toc-link:not(.mobile-toc-link)",
+      );
+      const sections = document.querySelectorAll("section[id]");
+
+      function updateActiveToc() {
+        let current = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (pageYOffset >= sectionTop - 150) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        tocLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", updateActiveToc);
+      updateActiveToc();
+
+      // Auto-expand all details for print
+      window.addEventListener("beforeprint", () => {
+        document
+          .querySelectorAll("details")
+          .forEach((d) => d.setAttribute("open", ""));
+      });
+
+      // Expand/Collapse All
+      const expandAllBtn = document.getElementById("expandAll");
+      const collapseAllBtn = document.getElementById("collapseAll");
+
+      expandAllBtn.addEventListener("click", () => {
+        document.querySelectorAll(".commit-item").forEach((item) => {
+          item.setAttribute("open", "");
+        });
+      });
+
+      collapseAllBtn.addEventListener("click", () => {
+        document.querySelectorAll(".commit-item").forEach((item) => {
+          item.removeAttribute("open");
+        });
+      });
+    </script>
+  </body>
+</html>

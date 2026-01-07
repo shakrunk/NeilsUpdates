@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RMLEB IIP Status Report | Dec 17, 2025 – Jan 7, 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --color-primary: #1e3a5f;
+        --color-primary-light: #2d5a8b;
+        --color-primary-dark: #0f1f33;
+        --color-accent: #3b82f6;
+        --color-accent-light: #60a5fa;
+        --color-success: #059669;
+        --color-warning: #d97706;
+        --color-neutral-50: #f8fafc;
+        --color-neutral-100: #f1f5f9;
+        --color-neutral-200: #e2e8f0;
+        --color-neutral-300: #cbd5e1;
+        --color-neutral-400: #94a3b8;
+        --color-neutral-500: #64748b;
+        --color-neutral-600: #475569;
+        --color-neutral-700: #334155;
+        --color-neutral-800: #1e293b;
+        --color-neutral-900: #0f172a;
+        --font-display: "Source Serif 4", Georgia, serif;
+        --font-body: "Source Sans 3", -apple-system, BlinkMacSystemFont, sans-serif;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        --radius: 8px;
+        --toc-width: 280px;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+      body { margin: 0; padding: 0; font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: var(--color-neutral-800); background: var(--color-neutral-50); }
+      .site-header { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: white; padding: 2rem 1.5rem; position: relative; overflow: hidden; }
+      .site-header::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
+      .header-content { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+      .header-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+      .org-badge { background: rgba(255, 255, 255, 0.15); padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+      .report-title { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; margin: 0 0 0.5rem 0; letter-spacing: -0.01em; }
+      .report-subtitle { font-size: 1.125rem; opacity: 0.9; margin: 0; }
+      .report-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+      .meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
+      .meta-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; }
+      .meta-value { font-size: 1.25rem; font-weight: 600; }
+      .print-button { display: flex; align-items: center; gap: 0.5rem; margin-left: auto; padding: 0.625rem 1rem; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: var(--radius); color: white; font-family: var(--font-body); font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.15s ease; }
+      .print-button:hover { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.5); }
+      .layout { display: flex; max-width: 1400px; margin: 0 auto; padding: 2rem 1rem; gap: 2rem; }
+      .sidebar { width: var(--toc-width); flex-shrink: 0; position: sticky; top: 2rem; height: fit-content; max-height: calc(100vh - 4rem); overflow-y: auto; }
+      .toc { background: white; border-radius: var(--radius); box-shadow: var(--shadow-md); padding: 1.5rem; }
+      .toc-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin: 0 0 1rem 0; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-neutral-200); color: var(--color-primary); }
+      .toc-list { list-style: none; padding: 0; margin: 0; }
+      .toc-item { margin-bottom: 0.25rem; }
+      .toc-link { display: block; padding: 0.5rem 0.75rem; color: var(--color-neutral-600); text-decoration: none; font-size: 0.875rem; border-radius: 4px; transition: all 0.15s ease; }
+      .toc-link:hover { background: var(--color-neutral-100); color: var(--color-primary); }
+      .toc-link.active { background: var(--color-accent); color: white; }
+      .main-content { flex: 1; min-width: 0; }
+      section { background: white; border-radius: var(--radius); box-shadow: var(--shadow-md); padding: 2rem; margin-bottom: 2rem; }
+      .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--color-neutral-100); }
+      .section-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--color-primary); color: white; border-radius: var(--radius); flex-shrink: 0; }
+      .section-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin: 0; color: var(--color-primary); }
+      .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+      .summary-stat { background: linear-gradient(135deg, var(--color-neutral-50), white); border: 1px solid var(--color-neutral-200); border-radius: var(--radius); padding: 1.25rem; text-align: center; }
+      .summary-stat-value { font-size: 2rem; font-weight: 700; color: var(--color-primary); line-height: 1; margin-bottom: 0.5rem; }
+      .summary-stat-label { font-size: 0.875rem; color: var(--color-neutral-600); }
+      .executive-text { font-size: 1.0625rem; line-height: 1.8; color: var(--color-neutral-700); }
+      .highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+      .highlight-card { background: var(--color-neutral-50); border: 1px solid var(--color-neutral-200); border-radius: var(--radius); padding: 1.25rem; border-left: 4px solid var(--color-accent); }
+      .highlight-card.success { border-left-color: var(--color-success); }
+      .highlight-card.warning { border-left-color: var(--color-warning); }
+      .highlight-title { font-weight: 600; color: var(--color-neutral-800); margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 0.5rem; }
+      .highlight-text { font-size: 0.9375rem; color: var(--color-neutral-600); margin: 0; }
+      .feature-section { margin-bottom: 2rem; }
+      .feature-section:last-child { margin-bottom: 0; }
+      .feature-title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--color-primary-light); margin: 0 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-neutral-200); }
+      .feature-description { color: var(--color-neutral-700); margin-bottom: 1rem; }
+      .feature-list { list-style: none; padding: 0; margin: 0; }
+      .feature-list li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; color: var(--color-neutral-700); }
+      .feature-list li::before { content: "→"; position: absolute; left: 0; color: var(--color-accent); font-weight: 600; }
+      .code-inline { font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.875em; background: var(--color-neutral-100); padding: 0.125rem 0.375rem; border-radius: 3px; color: var(--color-primary); }
+      .impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+      .impact-card { background: var(--color-neutral-50); border: 1px solid var(--color-neutral-200); border-radius: var(--radius); padding: 1.5rem; }
+      .impact-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+      .impact-badge { padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+      .impact-badge.cpr { background: #dbeafe; color: #1e40af; }
+      .impact-badge.drc { background: #dcfce7; color: #166534; }
+      .impact-badge.shared { background: #fef3c7; color: #92400e; }
+      .impact-title { font-weight: 600; color: var(--color-neutral-800); margin: 0; }
+      .impact-list { list-style: disc; padding-left: 1.25rem; margin: 0; color: var(--color-neutral-600); font-size: 0.9375rem; }
+      .impact-list li { margin-bottom: 0.375rem; }
+      .commit-toolbar { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-neutral-200); }
+      .commit-toolbar-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+      .commit-search-wrapper { flex: 1; min-width: 200px; display: flex; align-items: center; gap: 0.75rem; background: var(--color-neutral-50); border: 1px solid var(--color-neutral-200); border-radius: var(--radius); padding: 0.625rem 1rem; transition: all 0.15s ease; }
+      .commit-search-wrapper:focus-within { border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+      .search-icon { color: var(--color-neutral-400); flex-shrink: 0; }
+      .search-input { flex: 1; border: none; font-size: 0.9375rem; font-family: var(--font-body); color: var(--color-neutral-800); background: transparent; outline: none; }
+      .search-input::placeholder { color: var(--color-neutral-400); }
+      .search-clear { background: none; border: none; color: var(--color-neutral-400); cursor: pointer; padding: 0.25rem; display: none; }
+      .search-clear.visible { display: block; }
+      .search-results-count { font-size: 0.8125rem; color: var(--color-neutral-500); white-space: nowrap; }
+      .toolbar-actions { display: flex; gap: 0.5rem; }
+      .toolbar-btn { display: flex; align-items: center; gap: 0.375rem; padding: 0.5rem 0.875rem; border: 1px solid var(--color-neutral-300); border-radius: var(--radius); background: white; color: var(--color-neutral-700); font-family: var(--font-body); font-size: 0.8125rem; font-weight: 500; cursor: pointer; transition: all 0.15s ease; }
+      .toolbar-btn:hover { background: var(--color-neutral-50); border-color: var(--color-neutral-400); }
+      .module-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .module-btn { padding: 0.375rem 0.75rem; border: 1px solid var(--color-neutral-300); border-radius: 20px; background: white; color: var(--color-neutral-600); font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; cursor: pointer; transition: all 0.15s ease; }
+      .module-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+      .module-btn.active { background: var(--color-accent); border-color: var(--color-accent); color: white; }
+      .commit-list { display: flex; flex-direction: column; gap: 0.75rem; }
+      .commit-item { border: 1px solid var(--color-neutral-200); border-radius: var(--radius); background: white; overflow: hidden; }
+      .commit-item.hidden { display: none; }
+      .commit-item[open] { box-shadow: var(--shadow-sm); }
+      .commit-summary { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem; cursor: pointer; list-style: none; transition: background-color 0.15s ease; }
+      .commit-summary::-webkit-details-marker { display: none; }
+      .commit-summary:hover { background: var(--color-neutral-50); }
+      .commit-toggle { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: var(--color-neutral-400); transition: transform 0.15s ease; margin-top: 2px; }
+      .commit-item[open] .commit-toggle { transform: rotate(90deg); }
+      .commit-info { flex: 1; min-width: 0; }
+      .commit-header { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; }
+      .commit-hash { font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.75rem; color: var(--color-accent); background: var(--color-neutral-100); padding: 0.125rem 0.5rem; border-radius: 3px; }
+      .commit-scope { font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; padding: 0.125rem 0.5rem; border-radius: 3px; background: var(--color-neutral-200); color: var(--color-neutral-600); }
+      .commit-scope.backend { background: #dbeafe; color: #1e40af; }
+      .commit-scope.frontend { background: #dcfce7; color: #166534; }
+      .commit-scope.ui-components { background: #fef3c7; color: #92400e; }
+      .commit-scope.types { background: #f3e8ff; color: #6b21a8; }
+      .commit-scope.api-client { background: #fce7f3; color: #9d174d; }
+      .commit-scope.devops { background: #fee2e2; color: #991b1b; }
+      .commit-title { font-weight: 600; color: var(--color-neutral-800); word-break: break-word; }
+      .commit-meta { font-size: 0.8125rem; color: var(--color-neutral-500); }
+      .commit-stats { display: flex; gap: 0.75rem; flex-shrink: 0; margin-top: 2px; }
+      .stat-add { color: var(--color-success); font-size: 0.8125rem; font-weight: 500; }
+      .stat-del { color: #dc2626; font-size: 0.8125rem; font-weight: 500; }
+      .commit-body { padding: 1rem 1.25rem 1.25rem 3.5rem; background: var(--color-neutral-50); border-top: 1px solid var(--color-neutral-200); }
+      .commit-description { color: var(--color-neutral-700); margin-bottom: 0; white-space: pre-line; }
+      .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
+      .nav-button { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: white; border: 1px solid var(--color-neutral-300); border-radius: var(--radius); color: var(--color-neutral-700); text-decoration: none; font-weight: 500; transition: all 0.15s ease; }
+      .nav-button:hover:not(.disabled) { background: var(--color-neutral-50); border-color: var(--color-accent); color: var(--color-accent); }
+      .nav-button.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+      .site-footer { text-align: center; padding: 2rem 1rem; color: var(--color-neutral-500); font-size: 0.875rem; border-top: 1px solid var(--color-neutral-200); margin-top: 2rem; }
+      .mobile-toc-toggle { display: none; position: fixed; bottom: 1.5rem; right: 1.5rem; width: 56px; height: 56px; border-radius: 50%; background: var(--color-primary); color: white; border: none; box-shadow: var(--shadow-lg); cursor: pointer; z-index: 1000; align-items: center; justify-content: center; }
+      .mobile-toc-overlay { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1001; opacity: 0; transition: opacity 0.2s ease; }
+      .mobile-toc-overlay.active { opacity: 1; }
+      .mobile-toc-panel { position: fixed; top: 0; right: -300px; width: 300px; height: 100vh; background: white; z-index: 1002; padding: 1.5rem; overflow-y: auto; transition: right 0.3s ease; }
+      .mobile-toc-panel.active { right: 0; }
+      @media (max-width: 1024px) { .sidebar { display: none; } .mobile-toc-toggle { display: flex; } .mobile-toc-overlay { display: block; } }
+      @media (max-width: 640px) { .report-meta { gap: 1rem; } .meta-item { flex: 1 1 calc(50% - 0.5rem); } .summary-grid { grid-template-columns: 1fr 1fr; } .highlights-grid { grid-template-columns: 1fr; } .commit-summary { flex-wrap: wrap; } .commit-stats { width: 100%; margin-top: 0.5rem; padding-left: 2rem; } section { padding: 1.25rem; } }
+      @media print {
+        *, *::before, *::after { box-shadow: none !important; text-shadow: none !important; }
+        body { font-size: 10pt; line-height: 1.4; color: black; background: white; }
+        .sidebar, .mobile-toc-toggle, .mobile-toc-overlay, .mobile-toc-panel, .print-button, .commit-toolbar, .toolbar-actions, .module-filters, .report-nav, .search-clear, .commit-toggle { display: none !important; }
+        .layout { display: block; max-width: 100%; padding: 0; }
+        .main-content { width: 100%; }
+        .site-header { background: white !important; color: black !important; padding: 0 0 1rem 0; border-bottom: 2px solid black; }
+        .site-header::before { display: none; }
+        .org-badge { background: #eee; color: black; }
+        .report-title { font-size: 18pt; color: black; }
+        .report-subtitle { color: #333; }
+        .report-meta { border-top: 1px solid #ccc; padding-top: 0.5rem; margin-top: 0.5rem; }
+        .meta-value { color: black; font-size: 11pt; }
+        section { background: white; border: 1px solid #ccc; padding: 0.75rem; margin-bottom: 0.75rem; page-break-inside: avoid; }
+        .section-icon { background: #333 !important; }
+        .section-title { color: black; font-size: 13pt; }
+        .summary-stat { border: 1px solid #ccc; }
+        .summary-stat-value { color: black; font-size: 14pt; }
+        .highlight-card { border: 1px solid #ccc; border-left-width: 3px; padding: 0.5rem; }
+        .impact-card { border: 1px solid #ccc; }
+        details { display: block !important; }
+        details > summary { display: block !important; }
+        details[open] summary ~ * { display: block !important; }
+        .commit-item { border: 1px solid #ccc; page-break-inside: avoid; margin-bottom: 0.5rem; }
+        .commit-item, .commit-item[open], .commit-item:not([open]) { display: block !important; }
+        .commit-item > .commit-body { display: block !important; }
+        .commit-summary { background: white; padding: 0.5rem; }
+        .commit-body { display: block !important; background: #f9f9f9; padding: 0.5rem 0.5rem 0.5rem 1.5rem; }
+        .commit-hash { background: #eee; color: black; }
+        .commit-scope { background: #eee !important; color: black !important; }
+        .site-footer { border-top: 1px solid #ccc; margin-top: 1rem; padding: 0.5rem 0; }
+        a { color: black; text-decoration: underline; }
+        .stat-add { color: #006400; }
+        .stat-del { color: #8b0000; }
+        .feature-section { margin-bottom: 1rem; }
+        .feature-list li { margin-bottom: 0.25rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-content">
+        <div class="header-top">
+          <span class="org-badge">Rocky Mountain Lions Eye Bank</span>
+          <button class="print-button" onclick="window.print()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Print Report
+          </button>
+        </div>
+        <h1 class="report-title">Internal Information Portal — Status Report</h1>
+        <p class="report-subtitle">Development Progress: December 17, 2025 – January 7, 2026</p>
+        <div class="report-meta">
+          <div class="meta-item"><span class="meta-label">Report Period</span><span class="meta-value">21 Days</span></div>
+          <div class="meta-item"><span class="meta-label">Total Commits</span><span class="meta-value">83</span></div>
+          <div class="meta-item"><span class="meta-label">Contributors</span><span class="meta-value">3</span></div>
+          <div class="meta-item"><span class="meta-label">Files Modified</span><span class="meta-value">344</span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <nav class="toc">
+          <h2 class="toc-title">Contents</h2>
+          <ul class="toc-list">
+            <li class="toc-item"><a href="#executive-summary" class="toc-link">Executive Summary</a></li>
+            <li class="toc-item"><a href="#key-highlights" class="toc-link">Key Highlights</a></li>
+            <li class="toc-item"><a href="#drc-dashboard" class="toc-link">DRC Dashboard</a></li>
+            <li class="toc-item"><a href="#backend-services" class="toc-link">Backend Services</a></li>
+            <li class="toc-item"><a href="#cpr-dashboard" class="toc-link">CPR Dashboard</a></li>
+            <li class="toc-item"><a href="#ui-components" class="toc-link">UI Components</a></li>
+            <li class="toc-item"><a href="#type-system" class="toc-link">Type System</a></li>
+            <li class="toc-item"><a href="#impact-analysis" class="toc-link">Impact Analysis</a></li>
+            <li class="toc-item"><a href="#commit-log" class="toc-link">Full Commit Log</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <!-- Executive Summary -->
+        <section id="executive-summary">
+          <div class="section-header">
+            <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+            <h2 class="section-title">Executive Summary</h2>
+          </div>
+          <div class="summary-grid">
+            <div class="summary-stat"><div class="summary-stat-value">83</div><div class="summary-stat-label">Commits</div></div>
+            <div class="summary-stat"><div class="summary-stat-value">344</div><div class="summary-stat-label">Files Changed</div></div>
+            <div class="summary-stat"><div class="summary-stat-value">~15K</div><div class="summary-stat-label">Lines Added</div></div>
+            <div class="summary-stat"><div class="summary-stat-value">~12K</div><div class="summary-stat-label">Lines Removed</div></div>
+          </div>
+          <p class="executive-text">
+            This reporting period marks a <strong>major milestone for the DRC Dashboard</strong>, with the implementation of a complete dual-mode architecture supporting both Manager and DRC (Technician) views. The backend services underwent a significant domain-driven refactoring, splitting the monolithic <code class="code-inline">services.py</code> into purpose-built modules for referrals, tissue, distribution, designation, and organization domains.
+          </p>
+          <p class="executive-text">
+            The DRC Dashboard now features comprehensive visualization components including RidgeCharts for process timeline analysis, RadarCharts for quality scoring, and SunburstCharts for hierarchical disposition breakdowns. An interactive Interval Analysis Panel enables technicians to compare time distributions between recovery events with statistical metrics (Mean, Median, StdDev).
+          </p>
+          <p class="executive-text">
+            On the CPR Dashboard front, the V2 API integration is now complete with live data flowing to all tabs. New features include a Country Yearly Distribution table for 4-year rolling international trends and comprehensive tissue details endpoints. The shared UI component library received substantial enhancements with centralized type definitions migrated to the <code class="code-inline">@rmleb-iip/types</code> package for improved reusability across applications.
+          </p>
+        </section>
+
+        <!-- Key Highlights -->
+        <section id="key-highlights">
+          <div class="section-header">
+            <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+            <h2 class="section-title">Key Highlights</h2>
+          </div>
+          <div class="highlights-grid">
+            <div class="highlight-card success"><h3 class="highlight-title"><span>🎯</span> DRC Mode Architecture</h3><p class="highlight-text">Complete dual-mode system with Manager and DRC views, featuring mode-aware routing, tab configurations, and dedicated chart components for each persona.</p></div>
+            <div class="highlight-card success"><h3 class="highlight-title"><span>📊</span> Services Refactoring</h3><p class="highlight-text">Monolithic 2,160-line services.py decomposed into domain-specific modules: referral.py, tissue.py, distribution.py, designation.py, organization.py with shared base logic.</p></div>
+            <div class="highlight-card"><h3 class="highlight-title"><span>📈</span> DRC Metrics API</h3><p class="highlight-text">New backend endpoints for quality scores, D2P (Death to Preservation) metrics, UDRAI interview times, and technician performance leaderboards.</p></div>
+            <div class="highlight-card"><h3 class="highlight-title"><span>🗺️</span> Process Timeline Analysis</h3><p class="highlight-text">RidgeChart component enables visualization of recovery event distributions with interactive interval analysis and statistical comparisons.</p></div>
+            <div class="highlight-card warning"><h3 class="highlight-title"><span>🔧</span> Type Centralization</h3><p class="highlight-text">Chart component types (1,500+ lines) migrated from ui-components to shared @rmleb-iip/types package with comprehensive TSDoc documentation.</p></div>
+            <div class="highlight-card"><h3 class="highlight-title"><span>🌍</span> Country Distribution Table</h3><p class="highlight-text">New CountryYearlyTable component displays 4-year rolling international distribution trends with sticky headers and proper totals.</p></div>
+          </div>
+        </section>
+
+        <!-- DRC Dashboard -->
+        <section id="drc-dashboard">
+          <div class="section-header">
+            <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+            <h2 class="section-title">DRC Dashboard</h2>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">Mode Switching Architecture</h3>
+            <p class="feature-description">A complete dual-mode system allowing users to switch between Manager and DRC (Technician) views. Each mode presents different tabs, metrics, and visualizations tailored to the user's role.</p>
+            <ul class="feature-list">
+              <li><code class="code-inline">ModeProvider</code> context wraps the application for global mode state</li>
+              <li><code class="code-inline">ModeSelector</code> component in header with navigation to default tab on mode change</li>
+              <li>Dynamic route registration supporting direct navigation to any tab</li>
+              <li>Separate tab configurations: <code class="code-inline">TABS_DRC_MODE</code> and <code class="code-inline">TABS_MANAGER_MODE</code></li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">DRC Mode Visualization Components</h3>
+            <p class="feature-description">A comprehensive suite of atomic chart and KPI components organized by tab, enabling modular composition and reusability.</p>
+            <ul class="feature-list">
+              <li><strong>Impact Tab:</strong> CasesRecoveredKPI, DispositionBreakdownChart, DomesticDistributionMap, GlobalDistributionMap, QualityScoreChart</li>
+              <li><strong>Overview Tab:</strong> D2PKPI, PlacementRateKPI, RecoveriesKPI, QualityLeaderboard, RecoveriesLeaderboard</li>
+              <li><strong>Performance Tab:</strong> RecoveryChart, TissuesRecoveredKPI, TransplantabilityKPI, UDRAIChart</li>
+              <li>CSS Grid layout strings centralized in <code class="code-inline">constants/gridLayouts.ts</code></li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">Process Timeline Analysis</h3>
+            <p class="feature-description">Interactive RidgeChart visualization showing recovery event distributions with statistical analysis capabilities.</p>
+            <ul class="feature-list">
+              <li><code class="code-inline">RidgeChart</code> component with category click handlers and multi-selection support</li>
+              <li><code class="code-inline">IntervalAnalysisPanel</code> displaying Mean, Median, and Standard Deviation for selected intervals</li>
+              <li>2-event selection constraint for interval comparison</li>
+              <li>Ridge plot analysis logic extracted to <code class="code-inline">utils/timelineUtils.ts</code></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Backend Services -->
+        <section id="backend-services">
+          <div class="section-header">
+            <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
+            <h2 class="section-title">Backend Services</h2>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">Domain-Driven Service Refactoring</h3>
+            <p class="feature-description">The monolithic <code class="code-inline">services.py</code> (2,160 lines) has been decomposed into a modular package structure under <code class="code-inline">app/services/</code>.</p>
+            <ul class="feature-list">
+              <li><code class="code-inline">base.py</code> (227 lines): Shared logic and helper functions</li>
+              <li><code class="code-inline">referral.py</code> (566 lines): ReferralService with UDRAI interview time and technician leaderboard metrics</li>
+              <li><code class="code-inline">tissue.py</code> (446 lines): TissueService with quality score and recovery time metrics</li>
+              <li><code class="code-inline">distribution.py</code> (504 lines): DistributionService for geographic analytics</li>
+              <li><code class="code-inline">designation.py</code> (86 lines): DesignationService for donor designation logic</li>
+              <li><code class="code-inline">organization.py</code> (159 lines): OrganizationService for cascading filter options</li>
+              <li><code class="code-inline">dashboard.py</code> (228 lines): Unified DashboardService facade</li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">DRC Metrics API Endpoints</h3>
+            <p class="feature-description">New DrcService and router providing DRC-specific metrics for technician performance analysis.</p>
+            <ul class="feature-list">
+              <li>Quality score timeline (RecoveryTech, Descemet, Epithelium scores)</li>
+              <li>D2P (Death to Preservation) metrics</li>
+              <li>UDRAI interview completion times</li>
+              <li>Technician performance leaderboard</li>
+              <li>New database models: <code class="code-inline">EyeDonor</code> and <code class="code-inline">MedSoc</code></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- CPR Dashboard -->
+        <section id="cpr-dashboard">
+          <div class="section-header">
+            <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+            <h2 class="section-title">CPR Dashboard</h2>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">V2 API Integration Complete</h3>
+            <p class="feature-description">All dashboard hooks migrated to consume V2 REST endpoints with proper data transformations.</p>
+            <ul class="feature-list">
+              <li><code class="code-inline">useDistributionData</code>, <code class="code-inline">useEyeDetailsData</code>, <code class="code-inline">useEyeDonorData</code>, <code class="code-inline">useInstitutionData</code>, <code class="code-inline">useTransplantData</code> refactored</li>
+              <li>Client-side <code class="code-inline">processAgeData</code> for demographic data handling</li>
+              <li><code class="code-inline">countryUtils</code> for ISO code to GeoJSON name mapping</li>
+              <li><code class="code-inline">dateUtils</code> for timezone-safe local ISO string formatting</li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">Country Yearly Distribution Table</h3>
+            <p class="feature-description">New visualization component displaying 4-year rolling international distribution trends.</p>
+            <ul class="feature-list">
+              <li><code class="code-inline">useCountryYearlyDistribution</code> hook fetching from new API endpoint</li>
+              <li><code class="code-inline">CountryYearlyTable</code> with sticky headers and totals row</li>
+              <li>Tabular-nums CSS formatting for numeric alignment</li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">Tissue Details Integration</h3>
+            <p class="feature-description">DataTable component updated to fetch live data from the tissue details API.</p>
+            <ul class="feature-list">
+              <li>Removed hardcoded mock data from DataTable</li>
+              <li>Implemented <code class="code-inline">useQuery</code> hook with <code class="code-inline">CPRClient.getTissueDetails</code></li>
+              <li>Error handling and loading states added to table view</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- UI Components -->
+        <section id="ui-components">
+          <div class="section-header">
+            <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>
+            <h2 class="section-title">UI Components</h2>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">New Chart Components</h3>
+            <p class="feature-description">Three new chart components added to the shared UI library.</p>
+            <ul class="feature-list">
+              <li><strong>RidgeChart:</strong> ComposedChart-based ridge plot with interactivity (onCategoryClick, selectedCategories)</li>
+              <li><strong>RadarChart:</strong> Spider chart for multivariate data with loading states and custom colors</li>
+              <li><strong>SunburstChart:</strong> Hierarchical visualization using layered Pie components with processLayers algorithm</li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">BarChart and ComposedChart Updates</h3>
+            <p class="feature-description">Stack total label improvements and new padding options.</p>
+            <ul class="feature-list">
+              <li>StackTotalLabel dynamically calculates last visible bar in stack</li>
+              <li>Support for total labels on grouped and stacked bars</li>
+              <li>Added left, right, top, bottom padding props</li>
+              <li>Implemented StackTotalLabel for ComposedChart (feature parity)</li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">Additional Updates</h3>
+            <ul class="feature-list">
+              <li>Card component: Added <code class="code-inline">isLoading</code> prop with centered spinner overlay</li>
+              <li>LineChart: Added custom Y-axis domain support for automatic scaling</li>
+              <li>RegionHighlightMap: Custom style prop support and grid row spanning</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Type System -->
+        <section id="type-system">
+          <div class="section-header">
+            <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+            <h2 class="section-title">Type System</h2>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">Centralized Chart Types</h3>
+            <p class="feature-description">All chart component type definitions migrated from ui-components to the shared <code class="code-inline">@rmleb-iip/types</code> package for cross-application reusability.</p>
+            <ul class="feature-list">
+              <li><code class="code-inline">SunburstChartProps</code>, <code class="code-inline">RegionHighlightMapProps</code>, <code class="code-inline">PieChartProps</code></li>
+              <li><code class="code-inline">LineChartProps</code>, <code class="code-inline">ComposedChartProps</code>, <code class="code-inline">BarChartProps</code></li>
+              <li><code class="code-inline">ChartLegendItem</code>, <code class="code-inline">ChartLegendProps</code>, <code class="code-inline">ChartTooltipProps</code></li>
+              <li><code class="code-inline">RadarChartProps</code>, <code class="code-inline">RidgeChartProps</code>, <code class="code-inline">AreaChartProps</code></li>
+              <li>Comprehensive TSDoc documentation and usage examples</li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3 class="feature-title">API Client Types</h3>
+            <ul class="feature-list">
+              <li><code class="code-inline">EyeDetailsRow</code> models in Python and TypeScript</li>
+              <li><code class="code-inline">CountryYearlyDistributionResponse</code> Pydantic models</li>
+              <li><code class="code-inline">FilterOptionsResponse</code> for cascading slicers</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Impact Analysis -->
+        <section id="impact-analysis">
+          <div class="section-header">
+            <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
+            <h2 class="section-title">Impact Analysis</h2>
+          </div>
+          <div class="impact-grid">
+            <div class="impact-card">
+              <div class="impact-header"><span class="impact-badge drc">DRC Team</span><h3 class="impact-title">High Impact</h3></div>
+              <ul class="impact-list">
+                <li>Complete DRC mode with technician-focused dashboards</li>
+                <li>Quality score tracking across RecoveryTech, Descemet, Epithelium metrics</li>
+                <li>Process timeline analysis with interval statistics</li>
+                <li>Technician performance leaderboards</li>
+                <li>D2P (Death to Preservation) metrics visibility</li>
+              </ul>
+            </div>
+            <div class="impact-card">
+              <div class="impact-header"><span class="impact-badge cpr">CPR Team</span><h3 class="impact-title">Moderate Impact</h3></div>
+              <ul class="impact-list">
+                <li>Live tissue details data in DataTable</li>
+                <li>Country yearly distribution trends (4-year rolling)</li>
+                <li>Improved chart legibility with stack totals</li>
+                <li>Enhanced filter cascading for organization selection</li>
+              </ul>
+            </div>
+            <div class="impact-card">
+              <div class="impact-header"><span class="impact-badge shared">Shared Infrastructure</span><h3 class="impact-title">Foundation Work</h3></div>
+              <ul class="impact-list">
+                <li>Domain-driven backend architecture for maintainability</li>
+                <li>Centralized type definitions reducing duplication</li>
+                <li>New reusable chart components (Ridge, Radar, Sunburst)</li>
+                <li>Improved API client parameter serialization</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Full Commit Log -->
+        <section id="commit-log">
+          <div class="section-header">
+            <div class="section-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><line x1="1.05" y1="12" x2="7" y2="12"></line><line x1="17.01" y1="12" x2="22.96" y2="12"></line></svg></div>
+            <h2 class="section-title">Full Commit Log</h2>
+          </div>
+
+          <div class="commit-toolbar">
+            <div class="commit-toolbar-row">
+              <div class="commit-search-wrapper">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" class="search-input" id="commitSearch" placeholder="Search commits...">
+                <button class="search-clear" id="searchClear">✕</button>
+              </div>
+              <span class="search-results-count" id="searchCount"></span>
+              <div class="toolbar-actions">
+                <button class="toolbar-btn" id="expandAll">Expand All</button>
+                <button class="toolbar-btn" id="collapseAll">Collapse All</button>
+              </div>
+            </div>
+            <div class="module-filters">
+              <button class="module-btn active" data-scope="all" onclick="filterByScope('all')">All (83)</button>
+              <button class="module-btn" data-scope="backend" onclick="filterByScope('backend')">Backend</button>
+              <button class="module-btn" data-scope="frontend" onclick="filterByScope('frontend')">Frontend</button>
+              <button class="module-btn" data-scope="ui-components" onclick="filterByScope('ui-components')">UI Components</button>
+              <button class="module-btn" data-scope="types" onclick="filterByScope('types')">Types</button>
+              <button class="module-btn" data-scope="api-client" onclick="filterByScope('api-client')">API Client</button>
+              <button class="module-btn" data-scope="devops" onclick="filterByScope('devops')">DevOps</button>
+            </div>
+          </div>
+
+          <div class="commit-list">
+            <details class="commit-item" data-scope="backend" data-search="3bc3829 refactor services domain modules"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">3bc3829</span><span class="commit-scope backend">backend</span><span class="commit-title">Refactor services.py into domain-specific modules</span></div><div class="commit-meta">google-labs-jules[bot] • 16 hours ago</div></div><div class="commit-stats"><span class="stat-add">+2288</span><span class="stat-del">-2161</span></div></summary><div class="commit-body"><p class="commit-description">Split services.py into package structure with referral.py, tissue.py, distribution.py, designation.py, organization.py modules.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="18e2a6f drc metrics support technician"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">18e2a6f</span><span class="commit-scope backend">backend</span><span class="commit-title">feat(backend): add DRC metrics support</span></div><div class="commit-meta">google-labs-jules[bot] • 17 hours ago</div></div><div class="commit-stats"><span class="stat-add">+480</span><span class="stat-del">-418</span></div></summary><div class="commit-body"><p class="commit-description">Add technician_ids support to FilterContext, quality score and recovery time metrics to TissueService, UDRAI interview time and leaderboard metrics to ReferralService.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="c1d7b42 drc mode api drcservice quality"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">c1d7b42</span><span class="commit-scope backend">backend</span><span class="commit-title">feat(backend): add DRC mode API support</span></div><div class="commit-meta">google-labs-jules[bot] • 19 hours ago</div></div><div class="commit-stats"><span class="stat-add">+460</span><span class="stat-del">-0</span></div></summary><div class="commit-body"><p class="commit-description">Add DrcService for quality score timeline, D2P metrics, UDRAI interview times, technician leaderboard. Add EyeDonor and MedSoc models.</p></div></details>
+
+            <details class="commit-item" data-scope="devops" data-search="eeeb266 bump turbo 2.7.3"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">eeeb266</span><span class="commit-scope devops">devops</span><span class="commit-title">build(deps): Bump turbo from 2.7.2 to 2.7.3</span></div><div class="commit-meta">Krishna A. Kumar • 20 hours ago</div></div><div class="commit-stats"><span class="stat-add">+30</span><span class="stat-del">-30</span></div></summary><div class="commit-body"><p class="commit-description">Updates turbo package and platform-specific optional dependencies.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="9c6e983 modularize tabs drc-mode manager-mode"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">9c6e983</span><span class="commit-scope frontend">frontend</span><span class="commit-title">refactor(drc-dashboard): Modularize tabs and restructure component hierarchy</span></div><div class="commit-meta">Krishna A. Kumar • 20 hours ago</div></div><div class="commit-stats"><span class="stat-add">+1401</span><span class="stat-del">-600</span></div></summary><div class="commit-body"><p class="commit-description">Decompose monolithic tabs into atomic chart and KPI components. Reorganize tab structure by mode. Extract CSS grid strings to constants/gridLayouts.ts.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="029550f style intervalanalysispanel"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">029550f</span><span class="commit-scope frontend">frontend</span><span class="commit-title">style(drc-dashboard): Update styles and optimize imports in IntervalAnalysisPanel</span></div><div class="commit-meta">Krishna A. Kumar • 20 hours ago</div></div><div class="commit-stats"><span class="stat-add">+23</span><span class="stat-del">-27</span></div></summary><div class="commit-body"><p class="commit-description">Reorder imports, update Phosphor icon usage, refine Tailwind classes.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="8387485 bar spacing performancetab"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">8387485</span><span class="commit-scope frontend">frontend</span><span class="commit-title">style(drc-dashboard): Adjusted bar spacing</span></div><div class="commit-meta">Krishna A. Kumar • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+16</span><span class="stat-del">-8</span></div></summary><div class="commit-body"><p class="commit-description">Adjusted bar spacing in PerformanceTab.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="2fff491 mode switching drc manager modeprovider"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">2fff491</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat: implement mode switching for drc and manager views</span></div><div class="commit-meta">google-labs-jules[bot] • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+72</span><span class="stat-del">-10</span></div></summary><div class="commit-body"><p class="commit-description">Wrap App with ModeProvider, add ModeSelector to Header, configure dynamic routes and redirects based on active mode.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="2a580b5 rmleb theme chart_colors"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">2a580b5</span><span class="commit-scope frontend">frontend</span><span class="commit-title">Update drc-dashboard charts and interval panel to use rmleb theme</span></div><div class="commit-meta">google-labs-jules[bot] • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+9</span><span class="stat-del">-9</span></div></summary><div class="commit-body"><p class="commit-description">Created CHART_COLORS constants using rmleb- CSS variables, updated charts to use theme colors.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="b3fed4e theme colors timeline spacing"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">b3fed4e</span><span class="commit-scope frontend">frontend</span><span class="commit-title">Update drc-dashboard charts to use rmleb theme colors and fix timeline spacing</span></div><div class="commit-meta">google-labs-jules[bot] • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+47</span><span class="stat-del">-20</span></div></summary><div class="commit-body"><p class="commit-description">Added CHART_COLORS constants, updated mock data and charts to use theme colors, fixed IntervalAnalysisPanel height.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="2f1292e timeline interval analysis ridgechart"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">2f1292e</span><span class="commit-scope frontend">frontend</span><span class="commit-title">Refactor Timeline Tab for Dynamic Interval Analysis</span></div><div class="commit-meta">google-labs-jules[bot] • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+281</span><span class="stat-del">-14</span></div></summary><div class="commit-body"><p class="commit-description">Added IntervalAnalysisResult type, RidgeChart interactivity, IntervalAnalysisPanel with statistical simulation (Mean, Median, StdDev).</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="845077c overview tab leaderboards kpis"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">845077c</span><span class="commit-scope frontend">frontend</span><span class="commit-title">Scaffold Overview Tab with mock leaderboards and KPIs</span></div><div class="commit-meta">google-labs-jules[bot] • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+135</span><span class="stat-del">-12</span></div></summary><div class="commit-body"><p class="commit-description">Added mock leaderboard data and KPI components to Overview Tab.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="267d0b0 sunburstchart charttooltip"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">267d0b0</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">Refactor SunburstChart to use standard ChartTooltip</span></div><div class="commit-meta">google-labs-jules[bot] • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+14</span><span class="stat-del">-24</span></div></summary><div class="commit-body"><p class="commit-description">Replaced hardcoded CustomTooltip with reusable ChartTooltip component.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="7bc4d88 ridgechart process timeline"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">7bc4d88</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat(drc-dashboard): Implement RidgeChart and Process Timeline Analysis tab</span></div><div class="commit-meta">Krishna A. Kumar • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+228</span><span class="stat-del">-18</span></div></summary><div class="commit-body"><p class="commit-description">Add RidgeChartProps types, implement RidgeChart component, add bell-curve mock data generation.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="1a4ddb5 performancetab dashboard layout"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">1a4ddb5</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat(drc-dashboard): Implement PerformanceTab dashboard layout</span></div><div class="commit-meta">Krishna A. Kumar • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+143</span><span class="stat-del">-17</span></div></summary><div class="commit-body"><p class="commit-description">Full grid-based layout with KPI cards and charts for UDRAI, Recovery Breakdown, Quality Ratings.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="a71a128 quality radar chart impacttab"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">a71a128</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat(drc-dashboard): Implement quality score radar chart in ImpactTab</span></div><div class="commit-meta">Krishna A. Kumar • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+13</span><span class="stat-del">-4</span></div></summary><div class="commit-body"><p class="commit-description">Replaced placeholder with functional RadarChart component.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="1a472e3 performance mock data types"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">1a472e3</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat(drc-dashboard): Add performance mock data and update type exports</span></div><div class="commit-meta">Krishna A. Kumar • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+48</span><span class="stat-del">-1</span></div></summary><div class="commit-body"><p class="commit-description">Mock data for quality ratings, UDRAI completion times, recovery breakdowns.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="a934443 radarchart spider chart"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">a934443</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">feat(ui-components): Add RadarChart component</span></div><div class="commit-meta">Krishna A. Kumar • 2 days ago</div></div><div class="commit-stats"><span class="stat-add">+238</span><span class="stat-del">-0</span></div></summary><div class="commit-body"><p class="commit-description">New RadarChart (spider chart) component with RadarChartProps, RadarSeriesConfig types, loading states, custom colors, unit tests.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="f496f4f wip filters context"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">f496f4f</span><span class="commit-scope frontend">frontend</span><span class="commit-title">wip</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+494</span><span class="stat-del">-131</span></div></summary><div class="commit-body"><p class="commit-description">Work in progress: DRC Dashboard filter components and layout setup.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="0482711 areachart type definitions"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">0482711</span><span class="commit-scope types">types</span><span class="commit-title">refactor(types, ui-components): Centralize AreaChart type definitions</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+88</span><span class="stat-del">-29</span></div></summary><div class="commit-body"><p class="commit-description">Move AreaChartProps to shared types package with JSDoc documentation.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="8e2cade barchart types labelformat"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">8e2cade</span><span class="commit-scope types">types</span><span class="commit-title">refactor(types): Centralize BarChart types and widen label formatter signature</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+285</span><span class="stat-del">-89</span></div></summary><div class="commit-body"><p class="commit-description">Migrate BarChartProps, Bar, StackTotalLabelProps to shared types. Update labelFormat signature.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="039afc9 chartlegend charttooltip types"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">039afc9</span><span class="commit-scope types">types</span><span class="commit-title">refactor(ui-components, types): centralize chart component types to shared package</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+360</span><span class="stat-del">-75</span></div></summary><div class="commit-body"><p class="commit-description">Move ChartLegend and ChartTooltip interfaces to @rmleb-iip/types with JSDoc.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="0cceead composedchart axispadding"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">0cceead</span><span class="commit-scope types">types</span><span class="commit-title">refactor(charts): Centralize ComposedChart type definitions</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+194</span><span class="stat-del">-60</span></div></summary><div class="commit-body"><p class="commit-description">Move ComposedChartProps and AxisPadding to shared types with TSDoc.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="391a511 regionhighlightmap type suppression"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">391a511</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">chore(map): Remove unnecessary type suppression in RegionHighlightMap</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+0</span><span class="stat-del">-1</span></div></summary><div class="commit-body"><p class="commit-description">Remove @ts-expect-error directive after dependency update.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="00bb88a linechart types labelposition"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">00bb88a</span><span class="commit-scope types">types</span><span class="commit-title">refactor(charts): Centralize LineChart types and fix Recharts type mismatch</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+146</span><span class="stat-del">-40</span></div></summary><div class="commit-body"><p class="commit-description">Move LineChartProps and LineSeriesConfig to shared types. Fix LabelPosition type error.</p></div></details>
+
+            <details class="commit-item" data-scope="devops" data-search="c5a42f5 dependency bump"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">c5a42f5</span><span class="commit-scope devops">devops</span><span class="commit-title">chore(deployment): Dependency Bump</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+635</span><span class="stat-del">-687</span></div></summary><div class="commit-body"><p class="commit-description">Updates dependencies across cpr-dashboard, drc-dashboard, ui-components.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="e1a2035 piechartprops definition"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">e1a2035</span><span class="commit-scope types">types</span><span class="commit-title">refactor(ui-components, types): Centralize PieChartProps definition</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+120</span><span class="stat-del">-23</span></div></summary><div class="commit-body"><p class="commit-description">Move PieChartProps to shared types with JSDoc documentation.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="436f6c9 chartdata regionhighlightmapprops"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">436f6c9</span><span class="commit-scope types">types</span><span class="commit-title">refactor(ui-components, types): Centralize chart component type definitions</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+114</span><span class="stat-del">-25</span></div></summary><div class="commit-body"><p class="commit-description">Move ChartData to common.ts and RegionHighlightMapProps to charts.ts.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="ca6c3fb component module documentation"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">ca6c3fb</span><span class="commit-scope types">types</span><span class="commit-title">docs(types): Enhance component module documentation</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+7</span><span class="stat-del">-2</span></div></summary><div class="commit-body"><p class="commit-description">Add description, usage example, standardize TSDoc tag ordering.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="496ae38 sunburst impacttab shared"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">496ae38</span><span class="commit-scope types">types</span><span class="commit-title">feat(ui-components): Implement ImpactTab with shared Sunburst types</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+246</span><span class="stat-del">-29</span></div></summary><div class="commit-body"><p class="commit-description">Move SunburstChart interfaces to @rmleb-iip/types, implement ImpactTab with mock disposition data.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="13b1408 remove legacy pages views"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">13b1408</span><span class="commit-scope frontend">frontend</span><span class="commit-title">chore(drc-dashboard): Remove unused legacy pages and views</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+66</span><span class="stat-del">-236</span></div></summary><div class="commit-body"><p class="commit-description">Remove deprecated DRCMode, ManagerMode, IndividualStatsTab, OrganizationTab components.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="0aed6cc sunburstchart hierarchical"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">0aed6cc</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">feat(ui-components): Add SunburstChart component</span></div><div class="commit-meta">Krishna A. Kumar • 7 days ago</div></div><div class="commit-stats"><span class="stat-add">+204</span><span class="stat-del">-0</span></div></summary><div class="commit-body"><p class="commit-description">Create SunburstChart with layered Recharts Pie, processLayers algorithm, ghost segments for arc spacing.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="5af0979 tab order overview"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">5af0979</span><span class="commit-scope frontend">frontend</span><span class="commit-title">style(drc-dashboard): Improved tab order</span></div><div class="commit-meta">Krishna A. Kumar • 9 days ago</div></div><div class="commit-stats"><span class="stat-add">+6</span><span class="stat-del">-6</span></div></summary><div class="commit-body"><p class="commit-description">Overview tab is now first in DRC mode.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="fbe3579 linting type safety remove v1"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">fbe3579</span><span class="commit-scope backend">backend</span><span class="commit-title">chore: resolve linting errors, improve type safety, and remove v1 api</span></div><div class="commit-meta">Krishna A. Kumar • 9 days ago</div></div><div class="commit-stats"><span class="stat-add">+424</span><span class="stat-del">-1607</span></div></summary><div class="commit-body"><p class="commit-description">Remove deprecated V1 endpoints, replace 'any' with concrete types, add missing interfaces.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="f86cbde modular tab architecture"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">f86cbde</span><span class="commit-scope frontend">frontend</span><span class="commit-title">refactor(drc-dashboard): Migrate navigation to modular tab architecture</span></div><div class="commit-meta">Krishna A. Kumar • 9 days ago</div></div><div class="commit-stats"><span class="stat-add">+448</span><span class="stat-del">-34</span></div></summary><div class="commit-body"><p class="commit-description">Extract navigation config to tabs.ts with TABS_DRC_MODE and TABS_MANAGER_MODE constants, create placeholder tab components.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="92f31c2 prep starting work spacing"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">92f31c2</span><span class="commit-scope frontend">frontend</span><span class="commit-title">style(drc-dashboard): General prep for starting work</span></div><div class="commit-meta">Krishna A. Kumar • 9 days ago</div></div><div class="commit-stats"><span class="stat-add">+341</span><span class="stat-del">-347</span></div></summary><div class="commit-body"><p class="commit-description">Consistent tab spacing, removed empty files, updated deprecated imports.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="3b11b98 prep starting work"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">3b11b98</span><span class="commit-scope frontend">frontend</span><span class="commit-title">style(drc-dashboard): General prep for starting work</span></div><div class="commit-meta">Krishna A. Kumar • 9 days ago</div></div><div class="commit-stats"><span class="stat-add">+176</span><span class="stat-del">-185</span></div></summary><div class="commit-body"><p class="commit-description">Consistent tab spacing, removed empty files, updated deprecated imports.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="24a8e0b loading state card"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">24a8e0b</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">feat(ui-components): Add loading state to Card component</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+9</span><span class="stat-del">-0</span></div></summary><div class="commit-body"><p class="commit-description">Added isLoading prop with centered spinner overlay and backdrop blur.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="f2a07cd organization_names filteroptionsresponse"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">f2a07cd</span><span class="commit-scope types">types</span><span class="commit-title">refactor(types): Rename names to organization_names in FilterOptionsResponse</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+1</span><span class="stat-del">-1</span></div></summary><div class="commit-body"><p class="commit-description">Update field name for organization entries to align with API changes.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="3b4f6da tissue details api datatable"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">3b4f6da</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat(dashboard): Integrate real tissue details API in DataTable</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+76</span><span class="stat-del">-311</span></div></summary><div class="commit-body"><p class="commit-description">Remove hardcoded mock data, implement useQuery with CPRClient.getTissueDetails, add error handling and loading states.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="b971066 tissue details endpoint sdk"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">b971066</span><span class="commit-scope backend">backend</span><span class="commit-title">feat(api): Implement tissue details endpoint and sdk integration</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+234</span><span class="stat-del">-4</span></div></summary><div class="commit-body"><p class="commit-description">Add GET /tissue/details endpoint, implement get_tissue_details in TissueService, define EyeDetailsRow models.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="b282d62 chart visibility axis labeling"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">b282d62</span><span class="commit-scope frontend">frontend</span><span class="commit-title">style(dashboard): Improve chart visibility and axis labeling</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+3</span><span class="stat-del">-2</span></div></summary><div class="commit-body"><p class="commit-description">Increase strokeWidth for PercentTransPlacedChart, enable showAllxKeys on DistributionChart.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="1ebbd2d countryyearlytable distribution"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">1ebbd2d</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat(dashboard): Implement CountryYearlyTable for distribution trends</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+248</span><span class="stat-del">-2</span></div></summary><div class="commit-body"><p class="commit-description">Create useCountryYearlyDistribution hook, CountryYearlyTable with sticky headers and totals row, expand countryUtils.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="5cbe085 distribution country year"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">5cbe085</span><span class="commit-scope backend">backend</span><span class="commit-title">feat(api): Add endpoint for tissue distribution by country and year</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+305</span><span class="stat-del">-0</span></div></summary><div class="commit-body"><p class="commit-description">Implement get_distribution_by_country_yearly, add CountryYearlyDistributionResponse models, register endpoint.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="286fb08 stack totals chart padding"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">286fb08</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat(cpr-dashboard): Enable stack totals and adjust chart padding</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+3</span><span class="stat-del">-0</span></div></summary><div class="commit-body"><p class="commit-description">Enable showStackTotal on DonorSummaryChart, add padding to DispositionBreakdownChart Y-axis.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="942d5aa yaxispadding stacktotallabel"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">942d5aa</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">feat(ui-components): Add chart component parody with axis padding and stack total support</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+120</span><span class="stat-del">-22</span></div></summary><div class="commit-body"><p class="commit-description">Add yAxisPadding prop, implement StackTotalLabel in ComposedChart.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="5123813 remove gap bars"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">5123813</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat(cpr-dashboard): Remove gap between bars in DispositionBreakdownChart</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+1</span><span class="stat-del">-1</span></div></summary><div class="commit-body"><p class="commit-description">Removed gap between bars for cleaner appearance.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="98cbf92 total labels grouped stacked"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">98cbf92</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">feat(ui-components): Support total labels for grouped and stacked bars</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+30</span><span class="stat-del">-16</span></div></summary><div class="commit-body"><p class="commit-description">Refactor StackTotalLabel to handle stackId undefined, add isStacked check, prevent duplicates in grouped layouts.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="c230f70 remove debugging logs"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">c230f70</span><span class="commit-scope frontend">frontend</span><span class="commit-title">chore: remove debugging logs and comment out unused BarChart logic</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+14</span><span class="stat-del">-13</span></div></summary><div class="commit-body"><p class="commit-description">Removed debugging console.log statements.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="e73ac87 dynamic grid resizeobserver"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">e73ac87</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat(dashboard): implement dynamic grid row sizing using ResizeObserver</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+59</span><span class="stat-del">-39</span></div></summary><div class="commit-body"><p class="commit-description">Dynamic grid row sizing in TransplantPlacementTab.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="7c093fb custom styles regionhighlightmap kpi"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">7c093fb</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">refactor(ui): allow custom styles in RegionHighlightMap and adjust KPI padding</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+10</span><span class="stat-del">-1</span></div></summary><div class="commit-body"><p class="commit-description">Allow custom styles in RegionHighlightMap, adjusted KPI padding.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="aba712b chart label stack total configurations"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">aba712b</span><span class="commit-scope frontend">frontend</span><span class="commit-title">style(cpr-dashboard): Update chart label and stack total configurations</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+6</span><span class="stat-del">-4</span></div></summary><div class="commit-body"><p class="commit-description">Enable/disable showStackTotal and showLabels across charts.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="11fc4b2 stack total label positioning"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">11fc4b2</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">fix(ui-components): Improve BarChart stack total label positioning</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+25</span><span class="stat-del">-10</span></div></summary><div class="commit-body"><p class="commit-description">StackTotalLabel dynamically calculates last visible bar based on actual row data.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="76a5ba9 default bar labels sort imports"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">76a5ba9</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">refactor(ui-components): Update default bar labels and sort imports</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+108</span><span class="stat-del">-18</span></div></summary><div class="commit-body"><p class="commit-description">Change default showLabels to false, sort Recharts imports alphabetically.</p></div></details>
+
+            <details class="commit-item" data-scope="api-client" data-search="84f155a paramsserializer array"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">84f155a</span><span class="commit-scope api-client">api-client</span><span class="commit-title">fix(api-client): Implement custom query parameter serialization</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+12</span><span class="stat-del">-0</span></div></summary><div class="commit-body"><p class="commit-description">Add paramsSerializer for array parameters as repeated keys.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="c6ea782 organization alias distributionservice"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">c6ea782</span><span class="commit-scope backend">backend</span><span class="commit-title">feat(backend): Alias Organization join in DistributionService</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+5</span><span class="stat-del">-3</span></div></summary><div class="commit-body"><p class="commit-description">SQLAlchemy alias for ReferringOrganizationId joins.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="0457547 cpr dashboard api client filter"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">0457547</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat: Implement CPR Dashboard with dedicated API client, filter types, and UI components</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+95</span><span class="stat-del">-80</span></div></summary><div class="commit-body"><p class="commit-description">Updated filters and context for CPR Dashboard.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="83eceb9 looking sky"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">83eceb9</span><span class="commit-scope frontend">frontend</span><span class="commit-title">I'm just a-lookin' at the sky...</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+2</span><span class="stat-del">-3</span></div></summary><div class="commit-body"><p class="commit-description">Minor TransplantPlacementTab adjustments.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="27f1546 back in black"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">27f1546</span><span class="commit-scope frontend">frontend</span><span class="commit-title">back in black! i hit the sack!...</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+2</span><span class="stat-del">-2</span></div></summary><div class="commit-body"><p class="commit-description">Minor TransplantPlacementTab updates.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="9902a60 cascading filter options"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">9902a60</span><span class="commit-scope backend">backend</span><span class="commit-title">feat(backend): Add cascading filter options endpoint</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+110</span><span class="stat-del">-0</span></div></summary><div class="commit-body"><p class="commit-description">New GET /filters/options endpoint for cascading slicer behavior.</p></div></details>
+
+            <details class="commit-item" data-scope="devops" data-search="ea6435e turbo 2.7.1 2.7.2"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">ea6435e</span><span class="commit-scope devops">devops</span><span class="commit-title">chore(deps): Bump turbo from 2.7.1 to 2.7.2</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+30</span><span class="stat-del">-30</span></div></summary><div class="commit-body"><p class="commit-description">Update turbo package and dependencies.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="d804014 grid layout cleanup console logs"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">d804014</span><span class="commit-scope frontend">frontend</span><span class="commit-title">refactor(cpr-dashboard): Implement grid layout and cleanup console logs</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+201</span><span class="stat-del">-128</span></div></summary><div class="commit-body"><p class="commit-description">CSS Grid Template Areas for TransplantPlacementTab, cleanup debugging logs.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="da12a01 padding props barchart map"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">da12a01</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">feat(ui-components): Add padding props to BarChart and update Map styling</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+10</span><span class="stat-del">-2</span></div></summary><div class="commit-body"><p class="commit-description">Add left, right, top, bottom padding props to BarChart, grid row spanning for Map.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="700504e jsdoc documentation hooks"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">700504e</span><span class="commit-scope frontend">frontend</span><span class="commit-title">refactor(cpr-dashboard): Standardize documentation and formatting in data hooks</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+226</span><span class="stat-del">-152</span></div></summary><div class="commit-body"><p class="commit-description">Add comprehensive JSDoc to all data hooks, document fetch strategies and aggregation formulas.</p></div></details>
+
+            <details class="commit-item" data-scope="types" data-search="8b4b2c3 cpr models total jsdocs"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">8b4b2c3</span><span class="commit-scope types">types</span><span class="commit-title">feat(types): Update CPR models with new 'total' field and JSDocs</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+116</span><span class="stat-del">-3</span></div></summary><div class="commit-body"><p class="commit-description">Add total property to MonthlyDispositionData, JSDoc to data interfaces.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="5162c68 chart data ordering y-axis"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">5162c68</span><span class="commit-scope frontend">frontend</span><span class="commit-title">refactor: update chart data ordering and Y-axis scaling</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+16</span><span class="stat-del">-16</span></div></summary><div class="commit-body"><p class="commit-description">Remove manual data reversal, add custom Y-axis domains, enable automatic scaling.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="2f346e9 usetransplantdata"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">2f346e9</span><span class="commit-scope frontend">frontend</span><span class="commit-title">of all the scientific minds in history...</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+20</span><span class="stat-del">-24</span></div></summary><div class="commit-body"><p class="commit-description">useTransplantData hook improvements.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="017d38c linechart agedistribution"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">017d38c</span><span class="commit-scope frontend">frontend</span><span class="commit-title">I acccellerated the mind of man kind...</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+30</span><span class="stat-del">-4</span></div></summary><div class="commit-body"><p class="commit-description">AgeDistributionChart, PercentTransPlacedChart, and LineChart updates.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="94de4be useinstitutiondata"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">94de4be</span><span class="commit-scope frontend">frontend</span><span class="commit-title">if we don't stop it we aide and abet it</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+4</span><span class="stat-del">-4</span></div></summary><div class="commit-body"><p class="commit-description">useInstitutionData hook updates.</p></div></details>
+
+            <details class="commit-item" data-scope="devops" data-search="dd06e31 dependency bump"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">dd06e31</span><span class="commit-scope devops">devops</span><span class="commit-title">chore(deployment): Dependency Bump</span></div><div class="commit-meta">Krishna Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+30</span><span class="stat-del">-30</span></div></summary><div class="commit-body"><p class="commit-description">Dependency bump.</p></div></details>
+
+            <details class="commit-item" data-scope="devops" data-search="5ec4d56 dependency bump"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">5ec4d56</span><span class="commit-scope devops">devops</span><span class="commit-title">chore(deployment): Dependency Bump</span></div><div class="commit-meta">Krishna Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+1</span><span class="stat-del">-1</span></div></summary><div class="commit-body"><p class="commit-description">Dependency bump.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="76143e1 kpi filterutils"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">76143e1</span><span class="commit-scope frontend">frontend</span><span class="commit-title">centralizing national credit and making american credit competitive</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+71</span><span class="stat-del">-71</span></div></summary><div class="commit-body"><p class="commit-description">KPI and chart component updates.</p></div></details>
+
+            <details class="commit-item" data-scope="ui-components" data-search="49b1d55 daterangefilter"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">49b1d55</span><span class="commit-scope ui-components">ui-components</span><span class="commit-title">minor edits</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+6</span><span class="stat-del">-6</span></div></summary><div class="commit-body"><p class="commit-description">Minor edits to DateRangeFilter.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="40e0e0b daterange import filtercontext"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">40e0e0b</span><span class="commit-scope frontend">frontend</span><span class="commit-title">refactor(cpr-dashboard): Update DateRange import and allow undefined state</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+2</span><span class="stat-del">-2</span></div></summary><div class="commit-body"><p class="commit-description">Updated DateRange import and FilterContext.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="6983022 migrate v2 api hooks"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">6983022</span><span class="commit-scope frontend">frontend</span><span class="commit-title">feat(dashboard): Migrate dashboard hooks and charts to V2 API</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+449</span><span class="stat-del">-160</span></div></summary><div class="commit-body"><p class="commit-description">Refactor all data hooks to consume V2 REST endpoints, add utility functions.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="dc6ba9c institution metrics tissue counting"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">dc6ba9c</span><span class="commit-scope backend">backend</span><span class="commit-title">feat(api): Add institution metrics and refine tissue counting logic</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+648</span><span class="stat-del">-109</span></div></summary><div class="commit-body"><p class="commit-description">Implement institution metrics, refactor category case expression, update quantity logic for OU/Both.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="fa47510 types.py"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">fa47510</span><span class="commit-scope backend">backend</span><span class="commit-title">minor edit</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+3</span><span class="stat-del">-1</span></div></summary><div class="commit-body"><p class="commit-description">Minor edit to types.py.</p></div></details>
+
+            <details class="commit-item" data-scope="api-client" data-search="1b4fbe8 static import errorhandler"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">1b4fbe8</span><span class="commit-scope api-client">api-client</span><span class="commit-title">refactor(api-client): Convert dynamic require to static import for errorHandler</span></div><div class="commit-meta">Krishna A. Kumar • 2 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+1</span><span class="stat-del">-1</span></div></summary><div class="commit-body"><p class="commit-description">Replace CommonJS require() with ES module import.</p></div></details>
+
+            <details class="commit-item" data-scope="frontend" data-search="10c7cc3 toast drcfilter api"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">10c7cc3</span><span class="commit-scope frontend">frontend</span><span class="commit-title">AI agent go brrrrrrrrr</span></div><div class="commit-meta">Krishna A. Kumar • 3 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+1097</span><span class="stat-del">-59</span></div></summary><div class="commit-body"><p class="commit-description">Toast component, DRC Filter, API client enhancements, PBI DAX queries documentation.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="df052d9 wip antigravity services"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">df052d9</span><span class="commit-scope backend">backend</span><span class="commit-title">wip -- I think I'll tryyyyyyy defyying graaaaaavityyyyyyyy</span></div><div class="commit-meta">Krishna A. Kumar • 3 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+4824</span><span class="stat-del">-12734</span></div></summary><div class="commit-body"><p class="commit-description">Major refactoring: backend services consolidation, types cleanup, API v2 implementation.</p></div></details>
+
+            <details class="commit-item" data-scope="api-client" data-search="b0051f6 rewrite cpr client v2"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">b0051f6</span><span class="commit-scope api-client">api-client</span><span class="commit-title">refactor(api-client): Rewrite CPR client for Dashboard V2 API schema</span></div><div class="commit-meta">Krishna A. Kumar • 3 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+385</span><span class="stat-del">-230</span></div></summary><div class="commit-body"><p class="commit-description">BREAKING CHANGE: Replace previous CPR/Donors API with Dashboard V2 domains.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="32676e4 version constants v2"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">32676e4</span><span class="commit-scope backend">backend</span><span class="commit-title">refactor(backend): Standardize version constants and migrate client to v2</span></div><div class="commit-meta">Krishna A. Kumar • 3 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+4</span><span class="stat-del">-3</span></div></summary><div class="commit-body"><p class="commit-description">Correct API_V1_PREFIX, add API_V2_PREFIX, update router mount and client config.</p></div></details>
+
+            <details class="commit-item" data-scope="backend" data-search="8436455 remove legacy cpr services"><summary class="commit-summary"><span class="commit-toggle">▶</span><div class="commit-info"><div class="commit-header"><span class="commit-hash">8436455</span><span class="commit-scope backend">backend</span><span class="commit-title">refactor(backend): Remove legacy CPR dashboard services and data layer</span></div><div class="commit-meta">Krishna A. Kumar • 3 weeks ago</div></div><div class="commit-stats"><span class="stat-add">+0</span><span class="stat-del">-2208</span></div></summary><div class="commit-body"><p class="commit-description">Delete CPR dashboard service modules, DAX-to-SQLAlchemy translation, schema definitions.</p></div></details>
+          </div>
+        </section>
+
+        <nav class="report-nav">
+          <a href="006.html" class="nav-button">← Previous Report</a>
+          <a href="#" class="nav-button disabled">Next Report →</a>
+        </nav>
+      </main>
+    </div>
+
+    <button class="mobile-toc-toggle" id="mobileTocToggle" aria-label="Open table of contents">☰</button>
+    <div class="mobile-toc-overlay" id="mobileTocOverlay"></div>
+    <div class="mobile-toc-panel" id="mobileTocPanel">
+      <h2 class="toc-title">Contents</h2>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#executive-summary" class="toc-link mobile-toc-link">Executive Summary</a></li>
+        <li class="toc-item"><a href="#key-highlights" class="toc-link mobile-toc-link">Key Highlights</a></li>
+        <li class="toc-item"><a href="#drc-dashboard" class="toc-link mobile-toc-link">DRC Dashboard</a></li>
+        <li class="toc-item"><a href="#backend-services" class="toc-link mobile-toc-link">Backend Services</a></li>
+        <li class="toc-item"><a href="#cpr-dashboard" class="toc-link mobile-toc-link">CPR Dashboard</a></li>
+        <li class="toc-item"><a href="#ui-components" class="toc-link mobile-toc-link">UI Components</a></li>
+        <li class="toc-item"><a href="#type-system" class="toc-link mobile-toc-link">Type System</a></li>
+        <li class="toc-item"><a href="#impact-analysis" class="toc-link mobile-toc-link">Impact Analysis</a></li>
+        <li class="toc-item"><a href="#commit-log" class="toc-link mobile-toc-link">Full Commit Log</a></li>
+      </ul>
+    </div>
+
+    <footer class="site-footer">
+      <p>RMLEB Internal Information Portal — Generated Jan 7, 2026</p>
+      <p>For questions or feedback, contact the IIP Development Team</p>
+    </footer>
+
+    <script>
+      const searchInput = document.getElementById("commitSearch");
+      const searchClear = document.getElementById("searchClear");
+      const searchCount = document.getElementById("searchCount");
+      const commitItems = document.querySelectorAll(".commit-item");
+      let activeScope = "all";
+
+      function applyFilters() {
+        const query = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+        searchClear.classList.toggle("visible", query.length > 0);
+        commitItems.forEach((item) => {
+          const searchData = item.getAttribute("data-search").toLowerCase();
+          const itemScope = item.getAttribute("data-scope") || "";
+          const matchesSearch = query === "" || searchData.includes(query);
+          const matchesScope = activeScope === "all" || itemScope === activeScope;
+          const isVisible = matchesSearch && matchesScope;
+          item.classList.toggle("hidden", !isVisible);
+          if (isVisible) visibleCount++;
+        });
+        if (query.length > 0 || activeScope !== "all") {
+          searchCount.textContent = visibleCount + " of " + commitItems.length + " commits";
+        } else {
+          searchCount.textContent = "";
+        }
+      }
+
+      searchInput.addEventListener("input", applyFilters);
+      searchClear.addEventListener("click", function() { searchInput.value = ""; applyFilters(); searchInput.focus(); });
+
+      function filterByScope(scope) {
+        activeScope = scope;
+        document.querySelectorAll(".module-btn").forEach(function(btn) { btn.classList.toggle("active", btn.dataset.scope === scope); });
+        applyFilters();
+      }
+
+      const mobileTocToggle = document.getElementById("mobileTocToggle");
+      const mobileTocOverlay = document.getElementById("mobileTocOverlay");
+      const mobileTocPanel = document.getElementById("mobileTocPanel");
+      const mobileTocLinks = document.querySelectorAll(".mobile-toc-link");
+
+      function openMobileToc() { mobileTocOverlay.classList.add("active"); mobileTocPanel.classList.add("active"); }
+      function closeMobileToc() { mobileTocOverlay.classList.remove("active"); mobileTocPanel.classList.remove("active"); }
+
+      mobileTocToggle.addEventListener("click", openMobileToc);
+      mobileTocOverlay.addEventListener("click", closeMobileToc);
+      mobileTocLinks.forEach(function(link) { link.addEventListener("click", closeMobileToc); });
+
+      const tocLinks = document.querySelectorAll(".toc-link:not(.mobile-toc-link)");
+      const sections = document.querySelectorAll("section[id]");
+
+      function updateActiveToc() {
+        let current = "";
+        sections.forEach(function(section) { const sectionTop = section.offsetTop; if (pageYOffset >= sectionTop - 150) { current = section.getAttribute("id"); } });
+        tocLinks.forEach(function(link) { link.classList.remove("active"); if (link.getAttribute("href") === "#" + current) { link.classList.add("active"); } });
+      }
+
+      window.addEventListener("scroll", updateActiveToc);
+      updateActiveToc();
+      window.addEventListener("beforeprint", function() { document.querySelectorAll("details").forEach(function(d) { d.setAttribute("open", ""); }); });
+
+      const expandAllBtn = document.getElementById("expandAll");
+      const collapseAllBtn = document.getElementById("collapseAll");
+      expandAllBtn.addEventListener("click", function() { document.querySelectorAll(".commit-item").forEach(function(d) { d.setAttribute("open", ""); }); });
+      collapseAllBtn.addEventListener("click", function() { document.querySelectorAll(".commit-item").forEach(function(d) { d.removeAttribute("open"); }); });
+    </script>
+  </body>
+</html>
